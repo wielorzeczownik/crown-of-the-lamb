@@ -25,7 +25,7 @@ jobs:
     permissions:
       contents: write
     env:
-      RUSTUP_TOOLCHAIN: nightly
+      RUSTUP_TOOLCHAIN: stable
     outputs:
       released: ${{ steps.bump.outputs.released }}
       version: ${{ steps.bump.outputs.version }}
@@ -38,7 +38,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Install cargo-edit
         uses: taiki-e/install-action@v2.82.2
@@ -125,14 +125,13 @@ jobs:
           ref: ${{ needs.prepare-release.outputs.tag }}
           persist-credentials: false
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly
-          targets: xtensa-esp32-none-elf
+      - name: Install host Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Install espup
-        run: cargo install espup
+        uses: taiki-e/install-action@v2.82.2
+        with:
+          tool: espup
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -144,6 +143,8 @@ jobs:
           echo "LIBCLANG_PATH=$LIBCLANG_PATH" >> "$GITHUB_ENV"
 
       - name: Install espflash
+        env:
+          RUSTUP_TOOLCHAIN: stable
         run: cargo install espflash
 
       - name: Cache Cargo

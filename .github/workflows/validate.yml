@@ -19,14 +19,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly
-          targets: xtensa-esp32-none-elf
-
       - name: Install espup
-        run: cargo install espup
+        uses: taiki-e/install-action@v2.82.2
+        with:
+          tool: espup
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -52,14 +48,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly
-          targets: xtensa-esp32-none-elf
-
       - name: Install espup
-        run: cargo install espup
+        uses: taiki-e/install-action@v2.82.2
+        with:
+          tool: espup
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -88,14 +80,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly
-          targets: xtensa-esp32-none-elf
-
       - name: Install espup
-        run: cargo install espup
+        uses: taiki-e/install-action@v2.82.2
+        with:
+          tool: espup
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -109,8 +97,6 @@ jobs:
       - name: Cache Cargo
         uses: Swatinem/rust-cache@v2.9.1
 
-      # Debug builds fail on the Xtensa float-constant-pool LLVM bug, so the
-      # smoke build uses --release.
       - name: Build firmware
         run: cargo build --release
 
