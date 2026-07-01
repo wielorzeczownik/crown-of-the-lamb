@@ -176,7 +176,7 @@ jobs:
           sha256sum crown-of-the-lamb-merged.bin > crown-of-the-lamb-merged.bin.sha256
 
       - name: Attest firmware
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: |
             crown-of-the-lamb.bin
