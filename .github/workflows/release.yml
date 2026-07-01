@@ -126,7 +126,7 @@ jobs:
           persist-credentials: false
 
       - name: Install host Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
+        run: rustup toolchain install stable --profile minimal
 
       - name: Install espup
         uses: taiki-e/install-action@v2.82.3

@@ -113,7 +113,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
+        run: rustup toolchain install stable --profile minimal
 
       - name: Install cargo-audit
         uses: taiki-e/install-action@v2.82.3
