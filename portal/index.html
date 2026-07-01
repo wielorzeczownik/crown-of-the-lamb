@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+      name="viewport"
+    />
+    <title>Crown of the Lamb</title>
+    <link href="./src/assets/icon.svg?inline" rel="icon" />
+    <meta content="#060700" name="theme-color" />
+    <meta content="yes" name="mobile-web-app-capable" />
+    <meta
+      content="black-translucent"
+      name="apple-mobile-web-app-status-bar-style"
+    />
+    <meta content="Crown" name="apple-mobile-web-app-title" />
+    <meta
+      content="Configuration panel for the Crown of the Lamb prop"
+      name="description"
+    />
+    <meta content="noindex, nofollow" name="robots" />
+    <link href="/src/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="tabs-wrap">
+      <nav class="tabs" role="tablist">
+        <button
+          id="tab-btn-eye"
+          class="tab-btn active"
+          aria-controls="panel-eye"
+          aria-selected="true"
+          data-tab="eye"
+          role="tab"
+        >
+          Eye
+        </button>
+        <button
+          id="tab-btn-expression"
+          class="tab-btn"
+          aria-controls="panel-expression"
+          aria-selected="false"
+          data-tab="expression"
+          role="tab"
+        >
+          Mimicry
+        </button>
+        <button
+          id="tab-btn-sound"
+          class="tab-btn"
+          aria-controls="panel-sound"
+          aria-selected="false"
+          data-tab="sound"
+          role="tab"
+        >
+          Sound
+        </button>
+        <button
+          id="tab-btn-network"
+          class="tab-btn"
+          aria-controls="panel-network"
+          aria-selected="false"
+          data-tab="network"
+          role="tab"
+        >
+          WiFi
+        </button>
+        <button
+          id="tab-btn-ota"
+          class="tab-btn"
+          aria-controls="panel-ota"
+          aria-selected="false"
+          data-tab="ota"
+          role="tab"
+        >
+          OTA
+        </button>
+        <div class="tab-btn">
+          <select
+            id="locale-select"
+            class="locale-select"
+            aria-label="Language"
+            name="locale"
+          >
+            <option value="pl">PL</option>
+            <option value="en">EN</option>
+          </select>
+        </div>
+      </nav>
+    </div>
+
+    <main class="panels">
+      <!-- Eye -->
+      <section
+        id="panel-eye"
+        class="panel active"
+        aria-labelledby="tab-btn-eye"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div class="eye-wrap">
+          <canvas
+            id="eye-preview"
+            aria-label="Eye preview"
+            height="240"
+            role="img"
+            width="240"
+          ></canvas>
+        </div>
+
+        <div class="card">
+          <div id="card-title-eye-color" class="card__title">Eye color</div>
+          <div class="card__color-row">
+            <label id="label-color" class="card__color-label" for="eye-color">
+              Color
+            </label>
+            <input id="eye-color" type="color" value="#ff0000" />
+          </div>
+        </div>
+
+        <div class="card">
+          <div id="card-title-pupil" class="card__title">Pupil</div>
+          <div class="card__row">
+            <label
+              id="label-pupil-length"
+              class="card__label"
+              for="pupil-length"
+            >
+              Length
+            </label>
+            <input
+              id="pupil-length"
+              type="range"
+              max="120"
+              min="20"
+              value="70"
+            />
+            <span id="pupil-length-v" class="card__value">70</span>
+          </div>
+          <div class="card__row">
+            <label id="label-wiggle" class="card__label" for="wiggle-amp">
+              Wiggle
+            </label>
+            <input id="wiggle-amp" type="range" max="400" min="0" value="140" />
+            <span id="wiggle-amp-v" class="card__value">140</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div id="card-title-blink" class="card__title">Blink</div>
+          <div class="card__row">
+            <label
+              id="label-blink-interval"
+              class="card__label"
+              for="blink-interval"
+            >
+              Interval
+            </label>
+            <input
+              id="blink-interval"
+              type="range"
+              max="600"
+              min="60"
+              value="180"
+            />
+            <span id="blink-interval-v" class="card__value">180</span>
+          </div>
+        </div>
+
+        <button id="config-reset" class="btn btn--outline">
+          Restore defaults
+        </button>
+      </section>
+
+      <!-- Expressions -->
+      <section
+        id="panel-expression"
+        class="panel"
+        aria-labelledby="tab-btn-expression"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div class="card">
+          <div id="card-title-expression" class="card__title">Mimicry</div>
+
+          <div class="card__expr-row">
+            <button id="expr-eyeroll" class="btn btn--outline">Eye roll</button>
+            <div class="card__expr-scale">
+              <label
+                id="label-eyeroll-chance"
+                class="card__expr-chance-label"
+                for="eyeroll-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="eyeroll-rarity"
+                type="range"
+                aria-describedby="eyeroll-rarity-v"
+                aria-labelledby="expr-eyeroll label-eyeroll-chance"
+                max="100"
+                min="0"
+                value="15"
+              />
+              <span
+                id="eyeroll-rarity-v"
+                class="card__value"
+                aria-live="polite"
+              >
+                15%
+              </span>
+            </div>
+          </div>
+
+          <div class="card__expr-row">
+            <button id="expr-startled" class="btn btn--outline">Fear</button>
+            <div class="card__expr-scale">
+              <label
+                id="label-startled-chance"
+                class="card__expr-chance-label"
+                for="startled-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="startled-rarity"
+                type="range"
+                aria-describedby="startled-rarity-v"
+                aria-labelledby="expr-startled label-startled-chance"
+                max="100"
+                min="0"
+                value="35"
+              />
+              <span
+                id="startled-rarity-v"
+                class="card__value"
+                aria-live="polite"
+              >
+                35%
+              </span>
+            </div>
+          </div>
+
+          <div class="card__expr-row">
+            <button id="expr-suspicious" class="btn btn--outline">
+              Suspicious
+            </button>
+            <div class="card__expr-scale">
+              <label
+                id="label-suspicious-chance"
+                class="card__expr-chance-label"
+                for="suspicious-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="suspicious-rarity"
+                type="range"
+                aria-describedby="suspicious-rarity-v"
+                aria-labelledby="expr-suspicious label-suspicious-chance"
+                max="100"
+                min="0"
+                value="28"
+              />
+              <span
+                id="suspicious-rarity-v"
+                class="card__value"
+                aria-live="polite"
+              >
+                28%
+              </span>
+            </div>
+          </div>
+
+          <div class="card__expr-row">
+            <button id="expr-angry" class="btn btn--outline">Angry</button>
+            <div class="card__expr-scale">
+              <label
+                id="label-angry-chance"
+                class="card__expr-chance-label"
+                for="angry-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="angry-rarity"
+                type="range"
+                aria-describedby="angry-rarity-v"
+                aria-labelledby="expr-angry label-angry-chance"
+                max="100"
+                min="0"
+                value="55"
+              />
+              <span id="angry-rarity-v" class="card__value" aria-live="polite">
+                55%
+              </span>
+            </div>
+          </div>
+
+          <div class="card__expr-row">
+            <button id="expr-sin" class="btn btn--outline">Sin</button>
+            <div class="card__expr-scale">
+              <label
+                id="label-sin-chance"
+                class="card__expr-chance-label"
+                for="sin-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="sin-rarity"
+                type="range"
+                aria-describedby="sin-rarity-v"
+                aria-labelledby="expr-sin label-sin-chance"
+                max="100"
+                min="0"
+                value="1"
+              />
+              <span id="sin-rarity-v" class="card__value" aria-live="polite">
+                1%
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <button id="expr-reset" class="btn">Reset mimicry</button>
+        <button id="expression-reset" class="btn btn--outline">
+          Restore defaults
+        </button>
+      </section>
+
+      <!-- Sound -->
+      <section
+        id="panel-sound"
+        class="panel"
+        aria-labelledby="tab-btn-sound"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div class="card">
+          <div id="card-title-mic" class="card__title">
+            Microphone sensitivity
+          </div>
+          <div class="card__row">
+            <label
+              id="label-threshold"
+              class="card__label"
+              for="sound-threshold"
+            >
+              Threshold
+            </label>
+            <input
+              id="sound-threshold"
+              type="range"
+              max="400"
+              min="10"
+              value="40"
+            />
+            <span id="sound-threshold-v" class="card__value">40</span>
+          </div>
+        </div>
+
+        <button id="sound-reset" class="btn btn--outline">
+          Restore defaults
+        </button>
+      </section>
+
+      <!-- OTA -->
+      <section
+        id="panel-ota"
+        class="panel"
+        aria-labelledby="tab-btn-ota"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div class="card">
+          <div id="card-title-ota-version" class="card__title">
+            Firmware version
+          </div>
+          <div class="card__row">
+            <span id="label-ota-current" class="card__label">Installed</span>
+            <span style="flex: 1"></span>
+            <span id="ota-current-version" class="card__value">—</span>
+          </div>
+          <div class="card__row">
+            <span id="label-ota-status" class="card__label">GitHub</span>
+            <span style="flex: 1"></span>
+            <span
+              id="ota-github-status"
+              class="card__value"
+              style="font-size: 0.75rem"
+            >
+              —
+            </span>
+          </div>
+          <div id="ota-download-wrap" hidden>
+            <a
+              id="ota-download-link"
+              class="btn btn--outline"
+              style="
+                display: block;
+                text-align: center;
+                margin-top: 0.4rem;
+                text-decoration: none;
+              "
+              rel="noopener"
+              target="_blank"
+            ></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div id="card-title-ota-upload" class="card__title">
+            Flash firmware
+          </div>
+          <label id="file-drop-zone" class="file-drop" for="ota-file">
+            <svg
+              class="file-drop__icon"
+              aria-hidden="true"
+              fill="none"
+              height="28"
+              viewBox="0 0 24 24"
+              width="28"
+            >
+              <path
+                d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              />
+              <path
+                d="M4 17v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-width="2"
+              />
+            </svg>
+            <span id="label-ota-file" class="file-drop__label">
+              Firmware file (.bin)
+            </span>
+            <span id="ota-file-name" class="file-drop__name"></span>
+          </label>
+          <input id="ota-file" type="file" accept=".bin" hidden />
+          <div id="ota-progress-wrap" style="padding: 0.4rem 0" hidden>
+            <progress
+              id="ota-progress"
+              style="width: 100%; height: 6px"
+              max="100"
+              value="0"
+            ></progress>
+          </div>
+        </div>
+
+        <button id="ota-upload" class="btn" disabled>Flash firmware</button>
+      </section>
+
+      <!-- Network -->
+      <section
+        id="panel-network"
+        class="panel"
+        aria-labelledby="tab-btn-network"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div class="card">
+          <div id="card-title-wifi" class="card__title">WiFi configuration</div>
+          <div class="input-row">
+            <label id="label-wifi-ssid" class="input-label" for="wifi-ssid">
+              Network name (SSID)
+            </label>
+            <div class="field-wrap">
+              <input
+                id="wifi-ssid"
+                type="text"
+                class="text-input"
+                autocomplete="off"
+                maxlength="32"
+                placeholder="Crown of the Lamb"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button id="wifi-save" class="btn">Save and restart</button>
+        <button id="wifi-reset" class="btn btn--outline">
+          Restore defaults
+        </button>
+      </section>
+    </main>
+
+    <div
+      id="modal-overlay"
+      aria-labelledby="modal-message"
+      aria-modal="true"
+      role="dialog"
+    >
+      <div class="modal">
+        <p id="modal-message" class="modal__message"></p>
+        <div class="modal__actions">
+          <button id="modal-cancel" class="btn btn--outline">Cancel</button>
+          <button id="modal-confirm" class="btn">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <svg style="position: absolute; width: 0; height: 0" aria-hidden="true">
+      <defs>
+        <filter id="rough">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.065"
+            numOctaves="3"
+            seed="5"
+          />
+          <feDisplacementMap in="SourceGraphic" scale="5" />
+        </filter>
+      </defs>
+    </svg>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

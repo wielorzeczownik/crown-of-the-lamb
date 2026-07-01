@@ -1,0 +1,146 @@
+.logo {
+  width: auto;
+  height: 36px;
+}
+
+.tabs-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+.tabs-wrap::before {
+  position: absolute;
+  inset: -2px;
+  z-index: 1;
+  pointer-events: none;
+  content: '';
+  border: 3px solid var(--border);
+  filter: url('#rough');
+}
+
+.tabs-wrap::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 2.5rem;
+  pointer-events: none;
+  content: '';
+  background: linear-gradient(to right, transparent, var(--black) 90%);
+}
+
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  background: var(--black);
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  flex: 1 1 0;
+  min-width: 2.8rem;
+  min-height: 2.75rem;
+  padding: 0.6rem;
+  font: inherit;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  cursor: pointer;
+  scroll-snap-align: start;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgb(0 0 0 / 60%);
+  border-left: 1px solid rgb(255 255 255 / 5%);
+  transition:
+    color 0.15s,
+    background 0.06s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab-btn:first-child {
+  border-left: none;
+}
+
+.tab-btn:last-child {
+  padding-right: 1.8rem;
+  border-right: none;
+}
+
+.tab-btn.active {
+  padding-top: calc(0.6rem + 2px);
+  margin-top: -2px;
+  color: var(--white);
+  background: var(--tab-active);
+  border-right: 1px solid rgb(0 0 0 / 40%);
+  border-left: 1px solid rgb(255 255 255 / 15%);
+}
+
+.tab-btn:active {
+  color: var(--white);
+  background: var(--accent);
+}
+
+.tab-btn:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: -3px;
+}
+
+.panels {
+  flex: 1;
+  width: 100%;
+  max-width: 480px;
+  padding: 0.75rem 1rem;
+  overflow: hidden auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: panel-from-right 0.2s ease-out;
+}
+
+.panel.active[data-dir='left'] {
+  animation-name: panel-from-left;
+}
+
+@keyframes panel-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes panel-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,10 @@
+@import './style/variables.css';
+@import './style/fonts.css';
+@import './style/base.css';
+@import './style/layout.css';
+@import './style/card.css';
+@import './style/inputs.css';
+@import './style/buttons.css';
+@import './style/canvas.css';
+@import './style/toast.css';
+@import './style/modal.css';

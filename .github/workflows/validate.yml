@@ -1,0 +1,267 @@
+name: Validate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rustfmt:
+    name: rustfmt
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          targets: xtensa-esp32-none-elf
+
+      - name: Install espup
+        run: cargo install espup
+
+      - name: Install Xtensa toolchain
+        run: espup install --targets esp32
+
+      - name: Source Xtensa environment
+        run: |
+          source "$HOME/export-esp.sh"
+          echo "PATH=$PATH" >> "$GITHUB_ENV"
+          echo "LIBCLANG_PATH=$LIBCLANG_PATH" >> "$GITHUB_ENV"
+
+      - name: Format check
+        run: cargo fmt --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          targets: xtensa-esp32-none-elf
+
+      - name: Install espup
+        run: cargo install espup
+
+      - name: Install Xtensa toolchain
+        run: espup install --targets esp32
+
+      - name: Source Xtensa environment
+        run: |
+          source "$HOME/export-esp.sh"
+          echo "PATH=$PATH" >> "$GITHUB_ENV"
+          echo "LIBCLANG_PATH=$LIBCLANG_PATH" >> "$GITHUB_ENV"
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2.9.1
+
+      - name: Clippy
+        run: cargo clippy -- -D warnings
+
+  build:
+    name: Build firmware
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          targets: xtensa-esp32-none-elf
+
+      - name: Install espup
+        run: cargo install espup
+
+      - name: Install Xtensa toolchain
+        run: espup install --targets esp32
+
+      - name: Source Xtensa environment
+        run: |
+          source "$HOME/export-esp.sh"
+          echo "PATH=$PATH" >> "$GITHUB_ENV"
+          echo "LIBCLANG_PATH=$LIBCLANG_PATH" >> "$GITHUB_ENV"
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2.9.1
+
+      # Debug builds fail on the Xtensa float-constant-pool LLVM bug, so the
+      # smoke build uses --release.
+      - name: Build firmware
+        run: cargo build --release
+
+  cargo-audit:
+    name: Cargo audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-audit
+        uses: taiki-e/install-action@v2.82.2
+        with:
+          tool: cargo-audit
+
+      - name: Cargo audit
+        run: cargo audit
+        env:
+          RUSTUP_TOOLCHAIN: stable
+
+  portal-lint:
+    name: Portal lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: portal
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: portal/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Lint CSS
+        run: npm run lint:css
+
+  portal-typecheck:
+    name: Portal typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: portal
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: portal/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+  portal-build:
+    name: Portal build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: portal
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: portal/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+  shfmt:
+    name: shfmt
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Set up shfmt
+        uses: mfinelli/setup-shfmt@v4.0.1
+
+      - name: Format check shell scripts
+        run: shfmt --diff scripts/
+
+  markdownlint:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v23.2.0
+        with:
+          globs: |
+            **/*.md
+            !CHANGELOG.md

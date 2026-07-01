@@ -1,0 +1,17 @@
+[target.xtensa-esp32-none-elf]
+runner = "espflash flash --monitor --chip esp32 --partition-table partitions.csv"
+
+[env]
+# defmt log level compiled into the firmware (per-module e.g. "info,cotl::sound=debug")
+DEFMT_LOG = "info"
+
+[build]
+rustflags = [
+  "-C", "link-arg=-nostartfiles",
+  "-C", "link-arg=-Tdefmt.x",
+]
+
+target = "xtensa-esp32-none-elf"
+
+[unstable]
+build-std = ["alloc", "core"]

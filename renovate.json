@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "platformAutomerge": true,
+  "automergeType": "pr",
+  "semanticCommits": "enabled",
+  "minimumReleaseAge": "3 days",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "ci"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": [
+        "actions/upload-artifact",
+        "actions/download-artifact"
+      ],
+      "groupName": "artifact actions"
+    },
+    {
+      "matchManagers": ["cargo"],
+      "matchPackageNames": ["esp-hal", "esp-rtos", "esp-radio", "esp-alloc", "esp-storage", "esp-println", "esp-bootloader-esp-idf"],
+      "groupName": "esp-rs crates"
+    },
+    {
+      "matchManagers": ["cargo"],
+      "matchPackageNames": ["embassy-executor", "embassy-sync", "embassy-time", "embassy-net"],
+      "groupName": "embassy crates"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "semanticCommitType": "build"
+    }
+  ]
+}

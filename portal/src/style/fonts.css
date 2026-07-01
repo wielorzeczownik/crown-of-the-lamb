@@ -1,0 +1,24 @@
+/* Piazzolla (SIL Open Font License) — self-hosted because the captive-portal
+   AP has no internet, so the Google Fonts CDN is unreachable. viteSingleFile
+   base64-inlines these into the bundle, which is then baked into the firmware.
+
+   These are heavily reduced: the variable opsz axis is pinned (static instance)
+   and the glyph set is subset to the characters the UI uses (full ASCII for
+   typed SSIDs/filenames + Polish letters). Anything outside that set falls back
+   to the system stack in base.css. The woff2 are generated at build from the
+   variable source font by plugins/subset-font.ts. See fonts/OFL.txt. */
+@font-face {
+  font-family: Piazzolla;
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/piazzolla-600.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Piazzolla;
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/piazzolla-700.woff2') format('woff2');
+  font-display: swap;
+}

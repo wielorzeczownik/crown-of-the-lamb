@@ -1,0 +1,14 @@
+:root {
+  --black: #000;
+  --white: #fef0d3;
+  --background: #0e0b06;
+  --surface: #1a160e;
+  --border: #060700;
+  --accent: #4d4c48;
+  --text: #e8ddc8;
+  --text-title: #8d8172;
+  --muted: #8d8172;
+  --danger: #e05050;
+  --tab: #5a595a;
+  --tab-active: #d01804;
+}

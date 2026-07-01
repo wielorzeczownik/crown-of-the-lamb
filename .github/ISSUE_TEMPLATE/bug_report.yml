@@ -1,0 +1,56 @@
+name: Bug report
+description: Something is not working correctly
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before reporting, check if the issue already exists in [open issues](https://github.com/wielorzeczownik/crown-of-the-lamb/issues).
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: flash_method
+    attributes:
+      label: How did you flash the firmware?
+      options:
+        - Built from source (cargo build + espflash)
+        - Prebuilt release .bin (espflash)
+        - Over-the-air update (captive portal OTA)
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Firmware version
+      placeholder: "e.g. v0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware
+      description: ESP32 board, display, and microphone modules in use.
+      placeholder: "e.g. ESP32-WROOM-32, GC9A01 240x240, 2x MAX9814"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste any relevant serial output (defmt). Set `DEFMT_LOG=debug` for more detail.
+      render: text

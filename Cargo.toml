@@ -1,0 +1,100 @@
+cargo-features = ["panic-immediate-abort"]
+
+[package]
+name = "crown-of-the-lamb"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+description = "ESP32 firmware in Rust for an animatronic COTL prop: GC9A01 round display, dual-mic FFT direction detection, WiFi AP + captive portal config UI"
+license = "MIT"
+authors = ["wielorzeczownik"]
+repository = "https://github.com/wielorzeczownik/crown-of-the-lamb"
+homepage = "https://github.com/wielorzeczownik/crown-of-the-lamb"
+readme = "README.md"
+publish = false
+keywords = ["esp32", "embedded", "no_std", "embassy", "animatronic"]
+categories = ["embedded", "no-std", "hardware-support"]
+
+[lib]
+name = "cotl"
+
+[[bin]]
+name = "crown-of-the-lamb"
+path = "./src/bin/main.rs"
+
+[dependencies]
+
+# ESP32 HAL and runtime
+esp-hal                = { version = "1.1.1", features = ["esp32", "unstable"] }
+esp-rtos               = { version = "0.3.0", features = ["embassy", "esp-alloc", "esp-radio", "esp32"] }
+esp-bootloader-esp-idf = { version = "0.5.0", features = ["esp32"] }
+esp-alloc              = "0.10.0"
+esp-storage            = { version = "0.9.0", features = ["esp32"] }
+
+# Embassy async runtime
+embassy-executor = { version = "0.10.0", features = [] }
+embassy-sync     = "0.8.0"
+embassy-time     = "0.5.0"
+
+# WiFi and networking
+esp-radio         = { version = "0.18.0", features = ["esp32", "wifi"] }
+embassy-net       = { version = "0.9.1", features = ["tcp", "udp", "proto-ipv4", "medium-ethernet"] }
+embedded-io-async = "0.7.0"
+
+# HTTP server, DNS, DHCP
+picoserve  = { version = "0.18.0", features = ["embassy"] }
+simple-dns = { version = "0.11.3", default-features = false, features = ["alloc"] }
+edge-dhcp  = "0.8.0"
+
+# Display and hardware abstraction
+embedded-hal      = "1.0.0"
+embedded-hal-bus  = "0.3.0"
+embedded-graphics = "0.8.2"
+mipidsi           = "0.10.0"
+nb                = "1.1.0"
+
+# Flash storage with wear leveling
+embedded-storage       = "0.3.1"
+embedded-storage-async = "0.4.1"
+sequential-storage     = { version = "7.2.0", features = ["postcard"] }
+
+# Data and serialization
+serde           = { version = "1.0.228", default-features = false, features = ["derive", "alloc"] }
+serde-json-core = "0.6.0"
+heapless        = { version = "0.9.3", features = ["serde"] }
+
+# DSP, math, and RNG
+micromath = "2.1.0"
+microfft  = "0.6.0"
+oorandom  = "11.1.5"
+
+# Utilities
+static_cell = "2.1.1"
+
+# Logging
+defmt       = "1.1.0"
+esp-println = { version = "0.17.0", features = ["esp32", "defmt-espflash"] }
+
+[profile.dev]
+opt-level = "s"
+
+[profile.release]
+codegen-units = 1
+debug = 0
+debug-assertions = false
+incremental = false
+lto = 'fat'
+opt-level = 's'
+overflow-checks = false
+panic = "immediate-abort"
+
+[lints.clippy]
+mem_forget = "deny"
+pedantic = { level = "warn", priority = -1 }
+min_ident_chars = "warn"
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+cast_precision_loss = "allow"
+must_use_candidate = "allow"
+doc_markdown = "allow"
+missing_panics_doc = "allow"

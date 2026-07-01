@@ -1,0 +1,16 @@
+.eye-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+canvas#eye-preview {
+  display: block;
+  width: 160px;
+  height: 160px;
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+  border: 4px solid var(--border);
+  border-radius: 50%;
+  mask-image: radial-gradient(circle, black 60%, transparent 100%);
+}

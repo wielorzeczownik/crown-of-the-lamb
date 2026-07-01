@@ -1,0 +1,65 @@
+[changelog]
+header = """
+# Changelog
+
+All notable changes to this project are documented here.
+"""
+body = """
+{% if version %}
+# Release Notes for Version {{ version }}
+
+**Release Date: {{ timestamp | date(format="%Y-%m-%d") }}**
+
+### What's Changed
+{% for group, grouped_commits in commits | group_by(attribute="group") %}
+{% if group != "Internal" %}
+#### {{ group }}
+{% for commit in grouped_commits %}
+- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% if previous.version and remote.github.owner and remote.github.repo %}
+
+---
+**Full Changelog:** [{{ previous.version }}...{{ version }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }})
+{% elif previous.version %}
+
+---
+**Full Changelog:** {{ previous.version }}...{{ version }}
+{% endif %}
+{% endif %}
+"""
+trim = true
+
+[git]
+conventional_commits = true
+filter_unconventional = true
+split_commits = false
+commit_parsers = [
+  { breaking = true, group = "Breaking Changes" },
+  { message = "^chore\\(release\\)", group = "Internal" },
+  { message = "^chore\\(deps\\)", group = "Dependencies" },
+  { message = "^chore", skip = true },
+  { message = "^ci", skip = true },
+  { message = "^refactor", group = "Refactoring" },
+  { message = "^test", skip = true },
+  { message = "^docs", skip = true },
+  { message = "^style", skip = true },
+  { message = "^build", skip = true },
+  { message = "^feat", group = "Features" },
+  { message = "^fix", group = "Bug Fixes" },
+  { message = "^perf", group = "Performance" },
+]
+protect_breaking_commits = true
+filter_commits = true
+tag_pattern = "v[0-9]*"
+skip_tags = "v0.0.0"
+ignore_tags = ""
+topo_order = false
+sort_commits = "oldest"
+
+[bump]
+features_always_bump_minor = true
+breaking_always_bump_major = true
+initial_tag = "v0.1.0"

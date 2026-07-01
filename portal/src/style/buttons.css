@@ -1,0 +1,61 @@
+.btn {
+  position: relative;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  background: var(--tab-active);
+  border: none;
+  border-radius: 0;
+  isolation: isolate;
+  transition:
+    filter 0.06s,
+    transform 0.06s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn::before {
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  pointer-events: none;
+  content: '';
+  border: 3px solid var(--tab-active);
+  filter: url('#rough');
+  transition: border-color 0.06s;
+}
+
+.btn:active {
+  filter: brightness(1.55);
+  transform: scale(0.96);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+}
+
+/* Secondary dark fill, like inactive tab */
+.btn--outline {
+  color: var(--white);
+  background: var(--black);
+}
+
+.btn--outline::before {
+  border-color: var(--accent);
+}
+
+.btn--outline:active {
+  background: var(--accent);
+  filter: none;
+}
+
+.btn--outline:active::before {
+  border-color: var(--white);
+}

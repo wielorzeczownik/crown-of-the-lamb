@@ -1,0 +1,40 @@
+{
+  "name": "crown-of-the-lamb-portal",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src index.html",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "typecheck": "tsc --noEmit",
+    "fix": "eslint --fix src index.html && stylelint --fix \"src/**/*.css\" && prettier --write src"
+  },
+  "devDependencies": {
+    "@html-eslint/eslint-plugin": "0.63.0",
+    "@html-eslint/parser": "0.63.0",
+    "@types/ejs": "3.1.5",
+    "@types/html-minifier-terser": "7.0.2",
+    "@types/node": "26.1.0",
+    "@types/subset-font": "2.3.0",
+    "autoprefixer": "10.5.2",
+    "eslint": "10.6.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-simple-import-sort": "13.0.0",
+    "eslint-plugin-sonarjs": "4.1.0",
+    "eslint-plugin-unicorn": "70.0.0",
+    "jiti": "2.7.0",
+    "prettier": "3.9.4",
+    "stylelint": "17.14.0",
+    "stylelint-config-recess-order": "7.7.0",
+    "stylelint-config-standard": "40.0.0",
+    "subset-font": "2.5.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.62.1",
+    "vite": "8.1.2",
+    "vite-plugin-html": "3.2.2",
+    "vite-plugin-singlefile": "2.3.3"
+  }
+}
