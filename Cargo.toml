@@ -12,7 +12,7 @@ repository = "https://github.com/wielorzeczownik/crown-of-the-lamb"
 homepage = "https://github.com/wielorzeczownik/crown-of-the-lamb"
 readme = "README.md"
 publish = false
-keywords = ["esp32", "embedded", "no_std", "embassy", "animatronic"]
+keywords = ["esp32", "embedded", "no_std", "embassy", "animatronic", "crown-of-the-lamb", "captive-portal", "wifi", "fft"]
 categories = ["embedded", "no-std", "hardware-support"]
 
 [lib]
