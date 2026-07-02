@@ -1,29 +1,34 @@
 # Configuration for per-release notes shown on the GitHub release page.
+# The cumulative CHANGELOG.md file uses cliff.toml.
 
 [changelog]
 header = ""
 body = """
-## What's Changed
-{% for group, commits in commits | group_by(attribute="group") %}
-### {{ group | striptags | trim | upper_first }}
-{% for commit in commits %}
-- {{ commit.message | split(pat="\n") | first | trim | upper_first }}\
-{%- if remote.github.owner and remote.github.repo %} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}))\
-{%- else %} ({{ commit.id | truncate(length=7, end="") }})\
-{%- endif %}
-{%- endfor %}
-{% endfor %}
-{%- if version and previous.version and remote.github.owner and remote.github.repo %}
+{% if version %}
+# Release Notes for Version {{ version }}
 
-**Full Changelog**: https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }}
-{%- endif %}
+**Release Date: {{ timestamp | date(format="%Y-%m-%d") }}**
+
+### What's Changed
+{% for group, commits in commits | group_by(attribute="group") %}
+#### {{ group | striptags | trim }}
+{% for commit in commits %}
+- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}
+{% endfor %}
+{% endfor %}
+{% if previous.version and remote.github.owner and remote.github.repo %}
+
+---
+**Full Changelog:** [{{ previous.version }}...{{ version }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }})
+{% elif previous.version %}
+
+---
+**Full Changelog:** {{ previous.version }}...{{ version }}
+{% endif %}
+{% endif %}
 """
 footer = ""
 trim = true
-postprocessors = [
-  { pattern = '\A\s+', replace = "" },
-  { pattern = '\n{3,}', replace = "\n\n" },
-]
 
 [git]
 conventional_commits = true
