@@ -1,5 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "rust-toolchain": {
+    "description": "The esp channel is managed by espup, not Renovate.",
+    "enabled": false
+  },
   "platformAutomerge": true,
   "automergeType": "pr",
   "semanticCommits": "enabled",
