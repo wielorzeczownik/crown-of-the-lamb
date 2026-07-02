@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.1...v0.1.2) - 2026-07-02
+
+### Bug Fixes
+
+- Sync package-lock with vite 8.1.3 ([8bf63d7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8bf63d7f50a7809ad588d91c1875286afca18325))
+- Scope release notes to the current release ([0f06390](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/0f063907088a703d76b0ecc91cb1f2c3262d3c7c))
+
+### Documentation
+
+- Add physical height reference for the 3D print ([617dad3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/617dad36b272a3c31e90f490ffa00f5a9d8b17a1))
+
+### Styling
+
+- Show only user-facing changes in release notes ([9334c77](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9334c77e78421ddcb54b983a8d3f49222a6a30e4))
+- Match release notes format to ahe-ics ([8aa71f2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8aa71f2d929ae9dd24fb2308c07d5205b3a94a95))
+
 ## [0.1.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.0...v0.1.1) - 2026-07-02
 
 ### Bug Fixes
@@ -25,6 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update actions/attest-build-provenance action to v4 ([545115c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/545115c2b49197d4e8141fe01fc9073c66ddf2bc))
 - Split git-cliff config and include all commits ([22040c9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/22040c9a9dd907623221c7c5e3aed34ff7e4bfd5))
 - Install Xtensa toolchain via espup, drop broken rustup target add ([601b821](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/601b8213ecaf64656454e4dbc345ef3d9d0152dd))
+
+### Miscellaneous
+
+- Disable rust-toolchain manager for esp channel ([cc05f61](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/cc05f618932c7fd9aebebb0fe73c241bb66a288a))
 
 ## [0.1.0] - 2026-07-01
 
