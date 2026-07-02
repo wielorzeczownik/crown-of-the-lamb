@@ -54,8 +54,8 @@ async function checkGithub(): Promise<void> {
     };
 
     const latestTag = release.tag_name;
-    const binAsset = release.assets.find((asset) =>
-      asset.name.endsWith('.bin')
+    const binAsset = release.assets.find(
+      (asset) => asset.name === 'crown-of-the-lamb.bin'
     );
 
     if (currentVersion && isNewerVersion(latestTag, currentVersion)) {
