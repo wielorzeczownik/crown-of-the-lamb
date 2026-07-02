@@ -91,7 +91,7 @@ The crown is based on [Red Crown (Cult of the Lamb)](https://www.printables.com/
 - **microphone holes** on both sides (for left/right sound direction),
 - cut-outs for **2× USB-C ports** (charger + boost module) and a **power switch**.
 
-It's printed at **120% scale** so all the electronics fit inside.
+It's printed at **120% scale** so all the electronics fit inside. Scaling can come out differently depending on your printer and slicer, so use the physical size as a reference: the finished print should measure **around 11.5 cm** in height, from its lowest to its highest point.
 
 ### Parts
 

@@ -91,7 +91,7 @@ Korona bazuje na modelu [Red Crown (Cult of the Lamb)](https://www.printables.co
 - **otwory na mikrofony** po obu bokach (dla kierunku dźwięku L/P),
 - wycięcia na **2× port USB-C** (ładowarka + moduł boost) oraz **włącznik**.
 
-Wydruk w skali **120%**, żeby wszystko się zmieściło w środku.
+Wydruk w skali **120%**, żeby wszystko się zmieściło w środku. Skalowanie może wyjść różnie w zależności od drukarki i slicera, więc jako punkt odniesienia warto przyjąć fizyczny rozmiar: gotowy wydruk powinien mieć **około 11,5 cm** wysokości, od najniższego do najwyższego punktu.
 
 ### Części
 
