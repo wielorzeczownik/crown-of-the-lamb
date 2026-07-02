@@ -1,24 +1,9 @@
-# Configuration for the cumulative CHANGELOG.md file.
-# Release-note generation for GitHub releases uses cliff-release.toml.
+# Configuration for per-release notes shown on the GitHub release page.
 
 [changelog]
-header = """
-# Changelog
-
-All notable changes to this project are documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-"""
+header = ""
 body = """
-{% if version -%}
-## [{{ version | trim_start_matches(pat="v") }}]\
-{%- if remote.github.owner and remote.github.repo and previous.version %}\
-(https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }})\
-{%- endif %} - {{ timestamp | date(format="%Y-%m-%d") }}
-{% else -%}
-## [Unreleased]
-{% endif -%}
+## What's Changed
 {% for group, commits in commits | group_by(attribute="group") %}
 ### {{ group | striptags | trim | upper_first }}
 {% for commit in commits %}
@@ -28,10 +13,17 @@ body = """
 {%- endif %}
 {%- endfor %}
 {% endfor %}
+{%- if version and previous.version and remote.github.owner and remote.github.repo %}
+
+**Full Changelog**: https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }}
+{%- endif %}
 """
 footer = ""
 trim = true
-postprocessors = [{ pattern = '(?m)^(## \[)', replace = "\n$1" }]
+postprocessors = [
+  { pattern = '\A\s+', replace = "" },
+  { pattern = '\n{3,}', replace = "\n\n" },
+]
 
 [git]
 conventional_commits = true

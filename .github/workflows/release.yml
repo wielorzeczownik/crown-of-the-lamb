@@ -66,8 +66,8 @@ jobs:
         if: ${{ steps.bump.outputs.released == 'true' }}
         uses: orhun/git-cliff-action@v4.8.0
         with:
-          config: cliff.toml
-          args: --unreleased --tag ${{ steps.bump.outputs.tag }} --strip header
+          config: cliff-release.toml
+          args: --unreleased --tag ${{ steps.bump.outputs.tag }}
         env:
           OUTPUT: release-notes.md
           GITHUB_REPO: ${{ github.repository }}
