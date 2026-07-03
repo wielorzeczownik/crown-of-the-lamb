@@ -5,7 +5,30 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.2...v1.0.0) - 2026-07-03
+
+### Documentation
+
+- Refresh portal screenshots ([55b7d7a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/55b7d7aed9e8cef68932bbb1a78262ad77e29695))
+
+### Build System
+
+- Collapse OTA partition layout ([a5cdfe3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a5cdfe3f9b0e0324020388511cb0e651e98f2c07))
+
+### CI/CD
+
+- Ship a single merged firmware image ([302e12e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/302e12edeffa3ec49f720adbceb78af237d41758))
+- Update taiki-e/install-action action to v2.82.4 (#3) ([4bcdf4c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/4bcdf4c392d3c85e080c511e7ceb2c999a81e8a7))
+
+### Miscellaneous
+
+- Optimization favicon ([34022ae](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/34022ae1f27c75fbd381a1fb19719293fdaf1fa6))
+
 ## [0.1.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.1...v0.1.2) - 2026-07-02
+
+### Features
+
+- Rip out OTA because I gave up ([05daad0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/05daad0f117da6eb1d4c9acefc6e33753834a4d8))
 
 ### Bug Fixes
 
