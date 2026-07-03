@@ -1,6 +1,5 @@
 mod config;
 mod expression;
-mod ota;
 mod portal;
 mod wifi;
 
@@ -93,9 +92,7 @@ pub async fn web_task(
         .route("/api/config/reset",          post(config::reset))
         .route("/api/expression",            post(expression::set))
         .route("/api/wifi",                  post(wifi::set))
-        .route("/api/wifi/reset",            post(wifi::reset))
-        .route("/api/version",               get(ota::version))
-        .route_service("/api/ota",           ota::OtaService);
+        .route("/api/wifi/reset",            post(wifi::reset));
 
   let server_config = picoserve::Config::new(picoserve::Timeouts {
     start_read_request: Duration::from_secs(5),

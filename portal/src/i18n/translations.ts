@@ -38,21 +38,6 @@ export type Translations = {
   modalWifiResetMsg: string;
   modalExpressionResetMsg: string;
   modalSoundResetMsg: string;
-  // OTA tab
-  tabOta: string;
-  otaCurrentVersion: string;
-  otaLabelInstalled: string;
-  otaCheckingGithub: string;
-  otaUpToDate: string;
-  otaUpdateAvailable: string;
-  otaNoGithub: string;
-  otaDownloadLink: string;
-  otaUploadLabel: string;
-  otaBtnUpload: string;
-  otaFlashing: string;
-  otaSuccess: string;
-  otaBadMagic: string;
-  otaError: string;
   // Document / accessibility
   metaDescription: string;
   ariaEyePreview: string;

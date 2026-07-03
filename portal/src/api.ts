@@ -79,37 +79,3 @@ export function saveWifi(ssid: string): Promise<Response> {
 export function resetWifi(): Promise<Response> {
   return request('/api/wifi/reset', { method: 'POST' });
 }
-
-// Firmware
-
-export async function getVersion(): Promise<string> {
-  const response = await request('/api/version');
-  const data = (await response.json()) as { version: string };
-  return data.version;
-}
-
-// Streamed firmware upload
-export function uploadFirmware(
-  file: Blob,
-  onProgress: (percent: number) => void
-): Promise<number> {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/ota');
-    xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-
-    xhr.upload.addEventListener('progress', (event) => {
-      if (event.lengthComputable) {
-        onProgress(Math.round((event.loaded / event.total) * 100));
-      }
-    });
-
-    xhr.addEventListener('load', () => resolve(xhr.status));
-
-    xhr.addEventListener('error', () =>
-      reject(new Error('OTA upload network error'))
-    );
-
-    xhr.send(file);
-  });
-}

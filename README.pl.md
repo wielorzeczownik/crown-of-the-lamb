@@ -12,7 +12,7 @@
 
 <p align="center">🇬🇧 <a href="README.md">English</a> | 🇵🇱 Polski</p>
 
-Otwartoźródłowy **firmware na ESP32** napisany w **Rust** (`no_std`, [Embassy](https://embassy.dev)) do animatronicznego rekwizytu – korony z gry **Cult of the Lamb**. Okrągły wyświetlacz **GC9A01** renderuje żywe, mrugające oko, które rozgląda się, reaguje na kierunek dźwięku i wpada w mroczniejsze grymasy – a wszystko ustawisz bezprzewodowo z telefonu przez własny **captive portal WiFi** rekwizytu, z aktualizacjami **OTA**.
+Otwartoźródłowy **firmware na ESP32** napisany w **Rust** (`no_std`, [Embassy](https://embassy.dev)) do animatronicznego rekwizytu – korony z gry **Cult of the Lamb**. Okrągły wyświetlacz **GC9A01** renderuje żywe, mrugające oko, które rozgląda się, reaguje na kierunek dźwięku i wpada w mroczniejsze grymasy – a wszystko ustawisz bezprzewodowo z telefonu przez własny **captive portal WiFi** rekwizytu.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/demo.jpg" alt="Gotowa korona z zapalonym okiem" width="70%" />
@@ -25,7 +25,6 @@ Otwartoźródłowy **firmware na ESP32** napisany w **Rust** (`no_std`, [Embassy
 - **Grzech (Sin)** – mina spoczynkowa pojawiająca się losowo w chwilach ciszy.
 - **Punkt dostępowy WiFi + captive portal**: po połączeniu z siecią rekwizytu automatycznie otwiera się panel konfiguracji (DHCP + DNS + HTTP na urządzeniu).
 - **Konfiguracja na żywo**: kolor oka, kształt źrenicy, tempo mrugania, próg dźwięku i szanse na poszczególne miny – stosowane natychmiast i zapisywane we flashu.
-- **Aktualizacje OTA**: nowy firmware wgrasz z portalu, bez kabla.
 
 ## Sprzęt
 
@@ -134,7 +133,7 @@ Wszystko wchodzi na styk. Kilka uwag z mojego składania:
 Pobierz gotowy firmware ze [GitHub Releases](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest):
 
 - **[crown-of-the-lamb-merged.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb-merged.bin)** – obraz scalony (bootloader + tablica partycji + aplikacja) do wgrania czystego ESP32 na offset `0x0`.
-- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – obraz aplikacji do aktualizacji OTA przez captive portal albo aktualizacji partycji app (`0x10000`).
+- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – obraz aplikacji do aktualizacji partycji app (`0x10000`).
 
 Wgranie czystej płytki obrazem scalonym:
 
@@ -143,10 +142,6 @@ espflash write-bin 0x0 crown-of-the-lamb-merged.bin
 # albo esptool:
 esptool.py --chip esp32 write_flash 0x0 crown-of-the-lamb-merged.bin
 ```
-
-> [!NOTE]
-> Do kolejnych aktualizacji kabel nie jest już potrzebny – otwórz captive portal
-> i wgraj `crown-of-the-lamb.bin` z sekcji OTA.
 
 ## Konfiguracja
 

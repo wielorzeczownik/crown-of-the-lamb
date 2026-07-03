@@ -25,7 +25,6 @@ This project is firmware for a self-contained ESP32 prop that runs its own WiFi 
 
 - The WiFi access point and captive portal (DHCP, DNS, HTTP endpoints)
 - The configuration API exposed by the portal (eye/expression settings, colours, thresholds)
-- The over-the-air (OTA) firmware update endpoint
 - Configuration persisted to flash
 
 Because the device exposes an open access point by design, anyone within WiFi range can reach the portal. Treat physical/RF proximity as part of the trust boundary.

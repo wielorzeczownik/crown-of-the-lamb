@@ -7,7 +7,6 @@ pub mod constants;
 pub mod control;
 pub mod display;
 pub mod eye;
-pub mod ota;
 pub mod sin_bitmap;
 pub mod sound;
 pub mod storage;

@@ -4,7 +4,7 @@ Thank you for considering a contribution. This document covers everything you ne
 
 ## Overview
 
-`no_std` Rust firmware for an ESP32-powered animatronic Cult of the Lamb crown prop. It drives a GC9A01 round display with an animated eye, detects sound direction from two microphones via FFT to react with facial expressions, and hosts its own WiFi access point with a captive-portal web UI for live configuration and OTA updates.
+`no_std` Rust firmware for an ESP32-powered animatronic Cult of the Lamb crown prop. It drives a GC9A01 round display with an animated eye, detects sound direction from two microphones via FFT to react with facial expressions, and hosts its own WiFi access point with a captive-portal web UI for live configuration.
 
 ## Project structure
 
@@ -18,8 +18,7 @@ Thank you for considering a contribution. This document covers everything you ne
 │   ├── eye.rs                 eye state machine and expressions
 │   ├── sound.rs               FFT direction analysis
 │   ├── display.rs             GC9A01 rendering
-│   ├── config.rs / storage.rs runtime config + flash persistence
-│   └── ota.rs                 over-the-air update handling
+│   └── config.rs / storage.rs runtime config + flash persistence
 ├── portal/                    TypeScript + Vite captive-portal web UI
 ├── scripts/
 │   └── bump-version.sh        determines next release version from git-cliff and bumps Cargo.toml

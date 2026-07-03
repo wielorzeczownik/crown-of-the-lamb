@@ -74,59 +74,6 @@ input[type='color']::-webkit-color-swatch {
   border-radius: 2px;
 }
 
-.file-drop {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  align-items: center;
-  padding: 1.6rem 1rem;
-  cursor: pointer;
-  background: var(--surface);
-  border: 2px dashed var(--accent);
-  transition: border-color 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.file-drop:hover,
-.file-drop:focus-within {
-  border-color: var(--muted);
-}
-
-.file-drop.has-file {
-  border-color: var(--white);
-  border-style: solid;
-}
-
-.file-drop__icon {
-  color: var(--muted);
-  transition: color 0.2s;
-}
-
-.file-drop.has-file .file-drop__icon {
-  color: var(--white);
-}
-
-.file-drop__label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text);
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.file-drop__name {
-  min-height: 1em;
-  font-size: 0.7rem;
-  color: var(--muted);
-  text-align: center;
-  word-break: break-all;
-}
-
-.file-drop.has-file .file-drop__name {
-  color: var(--white);
-}
-
 .field-wrap {
   position: relative;
 }
