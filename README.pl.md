@@ -156,11 +156,10 @@ Z portalu ustawisz na żywo:
 Miny reaktywne losują się niezależnie przy każdej wykrytej zmianie kierunku dźwięku; szansa na **Grzech** losuje się przy każdym mrugnięciu. Wszystkie wartości zapisują się we flashu i wczytują po kolejnym włączeniu.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Interfejs captive portalu 1" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Interfejs captive portalu 2" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Interfejs captive portalu 3" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="Interfejs captive portalu 4" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-5.jpg" alt="Interfejs captive portalu 5" width="19%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Interfejs captive portalu 1" width="23%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Interfejs captive portalu 2" width="23%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Interfejs captive portalu 3" width="23%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="Interfejs captive portalu 4" width="23%" />
 </p>
 
 ## Budowanie ze źródeł

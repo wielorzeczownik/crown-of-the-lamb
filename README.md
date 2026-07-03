@@ -156,11 +156,10 @@ From the portal you can adjust, live:
 Reaction expressions roll independently on each detected change of sound direction; the **Sin** chance rolls on each blink. All values are saved to flash and reload on the next power-up.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Captive portal UI 1" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Captive portal UI 2" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Captive portal UI 3" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="Captive portal UI 4" width="19%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-5.jpg" alt="Captive portal UI 5" width="19%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Captive portal UI 1" width="23%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Captive portal UI 2" width="23%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Captive portal UI 3" width="23%" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="Captive portal UI 4" width="23%" />
 </p>
 
 ## Building from source
