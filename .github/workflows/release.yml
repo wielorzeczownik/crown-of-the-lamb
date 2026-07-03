@@ -143,34 +143,23 @@ jobs:
       - name: Build firmware
         run: cargo build --release
 
-      - name: Build OTA image (application only)
-        run: |
-          espflash save-image \
-            --chip esp32 \
-            --partition-table partitions.csv \
-            target/xtensa-esp32-none-elf/release/crown-of-the-lamb \
-            crown-of-the-lamb.bin
-
-      - name: Build merged image (bootloader + partitions + app)
+      - name: Build firmware image (bootloader + partitions + app)
         run: |
           espflash save-image \
             --merge \
             --chip esp32 \
             --partition-table partitions.csv \
             target/xtensa-esp32-none-elf/release/crown-of-the-lamb \
-            crown-of-the-lamb-merged.bin
+            crown-of-the-lamb.bin
 
-      - name: Compute SHA-256 checksums
+      - name: Compute SHA-256 checksum
         run: |
           sha256sum crown-of-the-lamb.bin > crown-of-the-lamb.bin.sha256
-          sha256sum crown-of-the-lamb-merged.bin > crown-of-the-lamb-merged.bin.sha256
 
       - name: Attest firmware
-        uses: actions/attest-build-provenance@v4
+        uses: actions/attest-build-provenance@v4.1.1
         with:
-          subject-path: |
-            crown-of-the-lamb.bin
-            crown-of-the-lamb-merged.bin
+          subject-path: crown-of-the-lamb.bin
 
       - name: Upload firmware artifacts
         uses: actions/upload-artifact@v7.0.1
@@ -179,8 +168,6 @@ jobs:
           path: |
             crown-of-the-lamb.bin
             crown-of-the-lamb.bin.sha256
-            crown-of-the-lamb-merged.bin
-            crown-of-the-lamb-merged.bin.sha256
 
   publish-release:
     needs:

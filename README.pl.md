@@ -132,15 +132,14 @@ Wszystko wchodzi na styk. Kilka uwag z mojego składania:
 
 Pobierz gotowy firmware ze [GitHub Releases](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest):
 
-- **[crown-of-the-lamb-merged.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb-merged.bin)** – obraz scalony (bootloader + tablica partycji + aplikacja) do wgrania czystego ESP32 na offset `0x0`.
-- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – obraz aplikacji do aktualizacji partycji app (`0x10000`).
+- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – pełny obraz (bootloader + tablica partycji + aplikacja), wgrywany na offset `0x0`
 
-Wgranie czystej płytki obrazem scalonym:
+Wgranie na `0x0`:
 
 ```bash
-espflash write-bin 0x0 crown-of-the-lamb-merged.bin
+espflash write-bin 0x0 crown-of-the-lamb.bin
 # albo esptool:
-esptool.py --chip esp32 write_flash 0x0 crown-of-the-lamb-merged.bin
+esptool.py --chip esp32 write_flash 0x0 crown-of-the-lamb.bin
 ```
 
 ## Konfiguracja

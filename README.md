@@ -132,15 +132,14 @@ It's a tight fit. A few notes from putting mine together:
 
 Grab the latest prebuilt firmware from the [GitHub Releases](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest):
 
-- **[crown-of-the-lamb-merged.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb-merged.bin)** – full image (bootloader + partition table + app) for flashing a fresh ESP32 at offset `0x0`.
-- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – application image for updating the app partition (`0x10000`).
+- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – full image (bootloader + partition table + app)
 
-Flash a blank board with the merged image:
+Flash it at `0x0`:
 
 ```bash
-espflash write-bin 0x0 crown-of-the-lamb-merged.bin
+espflash write-bin 0x0 crown-of-the-lamb.bin
 # or with esptool:
-esptool.py --chip esp32 write_flash 0x0 crown-of-the-lamb-merged.bin
+esptool.py --chip esp32 write_flash 0x0 crown-of-the-lamb.bin
 ```
 
 ## Configuration
