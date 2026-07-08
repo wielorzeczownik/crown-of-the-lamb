@@ -121,12 +121,16 @@ Wszystko wchodzi na styk. Kilka uwag z mojego składania:
 - Korona została wydrukowana w całości, a **dół rozciąłem i trochę wyrzeźbiłem** po wydruku, żeby zmieścić elektronikę. Jeśli masz drukarkę, łatwiej **rozdzielić dolną część w slicerze**, żeby wygodnie włożyć większe elementy.
 - **Upychaj wszystko w rogi** korony: najpierw **baterie i ESP32**, a dopiero potem wciśnij **przedłużacze USB-C i wyświetlacz**.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-1.jpg" alt="Złożona korona 1" width="24%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-2.jpg" alt="Złożona korona 2" width="24%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-3.jpg" alt="Złożona korona 3" width="24%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-4.jpg" alt="Złożona korona 4" width="24%" />
-</p>
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-1.jpg" alt="Okablowanie zwinięte w otwartej podstawie" width="200"/><br/><sub><b>Podstawa</b> · kable i złącza upchane w środku</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-2.jpg" alt="Zaklejony tył korony z otworem na mikrofon" width="200"/><br/><sub><b>Tył</b> · zaklejona skorupa, otwór mikrofonu</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-3.jpg" alt="Dwa porty USB-C i przycisk zasilania u podstawy" width="200"/><br/><sub><b>Porty</b> · dwa USB-C i przycisk zasilania</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-4.jpg" alt="Przód korony z wyciętym okiem" width="200"/><br/><sub><b>Przód</b> · wycięcie na oko</sub></td>
+</tr>
+</table>
+</div>
 
 ## Wgrywanie
 
@@ -155,12 +159,16 @@ Z portalu ustawisz na żywo:
 
 Miny reaktywne losują się niezależnie przy każdej wykrytej zmianie kierunku dźwięku; szansa na **Grzech** losuje się przy każdym mrugnięciu. Wszystkie wartości zapisują się we flashu i wczytują po kolejnym włączeniu.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Interfejs captive portalu 1" width="23%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Interfejs captive portalu 2" width="23%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Interfejs captive portalu 3" width="23%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="Interfejs captive portalu 4" width="23%" />
-</p>
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Zakładka Oko z kolorem, źrenicą i mruganiem" width="200"/><br/><sub><b>Oko</b> · kolor, źrenica i mruganie</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Zakładka Miny z suwakami szans na miny" width="200"/><br/><sub><b>Miny</b> · szanse na miny</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Zakładka Dźwięk z progiem czułości mikrofonu" width="200"/><br/><sub><b>Dźwięk</b> · czułość mikrofonu</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="Zakładka WiFi z konfiguracją SSID" width="200"/><br/><sub><b>WiFi</b> · konfiguracja SSID</sub></td>
+</tr>
+</table>
+</div>
 
 ## Budowanie ze źródeł
 

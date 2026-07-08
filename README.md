@@ -121,12 +121,16 @@ It's a tight fit. A few notes from putting mine together:
 - The crown was printed in one piece and its **bottom cut open and carved** afterwards to get the electronics in. If you have a printer, it's easier to **split the bottom in the slicer** so you can drop the larger parts in cleanly.
 - **Pack everything into the corners** of the crown: seat the **battery and ESP32 first**, then feed in the **USB-C extension cables and the display** last.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-1.jpg" alt="Assembled crown 1" width="24%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-2.jpg" alt="Assembled crown 2" width="24%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-3.jpg" alt="Assembled crown 3" width="24%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-4.jpg" alt="Assembled crown 4" width="24%" />
-</p>
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-1.jpg" alt="Wiring coiled inside the open base" width="200"/><br/><sub><b>Base wiring</b> · cables & connectors packed in</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-2.jpg" alt="Sealed back of the crown with mic port" width="200"/><br/><sub><b>Rear</b> · sealed shell, mic port</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-3.jpg" alt="Twin USB-C ports and power button at the base" width="200"/><br/><sub><b>Ports</b> · dual USB-C & power button</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/assembly-4.jpg" alt="Front of the crown with the eye cutout" width="200"/><br/><sub><b>Front</b> · eye-socket cutout</sub></td>
+</tr>
+</table>
+</div>
 
 ## Flashing
 
@@ -155,12 +159,16 @@ From the portal you can adjust, live:
 
 Reaction expressions roll independently on each detected change of sound direction; the **Sin** chance rolls on each blink. All values are saved to flash and reload on the next power-up.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Captive portal UI 1" width="23%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Captive portal UI 2" width="23%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Captive portal UI 3" width="23%" />
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="Captive portal UI 4" width="23%" />
-</p>
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-1.jpg" alt="Eye tab with colour, pupil and blink controls" width="200"/><br/><sub><b>Eye</b> · colour, pupil & blink</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-2.jpg" alt="Mimicry tab with expression chance sliders" width="200"/><br/><sub><b>Mimicry</b> · expression chances</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-3.jpg" alt="Sound tab with microphone sensitivity threshold" width="200"/><br/><sub><b>Sound</b> · mic sensitivity</sub></td>
+<td align="center" width="25%"><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/portal-4.jpg" alt="WiFi tab with SSID configuration" width="200"/><br/><sub><b>WiFi</b> · SSID setup</sub></td>
+</tr>
+</table>
+</div>
 
 ## Building from source
 
