@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.0...v1.0.1) - 2026-07-09
+
+### Documentation
+
+- Present assembly and portal screenshots in captioned tables ([a454613](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a45461305bf009256ebac2428b583d16ed41e107))
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v71 ([2c74c11](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2c74c11e6c9b83ab648bb5aa477927f146e45918))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.82.7 (#6) ([327cb03](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/327cb0396901b00b4fa94fade77638ba23eafcd6))
+- Update taiki-e/install-action action to v2.82.6 (#5) ([83ad2f3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/83ad2f3065d75ce421a54fc8a3b7b235b3970785))
+- Update taiki-e/install-action action to v2.82.5 (#4) ([ae4cee9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ae4cee91ff715eec0fb77069c7561ffc6137a042))
+
 ## [1.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.2...v1.0.0) - 2026-07-03
 
 ### Documentation
