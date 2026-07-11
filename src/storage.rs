@@ -7,7 +7,7 @@ use embedded_storage::nor_flash::{
 use embedded_storage_async::nor_flash::{ErrorType, NorFlash, ReadNorFlash};
 use esp_storage::FlashStorage;
 use sequential_storage::{
-  cache::NoCache,
+  cache::Cache,
   map::{MapConfig, MapStorage, PostcardValue},
 };
 
@@ -136,7 +136,7 @@ impl StoredConfig {
     let flash = guard.as_mut().expect("storage::init() was not called");
     let mut bf = BlockingFlash(flash);
     let mut map =
-      MapStorage::<u8, _, _>::new(&mut bf, MapConfig::new(CONFIG_RANGE), NoCache::new());
+      MapStorage::<u8, _, _>::new(&mut bf, MapConfig::new(CONFIG_RANGE), Cache::new_uncached());
     let mut buf = [0u8; FLASH_BUF_SIZE];
     map
       .fetch_item::<StoredConfig>(&mut buf, &CONFIG_KEY)
@@ -151,7 +151,7 @@ impl StoredConfig {
     let flash = guard.as_mut().expect("storage::init() was not called");
     let mut bf = BlockingFlash(flash);
     let mut map =
-      MapStorage::<u8, _, _>::new(&mut bf, MapConfig::new(CONFIG_RANGE), NoCache::new());
+      MapStorage::<u8, _, _>::new(&mut bf, MapConfig::new(CONFIG_RANGE), Cache::new_uncached());
     let mut buf = [0u8; FLASH_BUF_SIZE];
     map.store_item(&mut buf, &CONFIG_KEY, self).await.ok();
   }
