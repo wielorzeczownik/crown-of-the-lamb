@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.3...v1.0.4) - 2026-07-11
+
+### Performance
+
+- Compress assets ([fe96e64](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/fe96e64be330847833063c1a6060f346fc17151f))
+
+### Build System
+
+- Update dependency @types/node to v26.1.1 (#12) ([b094def](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b094def68ed9fb9260c0389d5883b34589b69e5e))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.82.8 (#10) ([a1dc472](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a1dc47202fcd5226b96ad5c7c08ba55f3019ea9e))
+
 ## [1.0.3](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.2...v1.0.3) - 2026-07-10
 
 ### Build System
