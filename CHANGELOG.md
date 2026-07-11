@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.4...v1.0.5) - 2026-07-11
+
+### Bug Fixes
+
+- Migrate to sequential-storage v8 cache API ([934c70e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/934c70e5821cf0e436b3e11c1bfe8e49b8cb4711))
+
+### CI/CD
+
+- Update davidanson/markdownlint-cli2-action action to v24 ([8f81b47](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8f81b474a1cc781c46020af4fecb60e20278a3bb))
+
+### Dependencies
+
+- Update rust crate sequential-storage to v8 ([82cf7d6](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/82cf7d69f94ade5986b443c9129b3e2426f56372))
+
 ## [1.0.4](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.3...v1.0.4) - 2026-07-11
 
 ### Performance
