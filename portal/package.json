@@ -26,7 +26,7 @@
     "eslint-plugin-sonarjs": "4.1.0",
     "eslint-plugin-unicorn": "71.1.0",
     "jiti": "2.7.0",
-    "prettier": "3.9.4",
+    "prettier": "3.9.5",
     "stylelint": "17.14.0",
     "stylelint-config-recess-order": "7.7.0",
     "stylelint-config-standard": "40.0.0",
