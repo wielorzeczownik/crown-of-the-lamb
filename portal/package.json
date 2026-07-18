@@ -24,7 +24,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-simple-import-sort": "13.0.0",
     "eslint-plugin-sonarjs": "4.1.0",
-    "eslint-plugin-unicorn": "71.1.0",
+    "eslint-plugin-unicorn": "72.0.0",
     "jiti": "2.7.0",
     "prettier": "3.9.5",
     "stylelint": "17.14.0",
