@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.14](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.13...v1.0.14) - 2026-07-18
+
+### Build System
+
+- Update dependency eslint-plugin-sonarjs to v4.2.0 (#26) ([6ee030f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6ee030ffaa83124a8b784ceea8f215d9dbc5fa32))
+
 ## [1.0.13](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.12...v1.0.13) - 2026-07-18
 
 ### Build System
