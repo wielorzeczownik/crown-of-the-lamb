@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.16](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.15...v1.0.16) - 2026-07-19
+
+### Build System
+
+- Update dependency vite to v8.1.5 (#31) ([6d01795](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6d01795501b2b7320be37ee74e27b466044beb86))
+
 ## [1.0.15](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.14...v1.0.15) - 2026-07-19
 
 ### Build System
