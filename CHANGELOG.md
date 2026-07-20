@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.17](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.16...v1.0.17) - 2026-07-20
+
+### Build System
+
+- Update dependency eslint-plugin-simple-import-sort to v14 ([5146597](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/51465971a7a8d1273a66a66cd0a53f32cc154b85))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.83.2 (#32) ([32bcc7a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/32bcc7a6534fed729a9df7348c4bc75a96a4cf7b))
+
 ## [1.0.16](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.15...v1.0.16) - 2026-07-19
 
 ### Build System
