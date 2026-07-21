@@ -5,6 +5,25 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.18](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.17...v1.0.18) - 2026-07-21
+
+### Bug Fixes
+
+- Update rust crate picoserve ([46f658e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/46f658e028b5ab1d35e6e08802c7d8eeb1ce3b9b))
+
+### Build System
+
+- Resolve audit advisories ([2b1c980](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2b1c9803acc8c964174fc20b2b72585e6c926493))
+
+### CI/CD
+
+- Update softprops/action-gh-release action to v3.0.2 ([bb0f546](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/bb0f546ae967ff6e117f504a82baad3a26f3a076))
+- Update actions/setup-node action to v7 ([1beb6e1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1beb6e15c6b12aeb65a032f1abbaec7098b4e86e))
+
+### Dependencies
+
+- Update rust crate picoserve to 0.19.0 ([3841d99](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3841d991e81417b405f6dfc282edae97354db437))
+
 ## [1.0.17](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.16...v1.0.17) - 2026-07-20
 
 ### Build System
