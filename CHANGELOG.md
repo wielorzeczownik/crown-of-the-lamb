@@ -5,6 +5,13 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.19](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.18...v1.0.19) - 2026-07-23
+
+### Build System
+
+- Update dependency stylelint to v17.14.1 (#37) ([40775d0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/40775d00ceea72e0d8338c2991344ca1fd7fe972))
+- Resolve audit advisories ([7cf71d7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/7cf71d767903cf2b32dd10507e337ea36dc3de43))
+
 ## [1.0.18](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.17...v1.0.18) - 2026-07-21
 
 ### Bug Fixes
