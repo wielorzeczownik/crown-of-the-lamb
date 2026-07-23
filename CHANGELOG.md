@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.20](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.19...v1.0.20) - 2026-07-23
+
+### Build System
+
+- Update dependency typescript-eslint to v8.65.0 ([796f407](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/796f407ad8bd8933e4b0b64f7cc4f78ebda2170a))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.83.3 (#38) ([82af088](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/82af0884bc2255da7c6ef21055e7708b632d4f4a))
+
 ## [1.0.19](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.18...v1.0.19) - 2026-07-23
 
 ### Build System
