@@ -119,7 +119,7 @@ jobs:
         run: rustup toolchain install stable --profile minimal
 
       - name: Install espup
-        uses: taiki-e/install-action@v2.83.2
+        uses: taiki-e/install-action@v2.83.3
         with:
           tool: espup
 
