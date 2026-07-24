@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.21](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.20...v1.0.21) - 2026-07-24
+
+### Build System
+
+- Update dependency prettier to v3.9.6 (#40) ([6092d66](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6092d66ff482e66e6de89f8adc004e1b11d01330))
+
 ## [1.0.20](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.19...v1.0.20) - 2026-07-23
 
 ### Build System
