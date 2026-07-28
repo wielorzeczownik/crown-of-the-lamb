@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.22](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.21...v1.0.22) - 2026-07-28
+
+### Build System
+
+- Update dependency eslint to v10.8.0 (#45) ([9df452a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9df452a560dc9505ee760d76f2e44dad67741b49))
+
+### CI/CD
+
+- Update actions/checkout action to v7.0.1 (#44) ([fa27496](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/fa27496fcd85c105c042677d7153a15208f3859b))
+- Update taiki-e/install-action action to v2.84.0 (#43) ([ea1c863](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ea1c863c772398096ee89d625b7f57932cb22b28))
+- Update taiki-e/install-action action to v2.83.4 (#41) ([d231af3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d231af3f88b8dd495d528d1f261ce99df57df0d7))
+- Update davidanson/markdownlint-cli2-action action to v24.1.0 (#42) ([b6b0a92](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b6b0a921abd867019a7b0f4e4d92356b0ba9e896))
+
 ## [1.0.21](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.20...v1.0.21) - 2026-07-24
 
 ### Build System
