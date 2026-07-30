@@ -272,7 +272,7 @@ jobs:
         shell: bash
         run: |
           set -uo pipefail
-          if cargo audit 2>&1 | tee audit.log; then
+          if cargo audit --color never 2>&1 | tee audit.log; then
             exit 0
           fi
           echo "::warning title=cargo audit::Advisories found - see the job summary. Not blocking this pull request."
