@@ -12,6 +12,10 @@ fn main() {
   println!("cargo:rerun-if-changed=portal/tsconfig.json");
   println!("cargo:rerun-if-changed=portal/vite.config.ts");
 
+  if env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("xtensa") {
+    return;
+  }
+
   // On Windows npm is npm.cmd
   let npm = if cfg!(target_os = "windows") {
     "npm.cmd"

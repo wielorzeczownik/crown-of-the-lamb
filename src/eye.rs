@@ -1,3 +1,4 @@
+#[cfg_attr(not(target_arch = "xtensa"), allow(unused_imports))]
 use micromath::F32Ext;
 use oorandom::Rand32;
 
@@ -30,7 +31,8 @@ pub enum BlinkPhase {
 }
 
 /// Facial expressions the eye can play
-#[derive(Clone, Copy, PartialEq, Eq, defmt::Format)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+#[cfg_attr(target_arch = "xtensa", derive(defmt::Format))]
 pub enum Expression {
   Normal,
   Sin,
@@ -133,6 +135,7 @@ impl EyeState {
   /// idle)
   fn set_mode(&mut self, mode: Expression) {
     if mode != self.expr_mode {
+      #[cfg(target_arch = "xtensa")]
       defmt::info!("expr: active {}", mode);
     }
     self.expr_mode = mode;
@@ -316,6 +319,136 @@ impl EyeState {
     if self.expr_t >= 1.0 {
       self.expr_t = 0.0;
       self.set_mode(Expression::Normal);
+    }
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::{Expression, EyeState};
+
+  const WEB_CODES: [i32; 6] = [1, 2, 3, 4, 5, 7];
+
+  #[test]
+  fn from_web_code_accepts_exactly_the_documented_codes() {
+    for code in WEB_CODES {
+      assert!(
+        Expression::from_web_code(code).is_some(),
+        "code {code} should map to an expression"
+      );
+    }
+  }
+
+  #[test]
+  fn from_web_code_rejects_everything_else() {
+    for code in -300..300 {
+      if WEB_CODES.contains(&code) {
+        continue;
+      }
+      assert!(
+        Expression::from_web_code(code).is_none(),
+        "code {code} must not map to an expression"
+      );
+    }
+  }
+
+  #[test]
+  fn from_web_code_never_maps_two_codes_to_one_expression() {
+    for (index, left) in WEB_CODES.iter().enumerate() {
+      for right in &WEB_CODES[index + 1..] {
+        assert!(
+          Expression::from_web_code(*left) != Expression::from_web_code(*right),
+          "codes {left} and {right} map to the same expression"
+        );
+      }
+    }
+  }
+
+  #[test]
+  fn resting_expressions_do_not_animate() {
+    for mode in [Expression::Normal, Expression::Sin] {
+      assert!(!mode.is_animated());
+      assert!(
+        mode.animation_speed().abs() < f32::EPSILON,
+        "a resting expression must not advance expr_t"
+      );
+    }
+  }
+
+  #[test]
+  fn animated_expressions_advance() {
+    for mode in [
+      Expression::EyeRoll,
+      Expression::Startled,
+      Expression::Suspicious,
+      Expression::Angry,
+    ] {
+      assert!(mode.is_animated());
+      assert!(
+        mode.animation_speed() > 0.0,
+        "an animated expression that never advances would stick forever"
+      );
+    }
+  }
+
+  #[test]
+  fn trigger_expr_restarts_the_animation_and_drops_the_queue() {
+    let mut eye = EyeState::new(1);
+    eye.queue_expr(Expression::Angry, 0.5);
+    eye.trigger_expr(Expression::Startled, 0.25);
+
+    assert!(eye.pending_expr.is_none(), "trigger must cancel the queue");
+    assert!(eye.expr_mode == Expression::Startled);
+    assert!(
+      eye.expr_t.abs() < f32::EPSILON,
+      "a new expression starts from the top"
+    );
+    assert!((eye.expr_param - 0.25).abs() < f32::EPSILON);
+  }
+
+  #[test]
+  fn queue_expr_starts_closing_the_lid_from_any_open_phase() {
+    for phase in [
+      super::BlinkPhase::Open,
+      super::BlinkPhase::Opening,
+      super::BlinkPhase::Closing,
+    ] {
+      let mut eye = EyeState::new(2);
+      eye.blink_phase = phase;
+      eye.queue_expr(Expression::EyeRoll, 0.0);
+
+      assert!(
+        eye.pending_expr.is_some(),
+        "the expression must stay queued until the lid closes"
+      );
+      assert!(
+        matches!(eye.blink_phase, super::BlinkPhase::Closing),
+        "a queued expression is applied at the blink close, so the lid has to get there"
+      );
+    }
+  }
+
+  #[test]
+  fn update_keeps_blink_within_its_documented_range() {
+    let mut eye = EyeState::new(3);
+
+    // Long enough to walk through several full blink cycles.
+    for _ in 0..5_000 {
+      eye.update(16.0);
+      assert!(
+        (0.0..=1.0).contains(&eye.blink),
+        "blink escaped 0..=1 at {}",
+        eye.blink
+      );
+      assert!(
+        (0.0..=1.0).contains(&eye.expr_t),
+        "expr_t escaped 0..=1 at {}",
+        eye.expr_t
+      );
+      assert!(
+        eye.expr_pupil_scale > 0.0,
+        "a pupil scale of 0 would vanish"
+      );
     }
   }
 }

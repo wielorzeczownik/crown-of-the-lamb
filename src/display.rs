@@ -4,6 +4,7 @@ use embedded_graphics::{
   pixelcolor::Rgb565,
   primitives::Rectangle,
 };
+#[cfg_attr(not(target_arch = "xtensa"), allow(unused_imports))]
 use micromath::F32Ext;
 
 use crate::eye::EyeState;

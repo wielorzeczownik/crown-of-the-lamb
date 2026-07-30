@@ -1,14 +1,21 @@
+#[cfg(target_arch = "xtensa")]
 use core::ops::Range;
 
+#[cfg(target_arch = "xtensa")]
 use embassy_sync::{blocking_mutex::raw::CriticalSectionRawMutex, mutex::Mutex, signal::Signal};
+#[cfg(target_arch = "xtensa")]
 use embedded_storage::nor_flash::{
   ErrorType as SyncErrorType, NorFlash as SyncNorFlash, ReadNorFlash as SyncReadNorFlash,
 };
+#[cfg(target_arch = "xtensa")]
 use embedded_storage_async::nor_flash::{ErrorType, NorFlash, ReadNorFlash};
+#[cfg(target_arch = "xtensa")]
 use esp_storage::FlashStorage;
+use sequential_storage::map::PostcardValue;
+#[cfg(target_arch = "xtensa")]
 use sequential_storage::{
   cache::Cache,
-  map::{MapConfig, MapStorage, PostcardValue},
+  map::{MapConfig, MapStorage},
 };
 
 use crate::constants::{
@@ -23,28 +30,37 @@ const DEFAULT_SSID: &str = "Crown of the Lamb";
 // Max SSID length (IEEE 802.11)
 const SSID_MAX_LEN: usize = 32;
 // Flash scratch buffer
+#[cfg(target_arch = "xtensa")]
 const FLASH_BUF_SIZE: usize = 512;
 // Map key of the single stored config record
+#[cfg(target_arch = "xtensa")]
 const CONFIG_KEY: u8 = 0;
 
+#[cfg(target_arch = "xtensa")]
 pub static SAVE_SIGNAL: Signal<CriticalSectionRawMutex, ()> = Signal::new();
 
 // Config partition from partitions.csv: 0x3D0000..0x3F0000
+#[cfg(target_arch = "xtensa")]
 const CONFIG_RANGE: Range<u32> = 0x3D_0000..0x3F_0000;
 
+#[cfg(target_arch = "xtensa")]
 static FLASH: Mutex<CriticalSectionRawMutex, Option<FlashStorage<'static>>> = Mutex::new(None);
 
+#[cfg(target_arch = "xtensa")]
 pub async fn init(flash: FlashStorage<'static>) {
   *FLASH.lock().await = Some(flash);
 }
 
 // Wraps blocking FlashStorage as async NorFlash for sequential-storage
+#[cfg(target_arch = "xtensa")]
 struct BlockingFlash<'a>(&'a mut FlashStorage<'static>);
 
+#[cfg(target_arch = "xtensa")]
 impl ErrorType for BlockingFlash<'_> {
   type Error = <FlashStorage<'static> as SyncErrorType>::Error;
 }
 
+#[cfg(target_arch = "xtensa")]
 impl ReadNorFlash for BlockingFlash<'_> {
   const READ_SIZE: usize = <FlashStorage<'static> as SyncReadNorFlash>::READ_SIZE;
 
@@ -57,6 +73,7 @@ impl ReadNorFlash for BlockingFlash<'_> {
   }
 }
 
+#[cfg(target_arch = "xtensa")]
 impl NorFlash for BlockingFlash<'_> {
   const WRITE_SIZE: usize = <FlashStorage<'static> as SyncNorFlash>::WRITE_SIZE;
   const ERASE_SIZE: usize = <FlashStorage<'static> as SyncNorFlash>::ERASE_SIZE;
@@ -130,6 +147,7 @@ impl Default for StoredConfig {
   }
 }
 
+#[cfg(target_arch = "xtensa")]
 impl StoredConfig {
   pub async fn load() -> Self {
     let mut guard = FLASH.lock().await;
@@ -157,10 +175,12 @@ impl StoredConfig {
   }
 }
 
+#[cfg(target_arch = "xtensa")]
 unsafe extern "C" {
   fn esp_rom_software_reset_system() -> !;
 }
 
+#[cfg(target_arch = "xtensa")]
 pub fn software_reset() -> ! {
   unsafe { esp_rom_software_reset_system() }
 }
