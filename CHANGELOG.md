@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.2...v1.1.3) - 2026-07-30
+
+### Bug Fixes
+
+- Disable cargo audit colour so the advisory report stays readable ([5a923df](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5a923df610544cbbe0e933a5b6f42d74eb128a01))
+
+### CI/CD
+
+- Split the audit into cargo and npm jobs ([de22736](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/de22736768221db9ac702aa7b21e85eebbccd215))
+
 ## [1.1.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.1...v1.1.2) - 2026-07-30
 
 ### Dependencies
