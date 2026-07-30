@@ -150,14 +150,34 @@ esptool.py --chip esp32 write_flash 0x0 crown-of-the-lamb.bin
 
 On boot the prop starts a WiFi access point. Join it with a phone or laptop and the captive portal opens automatically (or browse to the gateway IP `192.168.4.1`).
 
-From the portal you can adjust, live:
+Every setting below is adjustable live from the portal. Values outside the
+accepted range are clamped by the firmware, so the portal never offers one.
 
-- **Eye colour** (RGB) and **pupil** height/shape
-- **Blink interval** and **wiggle amplitude**
-- **Sound threshold** for reaction sensitivity
-- **Expression chances** (`Sin`, `EyeRoll`, `Startled`, `Suspicious`, `Angry`)
+| Setting             | Default             | Range   | Meaning                                                            |
+| ------------------- | ------------------- | ------- | ------------------------------------------------------------------ |
+| Eye colour (red)    | `26`                | 0–31    | Rgb565 red channel, 5-bit                                          |
+| Eye colour (green)  | `5`                 | 0–63    | Rgb565 green channel, 6-bit                                        |
+| Eye colour (blue)   | `0`                 | 0–31    | Rgb565 blue channel, 5-bit                                         |
+| Pupil length        | `70`                | 20–120  | Pupil slit half-height, in pixels                                  |
+| Wiggle amplitude    | `140`               | 0–400   | Idle gaze drift, in hundredths of a pixel                          |
+| Blink interval      | `180`               | 60–600  | Minimum frames between blinks                                      |
+| Sound threshold     | `40`                | 10–400  | FFT magnitude a mic must clear to count as a sound                 |
+| `Sin` chance        | `1`                 | 0–100 % | Rolled on each blink; `0` disables it                              |
+| `EyeRoll` chance    | `15`                | 0–100 % | Rolled on each change of sound direction                           |
+| `Startled` chance   | `35`                | 0–100 % | Rolled on each change of sound direction                           |
+| `Suspicious` chance | `28`                | 0–100 % | Rolled on each change of sound direction                           |
+| `Angry` chance      | `55`                | 0–100 % | Rolled on each change of sound direction                           |
+| Access point SSID   | `Crown of the Lamb` | ≤ 32 B  | Name of the WiFi network the prop hosts; a longer name is rejected |
 
-Reaction expressions roll independently on each detected change of sound direction; the **Sin** chance rolls on each blink. All values are saved to flash and reload on the next power-up.
+All values are saved to flash and reload on the next power-up. Reaction
+expressions roll independently on each detected change of sound direction; the
+`Sin` chance rolls on each blink.
+
+One setting is chosen at build time rather than in the portal:
+
+| Variable    | Required | Default | Meaning                                                                                     |
+| ----------- | -------- | ------- | ------------------------------------------------------------------------------------------- |
+| `DEFMT_LOG` | no       | `info`  | `defmt` log level compiled into the firmware. Set per module, e.g. `info,cotl::sound=debug` |
 
 <div align="center">
 <table>

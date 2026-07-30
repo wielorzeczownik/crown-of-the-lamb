@@ -150,14 +150,34 @@ esptool.py --chip esp32 write_flash 0x0 crown-of-the-lamb.bin
 
 Po starcie rekwizyt uruchamia punkt dostępowy WiFi. Połącz się telefonem lub laptopem, a captive portal otworzy się automatycznie (albo wejdź na adres bramy `192.168.4.1`).
 
-Z portalu ustawisz na żywo:
+Każde ustawienie poniżej zmienisz na żywo z portalu. Wartości poza zakresem
+firmware przycina, więc portal nigdy ich nie oferuje.
 
-- **Kolor oka** (RGB) i wysokość/kształt **źrenicy**
-- **Interwał mrugania** i **amplitudę drgania**
-- **Próg dźwięku** dla czułości reakcji
-- **Szanse na miny** (`Grzech`, `Zażenowanie`, `Strach`, `Podejrzliwość`, `Złość`)
+| Ustawienie                | Domyślnie           | Zakres  | Znaczenie                                                          |
+| ------------------------- | ------------------- | ------- | ------------------------------------------------------------------ |
+| Kolor oka (czerwony)      | `26`                | 0–31    | Kanał czerwony Rgb565, 5 bitów                                     |
+| Kolor oka (zielony)       | `5`                 | 0–63    | Kanał zielony Rgb565, 6 bitów                                      |
+| Kolor oka (niebieski)     | `0`                 | 0–31    | Kanał niebieski Rgb565, 5 bitów                                    |
+| Długość źrenicy           | `70`                | 20–120  | Połowa wysokości szpary źrenicy, w pikselach                       |
+| Amplituda drgania         | `140`               | 0–400   | Dryf spojrzenia w bezruchu, w setnych piksela                      |
+| Interwał mrugania         | `180`               | 60–600  | Minimalna liczba klatek między mrugnięciami                        |
+| Próg dźwięku              | `40`                | 10–400  | Magnituda FFT, którą mikrofon musi przekroczyć, by zaliczyć dźwięk |
+| Szansa na `Grzech`        | `1`                 | 0–100 % | Losowana przy każdym mrugnięciu; `0` wyłącza                       |
+| Szansa na `Zażenowanie`   | `15`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
+| Szansa na `Strach`        | `35`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
+| Szansa na `Podejrzliwość` | `28`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
+| Szansa na `Złość`         | `55`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
+| SSID punktu dostępowego   | `Crown of the Lamb` | ≤ 32 B  | Nazwa sieci WiFi hostowanej przez rekwizyt; dłuższa jest odrzucana |
 
-Miny reaktywne losują się niezależnie przy każdej wykrytej zmianie kierunku dźwięku; szansa na **Grzech** losuje się przy każdym mrugnięciu. Wszystkie wartości zapisują się we flashu i wczytują po kolejnym włączeniu.
+Wszystkie wartości zapisują się we flashu i wczytują po kolejnym włączeniu. Miny
+reaktywne losują się niezależnie przy każdej wykrytej zmianie kierunku dźwięku;
+szansa na `Grzech` losuje się przy każdym mrugnięciu.
+
+Jedno ustawienie wybiera się na etapie budowania, nie w portalu:
+
+| Zmienna     | Wymagana | Domyślnie | Znaczenie                                                                                        |
+| ----------- | -------- | --------- | ------------------------------------------------------------------------------------------------ |
+| `DEFMT_LOG` | nie      | `info`    | Poziom logów `defmt` wkompilowany we firmware. Ustawiany per moduł, np. `info,cotl::sound=debug` |
 
 <div align="center">
 <table>
