@@ -15,15 +15,18 @@ const WEIGHTS = [600, 700];
 const OPTICAL_SIZE = 14;
 
 function collectGlyphs(): string {
-  const chars = new Set<string>();
+  const glyphs = new Set<string>();
   for (const source of TEXT_SOURCES) {
-    for (const ch of readFileSync(fromRoot(source), 'utf8')) chars.add(ch);
+    const text = readFileSync(fromRoot(source), 'utf8');
+    for (const glyph of text) glyphs.add(glyph);
   }
   for (let code = 0x20; code <= 0x7e; code++) {
-    chars.add(String.fromCodePoint(code));
+    glyphs.add(String.fromCodePoint(code));
   }
-  for (const ch of POLISH_LETTERS) chars.add(ch);
-  return [...chars].filter((ch) => ch.codePointAt(0)! >= 0x20).join('');
+  for (const glyph of POLISH_LETTERS) glyphs.add(glyph);
+  return [...glyphs]
+    .filter((glyph) => (glyph.codePointAt(0) ?? 0) >= 0x20)
+    .join('');
 }
 
 export function subsetPiazzolla(): Plugin {
