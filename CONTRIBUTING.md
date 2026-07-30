@@ -25,7 +25,8 @@ Thank you for considering a contribution. This document covers everything you ne
 │   └── tests/                 Vitest suites, incl. the firmware contract test
 ├── scripts/
 │   ├── bump-version.sh        determines next release version from git-cliff and bumps Cargo.toml
-│   └── security-audit.sh      runs cargo audit + npm audit, drives the tracking issue
+│   ├── cargo-audit.sh         runs cargo audit, attempts a fix, drives its tracking issue
+│   └── npm-audit.sh           runs npm audit for the portal, same contract
 ├── partitions.csv             flash partition table
 └── build.rs                   bundles the portal into the firmware
 ```

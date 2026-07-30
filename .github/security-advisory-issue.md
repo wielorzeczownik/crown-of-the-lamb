@@ -3,9 +3,8 @@ title: Unresolved security advisories
 labels: security-advisory
 ---
 
-`cargo audit` or `npm audit` reports advisories that the matching `fix`
-subcommand could not resolve automatically, so the lockfile cannot be updated
-without a manual decision.
+`cargo audit` reports advisories that `cargo audit fix` could not resolve
+automatically, so `Cargo.lock` cannot be updated without a manual decision.
 
 ## Audit output
 
