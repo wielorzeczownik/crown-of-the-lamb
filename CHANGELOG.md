@@ -5,6 +5,13 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.1...v1.1.2) - 2026-07-30
+
+### Dependencies
+
+- Sync Cargo.lock with the updated manifest ([49d18d9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/49d18d9968549e0612e71c94e11b28a2d68e9ba1))
+- Update rust crate simple-dns to 0.12.0 ([2f17240](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2f172408be166608f69d3acd51eac5e2cb2d6def))
+
 ## [1.1.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.0...v1.1.1) - 2026-07-30
 
 ### Bug Fixes
