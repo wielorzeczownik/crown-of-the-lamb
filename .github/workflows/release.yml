@@ -5,22 +5,30 @@ on:
     branches:
       - main
     paths:
-      - "src/**"
-      - "portal/**"
-      - "build.rs"
-      - "partitions.csv"
-      - "Cargo.toml"
-      - "Cargo.lock"
+      - 'src/**'
+      - 'portal/index.html'
+      - 'portal/src/**'
+      - 'portal/plugins/**'
+      - 'portal/package.json'
+      - 'portal/package-lock.json'
+      - 'build.rs'
+      - 'partitions.csv'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'rust-toolchain.toml'
+      - '.cargo/config.toml'
+      - 'scripts/**'
 
 concurrency:
   group: release-main
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions: {}
 
 jobs:
   prepare-release:
-    runs-on: ubuntu-latest
+    name: Prepare release
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: write
@@ -31,13 +39,13 @@ jobs:
       commit_changes: ${{ steps.bump.outputs.commit_changes }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
       - name: Determine next version (git-cliff)
         id: cliff_bumped
-        uses: orhun/git-cliff-action@v4.8.0
+        uses: orhun/git-cliff-action@f50e11560dce63f7c33227798f90b924471a88b5 # v4.8.0
         with:
           config: cliff.toml
           args: --bumped-version
@@ -54,7 +62,7 @@ jobs:
 
       - name: Generate release notes (git-cliff)
         if: ${{ steps.bump.outputs.released == 'true' }}
-        uses: orhun/git-cliff-action@v4.8.0
+        uses: orhun/git-cliff-action@f50e11560dce63f7c33227798f90b924471a88b5 # v4.8.0
         with:
           config: cliff-release.toml
           args: --unreleased --tag ${{ steps.bump.outputs.tag }}
@@ -64,7 +72,7 @@ jobs:
 
       - name: Generate CHANGELOG.md (git-cliff)
         if: ${{ steps.bump.outputs.released == 'true' }}
-        uses: orhun/git-cliff-action@v4.8.0
+        uses: orhun/git-cliff-action@f50e11560dce63f7c33227798f90b924471a88b5 # v4.8.0
         with:
           config: cliff.toml
           args: --tag ${{ steps.bump.outputs.tag }}
@@ -74,54 +82,54 @@ jobs:
 
       - name: Commit, tag, and push
         if: ${{ steps.bump.outputs.released == 'true' && steps.bump.outputs.commit_changes == 'true' }}
-        uses: EndBug/add-and-commit@v10.0.0
+        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
         with:
-          add: "Cargo.toml Cargo.lock CHANGELOG.md"
+          add: 'Cargo.toml Cargo.lock CHANGELOG.md'
           default_author: github_actions
-          message: "chore(release): ${{ steps.bump.outputs.tag }} [skip ci]"
-          tag: "${{ steps.bump.outputs.tag }}"
+          message: 'chore(release): ${{ steps.bump.outputs.tag }} [skip ci]'
+          tag: '${{ steps.bump.outputs.tag }}'
           push: true
 
       - name: Commit changelog and tag
         if: ${{ steps.bump.outputs.released == 'true' && steps.bump.outputs.commit_changes == 'false' }}
-        uses: EndBug/add-and-commit@v10.0.0
+        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
         with:
-          add: "CHANGELOG.md"
+          add: 'CHANGELOG.md'
           default_author: github_actions
-          message: "chore(release): ${{ steps.bump.outputs.tag }} [skip ci]"
-          tag: "${{ steps.bump.outputs.tag }}"
+          message: 'chore(release): ${{ steps.bump.outputs.tag }} [skip ci]'
+          tag: '${{ steps.bump.outputs.tag }}'
           push: true
 
       - name: Upload release notes
         if: ${{ steps.bump.outputs.released == 'true' }}
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: release-notes
           path: release-notes.md
 
   build-firmware:
+    name: Build firmware image
     needs: prepare-release
     if: ${{ needs.prepare-release.outputs.released == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     permissions:
       contents: read
-      id-token: write
-      attestations: write
     steps:
       - name: Checkout tag
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.prepare-release.outputs.tag }}
           persist-credentials: false
 
       - name: Install host Rust toolchain
-        run: rustup toolchain install stable --profile minimal
+        uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4 # stable
 
       - name: Install espup
-        uses: taiki-e/install-action@v2.84.1
+        uses: taiki-e/install-action@c44f6b046f1c29ae5918b1e0bfdbb2f1813836fd # v2.84.1
         with:
-          tool: espup
+          # renovate: datasource=crate depName=espup
+          tool: espup@0.17.1
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -129,70 +137,85 @@ jobs:
       - name: Source Xtensa environment
         run: |
           source "$HOME/export-esp.sh"
-          echo "PATH=$PATH" >> "$GITHUB_ENV"
-          echo "LIBCLANG_PATH=$LIBCLANG_PATH" >> "$GITHUB_ENV"
+          echo "PATH=$PATH" >>"$GITHUB_ENV"
+          echo "LIBCLANG_PATH=$LIBCLANG_PATH" >>"$GITHUB_ENV"
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
 
       - name: Install espflash
         env:
           RUSTUP_TOOLCHAIN: stable
-        run: cargo install espflash
+        # renovate: datasource=crate depName=espflash
+        run: cargo install espflash --locked --version 4.5.0
 
-      - name: Cache Cargo
-        uses: Swatinem/rust-cache@v2.9.1
+      - name: Install Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: portal/package.json
+          cache: npm
+          cache-dependency-path: portal/package-lock.json
 
       - name: Build firmware
-        run: cargo build --release
+        run: cargo build --release --locked
 
       - name: Build firmware image (bootloader + partitions + app)
         run: |
+          set -euo pipefail
+          mkdir -p dist
           espflash save-image \
             --merge \
             --chip esp32 \
             --partition-table partitions.csv \
             target/xtensa-esp32-none-elf/release/crown-of-the-lamb \
-            crown-of-the-lamb.bin
+            dist/crown-of-the-lamb.bin
 
-      - name: Compute SHA-256 checksum
-        run: |
-          sha256sum crown-of-the-lamb.bin > crown-of-the-lamb.bin.sha256
-
-      - name: Attest firmware
-        uses: actions/attest-build-provenance@v4.1.1
-        with:
-          subject-path: crown-of-the-lamb.bin
-
-      - name: Upload firmware artifacts
-        uses: actions/upload-artifact@v7.0.1
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: firmware
-          path: |
-            crown-of-the-lamb.bin
-            crown-of-the-lamb.bin.sha256
+          path: dist/*
 
   publish-release:
+    name: Publish GitHub release
     needs:
       - prepare-release
       - build-firmware
     if: ${{ needs.prepare-release.outputs.released == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: write
+      id-token: write
+      attestations: write
     steps:
-      - name: Download firmware artifacts
-        uses: actions/download-artifact@v8.0.1
+      - name: Download firmware artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: firmware
           path: dist
 
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373 # v4.1.1
+        with:
+          subject-path: dist/*
+
+      - name: Compute SHA-256 checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd dist
+          sha256sum -- *.bin | sort -k2 >SHA256SUMS
+          cat SHA256SUMS
+
       - name: Download release notes
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: release-notes
           path: .
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v3.0.2
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         with:
           tag_name: ${{ needs.prepare-release.outputs.tag }}
           name: ${{ needs.prepare-release.outputs.tag }}
