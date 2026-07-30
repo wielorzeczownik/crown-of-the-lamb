@@ -5,6 +5,21 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.0...v1.1.1) - 2026-07-30
+
+### Bug Fixes
+
+- Disable cargo audit colour so the advisory issue stays readable ([3e0b530](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3e0b530b8da673ed6d401bbf3092131766ce13a9))
+- Override the esp toolchain pin in the jobs that only audit dependencies ([dfa0d30](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/dfa0d30077509544d01a8cfa0c0488fe88413467))
+
+### Build System
+
+- Resolve audit advisories ([c264370](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/c2643704cbba0bdec42b1f853d9a0128ca4ea8d4))
+
+### CI/CD
+
+- Reconcile Cargo.lock on Renovate branches ([4be2224](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/4be2224d5f87109a676512290dc64c269f0c19cf))
+
 ## [1.1.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.22...v1.1.0) - 2026-07-30
 
 ### Features
