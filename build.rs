@@ -5,9 +5,12 @@ fn main() {
   let portal = root.join("portal");
 
   println!("cargo:rerun-if-changed=portal/index.html");
-  println!("cargo:rerun-if-changed=portal/src/main.ts");
-  println!("cargo:rerun-if-changed=portal/src/style.css");
-  println!("cargo:rerun-if-changed=portal/vite.portal.js");
+  println!("cargo:rerun-if-changed=portal/src");
+  println!("cargo:rerun-if-changed=portal/plugins");
+  println!("cargo:rerun-if-changed=portal/package.json");
+  println!("cargo:rerun-if-changed=portal/package-lock.json");
+  println!("cargo:rerun-if-changed=portal/tsconfig.json");
+  println!("cargo:rerun-if-changed=portal/vite.config.ts");
 
   // On Windows npm is npm.cmd
   let npm = if cfg!(target_os = "windows") {
@@ -17,11 +20,11 @@ fn main() {
   };
 
   let install = Command::new(npm)
-    .args(["install", "--prefer-offline"])
+    .arg("ci")
     .current_dir(&portal)
     .status()
-    .expect("npm install failed — is Node.js installed?");
-  assert!(install.success(), "npm install exited with error");
+    .expect("npm ci failed — is Node.js installed?");
+  assert!(install.success(), "npm ci exited with error");
 
   let build = Command::new(npm)
     .args(["run", "build"])
