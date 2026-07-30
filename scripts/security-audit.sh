@@ -36,7 +36,7 @@ emit_report() {
 cargo_changed=false
 cargo_unresolved=false
 
-if ! cargo audit 2>&1 | tee "$cargo_report"; then
+if ! cargo audit --color never 2>&1 | tee "$cargo_report"; then
   echo "Advisories found in Cargo.lock, attempting cargo audit fix"
   cargo audit fix || echo "cargo audit fix could not resolve everything"
 
@@ -45,7 +45,7 @@ if ! cargo audit 2>&1 | tee "$cargo_report"; then
   fi
 
   cargo_unresolved=true
-  if cargo audit 2>&1 | tee "$cargo_report"; then
+  if cargo audit --color never 2>&1 | tee "$cargo_report"; then
     cargo_unresolved=false
   fi
 fi
