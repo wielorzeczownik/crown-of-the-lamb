@@ -1,0 +1,61 @@
+name: Renovate lockfile
+
+on:
+  push:
+    branches:
+      - 'renovate/**'
+    paths:
+      - 'Cargo.toml'
+
+permissions: {}
+
+concurrency:
+  group: renovate-lockfile-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync-lockfile:
+    name: Sync Cargo.lock
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      RUSTUP_TOOLCHAIN: nightly
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Install nightly toolchain
+        run: rustup toolchain install nightly --profile minimal
+
+      - name: Check whether Cargo.lock already matches Cargo.toml
+        id: check
+        shell: bash
+        run: |
+          set -uo pipefail
+          if cargo metadata --locked --format-version 1 >/dev/null 2>&1; then
+            echo 'in_sync=true' >>"$GITHUB_OUTPUT"
+            echo 'Cargo.lock already satisfies Cargo.toml, nothing to do.'
+          else
+            echo 'in_sync=false' >>"$GITHUB_OUTPUT"
+          fi
+
+      - name: Reconcile Cargo.lock
+        if: ${{ steps.check.outputs.in_sync == 'false' }}
+        run: cargo metadata --format-version 1 >/dev/null
+
+      - name: Show what changed
+        if: ${{ steps.check.outputs.in_sync == 'false' }}
+        run: git --no-pager diff --stat -- Cargo.lock
+
+      - name: Commit and push Cargo.lock
+        if: ${{ steps.check.outputs.in_sync == 'false' }}
+        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
+        with:
+          add: 'Cargo.lock'
+          default_author: github_actions
+          message: 'chore(deps): sync Cargo.lock with the updated manifest'
+          push: true
