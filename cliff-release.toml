@@ -10,12 +10,21 @@ body = """
 **Release Date: {{ timestamp | date(format="%Y-%m-%d") }}**
 
 ### What's Changed
+{% if commits | length > 0 %}
 {% for group, commits in commits | group_by(attribute="group") %}
 #### {{ group | striptags | trim }}
 {% for commit in commits %}
 - {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}
 {% endfor %}
 {% endfor %}
+{% else %}
+¯\\\\\\_(ツ)\\_/¯
+
+The version number went up. Nobody knows why. Some YAML was touched and now
+you have a fresh tag to flash.
+
+New bugs were absolutely added. We just have not found them yet.
+{% endif %}
 {% if previous.version and remote.github.owner and remote.github.repo %}
 
 ---
