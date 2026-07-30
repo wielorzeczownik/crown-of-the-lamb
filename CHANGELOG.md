@@ -5,6 +5,40 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.22...v1.1.0) - 2026-07-30
+
+### Features
+
+- Add a scripted dependency audit that reports what it could not fix ([1a0bebb](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1a0bebb6fbb8b7a7c9630151f3201c5716499b68))
+
+### Bug Fixes
+
+- Fall back to a note when a release has no user-facing commits ([7a4d15c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/7a4d15c79e4e6808f10b00cb79f39999928d2bb6))
+- Parse the current version with a portable awk pattern ([b493147](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b4931471e0180a3432d0a4dfbc662595df998e98))
+
+### Documentation
+
+- Document every setting and the checks CI runs ([8335585](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/833558549fd99454dc05bf2b2451803966117a51))
+
+### Testing
+
+- Make the library host-testable and cover the pure logic ([d1ff58e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d1ff58e7d1020f1574a643cad36e91afcfa54f35))
+- Add Vitest suites and assert the firmware contract ([ffbdddb](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ffbdddb394eb3a426b21933870306ac3eadbe45e))
+
+### Build System
+
+- Install the portal from the committed lockfile ([69295d5](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/69295d56670b124e4a4ac84c6021dbe5d2c71ab8))
+
+### CI/CD
+
+- Group related updates and pin action digests with a soak period ([cf82bb6](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/cf82bb69230cd7bbb5d7dc7aad2e4fb4d9f46417))
+- Gate every job on a path filter and pin the whole supply chain ([3539788](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/353978868b48364a15a6764f1d81231bdf81f657))
+- Update taiki-e/install-action action to v2.84.1 (#46) ([c8fa399](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/c8fa399685b8bf96441469df4eb1131c25197f2c))
+
+### Miscellaneous
+
+- Check the whole tree with Prettier and markdownlint ([785e31f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/785e31f647baeeed7db89ba59d666f170da64a6c))
+
 ## [1.0.22](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.0.21...v1.0.22) - 2026-07-28
 
 ### Build System
