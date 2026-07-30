@@ -19,6 +19,8 @@ jobs:
     permissions:
       contents: write
       issues: write
+    env:
+      RUSTUP_TOOLCHAIN: stable
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -46,8 +48,6 @@ jobs:
       - name: Run audit
         id: audit
         shell: bash
-        env:
-          RUSTUP_TOOLCHAIN: stable
         run: bash scripts/security-audit.sh
 
       - name: Commit fixed Cargo.lock
