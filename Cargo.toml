@@ -21,8 +21,25 @@ name = "cotl"
 [[bin]]
 name = "crown-of-the-lamb"
 path = "./src/bin/main.rs"
+test = false
 
 [dependencies]
+
+# Display rendering
+embedded-graphics = "0.8.2"
+
+# Stored config shape (the flash I/O itself is Xtensa-only, below)
+sequential-storage = { version = "8.0.0", features = ["postcard"] }
+serde              = { version = "1.0.228", default-features = false, features = ["derive", "alloc"] }
+heapless           = { version = "0.9.3", features = ["serde"] }
+
+# DSP, math, and RNG
+micromath = "2.1.0"
+microfft  = "0.6.0"
+oorandom  = "11.1.5"
+
+# Anything that needs the Xtensa target to build or link
+[target.'cfg(target_arch = "xtensa")'.dependencies]
 
 # ESP32 HAL and runtime
 esp-hal                = { version = "1.1.1", features = ["esp32", "unstable"] }
@@ -46,27 +63,18 @@ picoserve  = { version = "0.19.0", features = ["embassy"] }
 simple-dns = { version = "0.11.3", default-features = false, features = ["alloc"] }
 edge-dhcp  = "0.8.0"
 
-# Display and hardware abstraction
-embedded-hal      = "1.0.0"
-embedded-hal-bus  = "0.3.0"
-embedded-graphics = "0.8.2"
-mipidsi           = "0.10.0"
-nb                = "1.1.0"
+# Hardware abstraction
+embedded-hal     = "1.0.0"
+embedded-hal-bus = "0.3.0"
+mipidsi          = "0.10.0"
+nb               = "1.1.0"
 
 # Flash storage with wear leveling
 embedded-storage       = "0.3.1"
 embedded-storage-async = "0.4.1"
-sequential-storage     = { version = "8.0.0", features = ["postcard"] }
 
-# Data and serialization
-serde           = { version = "1.0.228", default-features = false, features = ["derive", "alloc"] }
+# Serialization used by the web handlers
 serde-json-core = "0.6.0"
-heapless        = { version = "0.9.3", features = ["serde"] }
-
-# DSP, math, and RNG
-micromath = "2.1.0"
-microfft  = "0.6.0"
-oorandom  = "11.1.5"
 
 # Utilities
 static_cell = "2.1.1"

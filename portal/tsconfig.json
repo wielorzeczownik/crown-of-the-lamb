@@ -10,5 +10,5 @@
     "types": ["vite/client", "node"],
     "lib": ["ES2022", "DOM"]
   },
-  "include": ["src", "plugins", "./*.config.ts"]
+  "include": ["src", "plugins", "tests", "./*.config.ts"]
 }

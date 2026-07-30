@@ -6,6 +6,12 @@ pub const SIN_BMP_ROW: usize = 16;
 pub const SIN_EYE_X: i32 = 5;
 pub const SIN_EYE_Y: i32 = 62;
 
+const _: () = assert!(SIN_BMP.len() == SIN_BMP_ROW * SIN_BMP_H as usize);
+const _: () = assert!(SIN_BMP_ROW * 8 >= SIN_BMP_W as usize);
+const _: () = assert!(SIN_BMP_ROW * 8 - (SIN_BMP_W as usize) < 8);
+const _: () = assert!(SIN_EYE_X >= 0 && SIN_EYE_X < SIN_BMP_W);
+const _: () = assert!(SIN_EYE_Y >= 0 && SIN_EYE_Y < SIN_BMP_H);
+
 #[rustfmt::skip]
 pub static SIN_BMP: [u8; 3040] = [
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,

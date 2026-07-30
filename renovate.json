@@ -1,22 +1,66 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "rust-toolchain": {
-    "description": "The esp channel is managed by espup, not Renovate.",
-    "enabled": false
-  },
+  "extends": ["group:monorepos", "group:recommended"],
   "platformAutomerge": true,
   "automergeType": "pr",
   "semanticCommits": "enabled",
   "minimumReleaseAge": "3 days",
+  "rust-toolchain": {
+    "description": "The esp channel is managed by espup, not Renovate.",
+    "enabled": false
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
+      "matchStrings": ["prettier@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "prettier",
+      "datasourceTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+version: (?<currentValue>\\S+)"
+      ],
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+tool: \\S+@(?<currentValue>\\S+)"
+      ],
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+run: cargo install \\S+ --locked --version (?<currentValue>\\S+)"
+      ],
+      "versioningTemplate": "semver"
+    }
+  ],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
     },
     {
+      "matchDepTypes": ["buildDependencies", "devDependencies"],
+      "semanticCommitType": "build"
+    },
+    {
       "matchManagers": ["github-actions"],
+      "pinDigests": true,
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "ci"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "github actions"
     },
     {
       "matchManagers": ["github-actions"],
@@ -28,18 +72,50 @@
     },
     {
       "matchManagers": ["cargo"],
-      "matchPackageNames": ["esp-hal", "esp-rtos", "esp-radio", "esp-alloc", "esp-storage", "esp-println", "esp-bootloader-esp-idf"],
+      "matchPackageNames": [
+        "esp-hal",
+        "esp-rtos",
+        "esp-radio",
+        "esp-alloc",
+        "esp-storage",
+        "esp-println",
+        "esp-bootloader-esp-idf"
+      ],
       "groupName": "esp-rs crates"
     },
     {
       "matchManagers": ["cargo"],
-      "matchPackageNames": ["embassy-executor", "embassy-sync", "embassy-time", "embassy-net"],
+      "matchPackageNames": [
+        "embassy-executor",
+        "embassy-sync",
+        "embassy-time",
+        "embassy-net"
+      ],
       "groupName": "embassy crates"
     },
     {
-      "matchManagers": ["npm"],
-      "matchDepTypes": ["devDependencies"],
-      "semanticCommitType": "build"
+      "matchManagers": ["cargo"],
+      "matchPackageNames": [
+        "embedded-hal",
+        "embedded-hal-bus",
+        "embedded-graphics",
+        "mipidsi"
+      ],
+      "groupName": "display and hal crates"
+    },
+    {
+      "matchManagers": ["cargo"],
+      "matchPackageNames": [
+        "embedded-storage",
+        "embedded-storage-async",
+        "sequential-storage"
+      ],
+      "groupName": "storage crates"
+    },
+    {
+      "matchManagers": ["cargo"],
+      "matchPackageNames": ["serde", "serde-json-core"],
+      "groupName": "serde"
     }
   ]
 }

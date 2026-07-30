@@ -35,4 +35,4 @@ Issues in upstream crates (esp-hal, embassy, picoserve, etc.) should be reported
 
 - Deploy the prop only in environments where you control who is in WiFi range.
 - Do not expose the portal beyond the device's own access point (there is no authentication by design).
-- Only flash firmware built from trusted sources; verify the published `.sha256` checksum for release binaries.
+- Only flash firmware built from trusted sources; verify the firmware against the `SHA256SUMS` manifest published with each release.
