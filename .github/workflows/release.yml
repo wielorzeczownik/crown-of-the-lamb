@@ -80,25 +80,35 @@ jobs:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
 
-      - name: Commit, tag, and push
+      - name: Stage release files
         if: ${{ steps.bump.outputs.released == 'true' && steps.bump.outputs.commit_changes == 'true' }}
-        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
-        with:
-          add: 'Cargo.toml Cargo.lock CHANGELOG.md'
-          default_author: github_actions
-          message: 'chore(release): ${{ steps.bump.outputs.tag }} [skip ci]'
-          tag: '${{ steps.bump.outputs.tag }}'
-          push: true
+        run: git add Cargo.toml Cargo.lock CHANGELOG.md
 
-      - name: Commit changelog and tag
+      - name: Stage changelog
         if: ${{ steps.bump.outputs.released == 'true' && steps.bump.outputs.commit_changes == 'false' }}
-        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
+        run: git add CHANGELOG.md
+
+      - name: Commit release (verified)
+        if: ${{ steps.bump.outputs.released == 'true' }}
+        uses: qoomon/actions--create-commit@7102b1a8b3cb8716dc70dbeb6d774c375d779d2f # v1.2.5
         with:
-          add: 'CHANGELOG.md'
-          default_author: github_actions
           message: 'chore(release): ${{ steps.bump.outputs.tag }} [skip ci]'
-          tag: '${{ steps.bump.outputs.tag }}'
-          push: true
+          skip-empty: true
+
+      - name: Push commit
+        if: ${{ steps.bump.outputs.released == 'true' }}
+        run: git push
+
+      - name: Create tag
+        if: ${{ steps.bump.outputs.released == 'true' }}
+        uses: qoomon/actions--create-tag@bc18da911783e8dd24a7ae3ec1a95af941d29f60 # v1.0.0
+        with:
+          name: '${{ steps.bump.outputs.tag }}'
+          message: '${{ steps.bump.outputs.tag }}'
+
+      - name: Push tag
+        if: ${{ steps.bump.outputs.released == 'true' }}
+        run: git push origin 'refs/tags/${{ steps.bump.outputs.tag }}'
 
       - name: Upload release notes
         if: ${{ steps.bump.outputs.released == 'true' }}

@@ -39,14 +39,20 @@ jobs:
         shell: bash
         run: bash scripts/cargo-audit.sh
 
+      - name: Stage audit fix
+        if: ${{ steps.audit.outputs.changed == 'true' }}
+        run: git add Cargo.lock
+
       - name: Commit fixed Cargo.lock
         if: ${{ steps.audit.outputs.changed == 'true' }}
-        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
+        uses: qoomon/actions--create-commit@7102b1a8b3cb8716dc70dbeb6d774c375d779d2f # v1.2.5
         with:
-          add: 'Cargo.lock'
-          default_author: github_actions
           message: 'fix(deps): resolve audit advisories'
-          push: true
+          skip-empty: true
+
+      - name: Push audit fix
+        if: ${{ steps.audit.outputs.changed == 'true' }}
+        run: git push
 
       - name: Create issue
         if: ${{ steps.audit.outputs.unresolved == 'true' }}
@@ -106,23 +112,27 @@ jobs:
           NPM_DIR: portal
         run: bash scripts/npm-audit.sh
 
+      - name: Stage audit fix
+        if: ${{ steps.audit.outputs.changed == 'true' }}
+        run: git add portal/package-lock.json
+
       - name: Commit fix (runtime advisory)
         if: ${{ steps.audit.outputs.changed == 'true' && steps.audit.outputs.production == 'true' }}
-        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
+        uses: qoomon/actions--create-commit@7102b1a8b3cb8716dc70dbeb6d774c375d779d2f # v1.2.5
         with:
-          add: 'portal/package-lock.json'
-          default_author: github_actions
           message: 'fix(deps): resolve audit advisories'
-          push: true
+          skip-empty: true
 
       - name: Commit fix (dev-only advisory)
         if: ${{ steps.audit.outputs.changed == 'true' && steps.audit.outputs.production == 'false' }}
-        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
+        uses: qoomon/actions--create-commit@7102b1a8b3cb8716dc70dbeb6d774c375d779d2f # v1.2.5
         with:
-          add: 'portal/package-lock.json'
-          default_author: github_actions
           message: 'build(deps): resolve audit advisories'
-          push: true
+          skip-empty: true
+
+      - name: Push audit fix
+        if: ${{ steps.audit.outputs.changed == 'true' }}
+        run: git push
 
       - name: Create issue
         if: ${{ steps.audit.outputs.unresolved == 'true' }}

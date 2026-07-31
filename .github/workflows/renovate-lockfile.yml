@@ -51,11 +51,17 @@ jobs:
         if: ${{ steps.check.outputs.in_sync == 'false' }}
         run: git --no-pager diff --stat -- Cargo.lock
 
-      - name: Commit and push Cargo.lock
+      - name: Stage Cargo.lock
         if: ${{ steps.check.outputs.in_sync == 'false' }}
-        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
+        run: git add Cargo.lock
+
+      - name: Commit Cargo.lock (verified)
+        if: ${{ steps.check.outputs.in_sync == 'false' }}
+        uses: qoomon/actions--create-commit@7102b1a8b3cb8716dc70dbeb6d774c375d779d2f # v1.2.5
         with:
-          add: 'Cargo.lock'
-          default_author: github_actions
           message: 'chore(deps): sync Cargo.lock with the updated manifest'
-          push: true
+          skip-empty: true
+
+      - name: Push Cargo.lock
+        if: ${{ steps.check.outputs.in_sync == 'false' }}
+        run: git push
