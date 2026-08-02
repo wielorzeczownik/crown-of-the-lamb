@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.5](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.4...v1.1.5) - 2026-08-02
+
+### Build System
+
+- Update dependency vite to v8.2.0 (#55) ([6dd9e30](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6dd9e30bf18c83f7ba22f145ae7e9124774684b0))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.85.2 (#54) ([ceacb64](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ceacb64a9c95fd1af3b8e0f038263545e2490956))
+- Update taiki-e/install-action action to v2.85.1 (#53) ([03051b7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/03051b789f3ce1d1c96c6170f97be70f22b93b51))
+- Sign bot commits via GitHub API (qoomon create-commit/create-tag) ([32c9149](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/32c91498923dad7960191593049c8c14b66ade36))
+
 ## [1.1.4](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.3...v1.1.4) - 2026-07-30
 
 ### Build System
