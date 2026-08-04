@@ -86,7 +86,7 @@ jobs:
           persist-credentials: false
 
       - name: Install espup
-        uses: taiki-e/install-action@41049aa56687c35e0afa74eed4f09cec4f9afabf # v2.85.2
+        uses: taiki-e/install-action@18b1216eba7f8039b0f8d131d5473787f0edce68 # v2.85.3
         with:
           # renovate: datasource=crate depName=espup
           tool: espup@0.17.1
@@ -135,7 +135,7 @@ jobs:
           persist-credentials: false
 
       - name: Install espup
-        uses: taiki-e/install-action@41049aa56687c35e0afa74eed4f09cec4f9afabf # v2.85.2
+        uses: taiki-e/install-action@18b1216eba7f8039b0f8d131d5473787f0edce68 # v2.85.3
         with:
           # renovate: datasource=crate depName=espup
           tool: espup@0.17.1
@@ -175,7 +175,7 @@ jobs:
           persist-credentials: false
 
       - name: Install espup
-        uses: taiki-e/install-action@41049aa56687c35e0afa74eed4f09cec4f9afabf # v2.85.2
+        uses: taiki-e/install-action@18b1216eba7f8039b0f8d131d5473787f0edce68 # v2.85.3
         with:
           # renovate: datasource=crate depName=espup
           tool: espup@0.17.1
@@ -264,7 +264,7 @@ jobs:
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4 # stable
 
       - name: Install cargo-audit
-        uses: taiki-e/install-action@41049aa56687c35e0afa74eed4f09cec4f9afabf # v2.85.2
+        uses: taiki-e/install-action@18b1216eba7f8039b0f8d131d5473787f0edce68 # v2.85.3
         with:
           tool: cargo-audit
 
@@ -359,7 +359,7 @@ jobs:
           persist-credentials: false
 
       - name: Install shfmt and shellcheck
-        uses: taiki-e/install-action@41049aa56687c35e0afa74eed4f09cec4f9afabf # v2.85.2
+        uses: taiki-e/install-action@18b1216eba7f8039b0f8d131d5473787f0edce68 # v2.85.3
         with:
           tool: shfmt,shellcheck
 
