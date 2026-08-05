@@ -47,8 +47,6 @@ footer = ""
 trim = true
 
 [git]
-# The PR number is rendered as a link, so drop the '(#123)' suffix GitHub
-# appends to squash-merge subjects.
 commit_preprocessors = [{ pattern = '(?m) +\(#[0-9]+\)$', replace = "" }]
 conventional_commits = true
 filter_unconventional = true
