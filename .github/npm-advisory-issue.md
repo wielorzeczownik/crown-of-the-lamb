@@ -1,6 +1,6 @@
 ---
 title: Unresolved npm advisories
-labels: npm-advisory
+labels: npm advisory
 ---
 
 `npm audit` reports advisories in `portal/package-lock.json` that
