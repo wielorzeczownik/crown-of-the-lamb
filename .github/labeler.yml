@@ -9,6 +9,8 @@ dependencies:
       - any-glob-to-any-file:
           - 'Cargo.toml'
           - 'Cargo.lock'
+          - '**/package.json'
+          - '**/package-lock.json'
           - 'renovate.json'
 
 ci:

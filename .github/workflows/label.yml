@@ -55,7 +55,7 @@ jobs:
           l_label: 'size:L'
           l_max_size: '500'
           xl_label: 'size:XL'
-          files_to_ignore: 'assets/* portal/*'
+          files_to_ignore: 'assets/* portal/package-lock.json'
           message_if_xl: >-
             This pull request changes more than 500 lines, not counting tests.
             Please check that it is not addressing several unrelated things at
