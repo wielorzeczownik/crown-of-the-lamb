@@ -14,9 +14,16 @@ body = """
 {% for group, commits in commits | group_by(attribute="group") %}
 #### {{ group | striptags | trim }}
 {% for commit in commits %}
-- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}
+- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}{% if commit.remote.username %} by @{{ commit.remote.username }}{% endif %}{% if commit.remote.pr_number %} in #{{ commit.remote.pr_number }}{% endif %}
 {% endfor %}
 {% endfor %}
+{% set first_timers = github.contributors | filter(attribute="is_first_time", value=true) %}
+{% if first_timers | length > 0 %}
+#### New Contributors
+{% for contributor in first_timers %}
+- @{{ contributor.username }} made their first contribution{% if contributor.pr_number %} in #{{ contributor.pr_number }}{% endif %}
+{% endfor %}
+{% endif %}
 {% else %}
 ¯\\\\\\_(ツ)\\_/¯
 
