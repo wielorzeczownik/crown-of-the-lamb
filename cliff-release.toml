@@ -15,7 +15,7 @@ body = """
 #### {{ group | striptags | trim }}
 
 {% for commit in commits -%}
-- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}{% if commit.remote.username %}{% set user = commit.remote.username | replace(from="[bot]", to="") %} by [@{{ user }}](https://github.com/{%- if commit.remote.username is ending_with("[bot]") %}apps/{% endif %}{{ user }}){% endif %}{% if commit.remote.pr_number %} in [#{{ commit.remote.pr_number }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/pull/{{ commit.remote.pr_number }}){% endif %}
+- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}{% if commit.remote.username %}{% set user = commit.remote.username | replace(from="[bot]", to="") %} by [@{{ user }}](https://github.com/{% if commit.remote.username is ending_with("[bot]") %}apps/{% endif %}{{ user }}){% endif %}{% if commit.remote.pr_number %} in [#{{ commit.remote.pr_number }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/pull/{{ commit.remote.pr_number }}){% endif %}
 {% endfor %}
 {%- endfor %}
 {%- set first_timers = github.contributors | filter(attribute="is_first_time", value=true) %}
@@ -23,7 +23,7 @@ body = """
 #### New Contributors
 
 {% for contributor in first_timers -%}
-- {% set user = contributor.username | replace(from="[bot]", to="") %}[@{{ user }}](https://github.com/{%- if contributor.username is ending_with("[bot]") %}apps/{% endif %}{{ user }}) made their first contribution{% if contributor.pr_number %} in [#{{ contributor.pr_number }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/pull/{{ contributor.pr_number }}){% endif %}
+- {% set user = contributor.username | replace(from="[bot]", to="") %}[@{{ user }}](https://github.com/{% if contributor.username is ending_with("[bot]") %}apps/{% endif %}{{ user }}) made their first contribution{% if contributor.pr_number %} in [#{{ contributor.pr_number }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/pull/{{ contributor.pr_number }}){% endif %}
 {% endfor %}
 {%- endif -%}
 {% else %}
