@@ -4,26 +4,28 @@
 [changelog]
 header = ""
 body = """
-{% if version %}
+{%- if version -%}
 # Release Notes for Version {{ version }}
 
 **Release Date: {{ timestamp | date(format="%Y-%m-%d") }}**
 
 ### What's Changed
 {% if commits | length > 0 %}
-{% for group, commits in commits | group_by(attribute="group") %}
+{%- for group, commits in commits | group_by(attribute="group") %}
 #### {{ group | striptags | trim }}
-{% for commit in commits %}
-- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}{% if commit.remote.username %} by @{{ commit.remote.username }}{% endif %}{% if commit.remote.pr_number %} in #{{ commit.remote.pr_number }}{% endif %}
+
+{% for commit in commits -%}
+- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}{% if commit.remote.username %}{% set user = commit.remote.username | replace(from="[bot]", to="") %} by [@{{ user }}](https://github.com/{%- if commit.remote.username is ending_with("[bot]") %}apps/{% endif %}{{ user }}){% endif %}{% if commit.remote.pr_number %} in [#{{ commit.remote.pr_number }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/pull/{{ commit.remote.pr_number }}){% endif %}
 {% endfor %}
-{% endfor %}
-{% set first_timers = github.contributors | filter(attribute="is_first_time", value=true) %}
-{% if first_timers | length > 0 %}
+{%- endfor %}
+{%- set first_timers = github.contributors | filter(attribute="is_first_time", value=true) %}
+{%- if first_timers | length > 0 %}
 #### New Contributors
-{% for contributor in first_timers %}
-- @{{ contributor.username }} made their first contribution{% if contributor.pr_number %} in #{{ contributor.pr_number }}{% endif %}
+
+{% for contributor in first_timers -%}
+- {% set user = contributor.username | replace(from="[bot]", to="") %}[@{{ user }}](https://github.com/{%- if contributor.username is ending_with("[bot]") %}apps/{% endif %}{{ user }}) made their first contribution{% if contributor.pr_number %} in [#{{ contributor.pr_number }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/pull/{{ contributor.pr_number }}){% endif %}
 {% endfor %}
-{% endif %}
+{%- endif -%}
 {% else %}
 ¯\\\\\\_(ツ)\\_/¯
 
@@ -32,12 +34,10 @@ you have a fresh tag to flash.
 
 New bugs were absolutely added. We just have not found them yet.
 {% endif %}
-{% if previous.version and remote.github.owner and remote.github.repo %}
-
+{%- if previous.version and remote.github.owner and remote.github.repo %}
 ---
 **Full Changelog:** [{{ previous.version }}...{{ version }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }})
 {% elif previous.version %}
-
 ---
 **Full Changelog:** {{ previous.version }}...{{ version }}
 {% endif %}
@@ -47,6 +47,9 @@ footer = ""
 trim = true
 
 [git]
+# The PR number is rendered as a link, so drop the '(#123)' suffix GitHub
+# appends to squash-merge subjects.
+commit_preprocessors = [{ pattern = '(?m) +\(#[0-9]+\)$', replace = "" }]
 conventional_commits = true
 filter_unconventional = true
 split_commits = false
