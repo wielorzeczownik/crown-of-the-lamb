@@ -71,7 +71,7 @@ jobs:
         if: ${{ steps.audit.outputs.unresolved == 'false' }}
         uses: micalevisk/last-issue-action@0d40124cc99ac8601c2516007f0c98ef3d27537b # v2.3.0
         with:
-          labels: security-advisory
+          labels: security advisory
           state: open
 
       - name: Close advisory issue
@@ -151,7 +151,7 @@ jobs:
         if: ${{ steps.audit.outputs.unresolved == 'false' }}
         uses: micalevisk/last-issue-action@0d40124cc99ac8601c2516007f0c98ef3d27537b # v2.3.0
         with:
-          labels: npm-advisory
+          labels: npm advisory
           state: open
 
       - name: Close npm advisory issue

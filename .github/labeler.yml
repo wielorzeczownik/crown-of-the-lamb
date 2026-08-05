@@ -1,0 +1,17 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+          - 'docs/**'
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'Cargo.toml'
+          - 'Cargo.lock'
+          - 'renovate.json'
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/**'

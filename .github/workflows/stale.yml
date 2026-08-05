@@ -1,0 +1,45 @@
+name: Stale
+
+on:
+  schedule:
+    - cron: '30 3 * * 1'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: stale
+  cancel-in-progress: false
+
+jobs:
+  stale:
+    name: Mark and close stale items
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Mark and close
+        uses: actions/stale@4391f3da665fdf50b6810c1a66712fb9ba21aa93 # v11.0.0
+        with:
+          days-before-stale: 60
+          days-before-close: 14
+          stale-issue-label: stale
+          stale-pr-label: stale
+          exempt-issue-labels: 'pinned,security,security advisory,npm advisory,image advisory,upstream drift,breaking change'
+          exempt-pr-labels: 'pinned,security,security advisory,npm advisory,image advisory,upstream drift,breaking change'
+          exempt-all-milestones: true
+          stale-issue-message: >-
+            No activity here for 60 days, so this is being marked stale. Comment
+            if it is still relevant, otherwise it will close in 14 days.
+          stale-pr-message: >-
+            No activity here for 60 days, so this is being marked stale. Comment
+            if it is still relevant, otherwise it will close in 14 days.
+          close-issue-message: >-
+            Closing after 14 days with no further activity. Reopen it if this
+            turns out to still matter.
+          close-pr-message: >-
+            Closing after 14 days with no further activity. Reopen it if this
+            turns out to still matter.

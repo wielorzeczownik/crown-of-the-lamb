@@ -1,6 +1,6 @@
 ---
 title: Unresolved security advisories
-labels: security-advisory
+labels: security advisory
 ---
 
 `cargo audit` reports advisories that `cargo audit fix` could not resolve

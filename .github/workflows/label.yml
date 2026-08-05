@@ -1,0 +1,63 @@
+name: Label
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
+
+permissions: {}
+
+concurrency:
+  group: label-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  label:
+    name: Apply labels
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Label by changed paths
+        uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7.0.0
+
+      - name: Label a first contribution
+        if: ${{ contains(fromJSON('["FIRST_TIMER", "FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association) }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: gh pr edit "$PR" --add-label 'first contribution'
+
+      - name: Label a breaking change
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.html_url }}
+          TITLE: ${{ github.event.pull_request.title }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$TITLE" =~ ^[a-z]+(\([^\)]*\))?!: ]]; then
+            gh pr edit "$PR" --add-label 'breaking change'
+          else
+            gh pr edit "$PR" --remove-label 'breaking change'
+          fi
+
+      - name: Label by size
+        uses: CodelyTV/pr-size-labeler@095a41fca88b8764fd9e008ad269bcdb82bb38b9 # v1.10.4
+        with:
+          xs_label: 'size:XS'
+          xs_max_size: '10'
+          s_label: 'size:S'
+          s_max_size: '30'
+          m_label: 'size:M'
+          m_max_size: '100'
+          l_label: 'size:L'
+          l_max_size: '500'
+          xl_label: 'size:XL'
+          files_to_ignore: 'assets/* portal/*'
+          message_if_xl: >-
+            This pull request changes more than 500 lines, not counting tests.
+            Please check that it is not addressing several unrelated things at
+            once, because a review this large is a review that misses things.
+            It may be asked to be split before it is merged.
