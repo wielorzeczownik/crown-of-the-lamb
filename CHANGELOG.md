@@ -5,6 +5,42 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.6](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.5...v1.1.6) - 2026-08-06
+
+### Bug Fixes
+
+- Link bot authors and pull requests in the release notes ([bda9953](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/bda99537f9ddfc2be137b08ad7eca4ebd80757f4))
+- Cover every dependency manifest in the label rules ([6f5f3d1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6f5f3d11528454d2616f971a1b2bde57dd00d1c9))
+
+### Refactoring
+
+- Collapse the two assign steps into one ([62c5d91](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/62c5d91c8157967631d917a750d6d2bf287fd35e))
+
+### Documentation
+
+- Drop the redundant comment above commit_preprocessors ([f5fbdef](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f5fbdef8ff6a5e338c36e56b523f572eb452008f))
+
+### Styling
+
+- Drop the no-op whitespace trim inside the profile url ([9efda2f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9efda2f09147468b2b3b5e43621b07960e26850f))
+
+### Build System
+
+- Update dependency typescript-eslint to v8.66.0 (#59) ([135cf0d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/135cf0d6309928129fb39103226ae534b7920fe7))
+- Update dependency eslint-plugin-unicorn to v73 (#60) ([cbe2010](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/cbe2010b7391dbe2ffef4940bf50d26024af5327))
+- Resolve audit advisories ([0b6f7d0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/0b6f7d0828a70cd69ed77108a894d046601ca788))
+
+### CI/CD
+
+- Update github actions (#61) ([2656fc1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2656fc181849511992b8492aa3ead887eb9862de))
+- Update taiki-e/install-action action to v2.85.4 (#58) ([21a3910](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/21a3910384b256ad9e24d5f3d5124cdf91af69af))
+- Publish through a deployment environment ([3eee0a9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3eee0a9cbd2f9d5ee005fe9d678ef2bb5bd48410))
+- Update taiki-e/install-action action to v2.85.3 (#56) ([f744d60](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f744d600c0f0ae31a8cbe432ef03bdaf4321392e))
+
+### Other
+
+- Ci/labels and automation (#57) ([92041d7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/92041d7fc02dcea8771791541c649d50781744bf))
+
 ## [1.1.5](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.4...v1.1.5) - 2026-08-02
 
 ### Build System
