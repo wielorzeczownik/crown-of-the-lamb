@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.7](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.6...v1.1.7) - 2026-08-09
+
+### Bug Fixes
+
+- Restore plain @mentions for human authors so avatars render ([4b9b475](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/4b9b475476d7141ff27d7aeb33f40e0989a4b1f9))
+
+### Build System
+
+- Update dependency vite to v8.2.1 (#62) ([ca958c7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ca958c73876f895262e00e884a609fd39303d6ff))
+- Resolve audit advisories ([6b9cf1d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6b9cf1d0e1a61ee7775f9f837b31ead6735342de))
+- Resolve audit advisories ([5d681d9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5d681d95125eb1073b2f58d43ee20678571e0ac4))
+
 ## [1.1.6](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.5...v1.1.6) - 2026-08-06
 
 ### Bug Fixes
