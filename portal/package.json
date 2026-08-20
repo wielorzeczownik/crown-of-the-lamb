@@ -18,8 +18,8 @@
     "fix": "eslint --fix src plugins index.html tests && stylelint --fix \"src/**/*.css\" && prettier --write src plugins index.html tests"
   },
   "devDependencies": {
-    "@html-eslint/eslint-plugin": "0.64.0",
-    "@html-eslint/parser": "0.64.0",
+    "@html-eslint/eslint-plugin": "0.65.0",
+    "@html-eslint/parser": "0.65.0",
     "@types/ejs": "3.1.5",
     "@types/html-minifier-terser": "7.0.2",
     "@types/node": "26.2.0",
