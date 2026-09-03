@@ -5,6 +5,43 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.8](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.7...v1.1.8) - 2026-09-03
+
+### Build System
+
+- Resolve audit advisories ([6a56e1c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6a56e1c15d429eb72cf42abda0b6abca598cc608))
+- Update dependency subset-font to v2.7.0 (#86) ([44cc2e0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/44cc2e0e7ac62e975ada9a3a212abec4656cbeeb))
+- Update dependency subset-font to v2.6.0 (#82) ([71a3c15](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/71a3c15dc59d06d07dc9a8e97b6c279771924361))
+- Update dependency eslint-plugin-unicorn to v74 (#85) ([d5e9f6d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d5e9f6d60081defe31c22eaf5f2c0e31c19b89ab))
+- Update dependency @types/node to v26.4.0 (#81) ([4d2d5e0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/4d2d5e07a410f1955e8256e79ab710443b652f48))
+- Update dependency typescript-eslint to v8.68.0 (#78) ([c9ea240](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/c9ea240df48e81daba172237b27d486bdb200c56))
+- Update dependency @types/node to v26.3.0 (#80) ([e587213](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e5872130af2bfc7dcdc97e99c92729d3d10a13a9))
+- Update dependency eslint to v10.9.1 (#79) ([b85dbc7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b85dbc777d4e7e5fb97115d78318717cf7b8cfd9))
+- Update dependency eslint to v10.9.0 (#76) ([d91a9e7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d91a9e7edcb0e2b7b286aa65d952679d32fc5a28))
+- Update dependency vite to v8.2.2 (#74) ([99227e7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/99227e7a35c2e487e5937d320f80dd7ac3e4ad2a))
+- Update dependency vitest to v4.1.11 (#72) ([2f98962](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2f9896254017999e6d478ddae363d84f8a77deaf))
+- Update html-eslint monorepo to v0.65.0 (#70) ([8834e84](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8834e84d83aa9847013e7ca96c629e656931b851))
+- Update dependency stylelint-config-recess-order to v7.8.0 (#67) ([a22e9f1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a22e9f1ef762aa04c96862f34f7ef0a64211ee76))
+- Update dependency typescript-eslint to v8.67.0 (#66) ([d7c9fb3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d7c9fb3ee9d6486537c70281337d9e7a6a50f64d))
+- Update dependency eslint to v10.8.1 (#64) ([db972c2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/db972c2c30e6d19ed2fe928c63440365b3e63388))
+- Update dependency @types/node to v26.2.0 (#63) ([dceccb5](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/dceccb5429958c92dec7e280a209530e6b09de50))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.86.8 (#87) ([7f34354](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/7f34354df8fcc577f7c2f012c68fdf6a4d5d3ae0))
+- Update taiki-e/install-action action to v2.86.7 (#83) ([39b27c1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/39b27c1e4480656bae906ef8197f74806aced834))
+- Update taiki-e/install-action action to v2.86.4 (#77) ([f6f288f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f6f288f75d1b712620fe0d9518e2eeb16894f4f6))
+- Update taiki-e/install-action action to v2.86.3 (#75) ([1ee78da](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1ee78daf55a613c3b33bf1cd96fae423ee5d4448))
+- Update taiki-e/install-action action to v2.86.1 (#73) ([5be7815](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5be78155888f9d404d9d8f187b440cd22125abcb))
+- Update taiki-e/install-action action to v2.85.13 (#71) ([efd32b1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/efd32b18fdd51ad727acaaca66b604d00d59ed55))
+- Update taiki-e/install-action action to v2.85.12 (#69) ([439f0c8](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/439f0c8174e3f2d36c466337e2d9f99e930ef50e))
+- Update taiki-e/install-action action to v2.85.11 (#68) ([77cb05e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/77cb05e0f6900ca69894e4a762aa247269610aea))
+- Update github actions (#65) ([c3afc37](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/c3afc371a20e540ee7a6efaf6403bafcfe870da5))
+
+### Dependencies
+
+- Update rust crate picoserve to 0.20.0 (#88) ([4385749](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/43857498b54081b2cb1362f2bf238d82c67d602d))
+
 ## [1.1.7](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.6...v1.1.7) - 2026-08-09
 
 ### Bug Fixes
