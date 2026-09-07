@@ -24,7 +24,7 @@
     "@types/html-minifier-terser": "7.0.2",
     "@types/node": "26.4.1",
     "@types/subset-font": "2.3.0",
-    "autoprefixer": "10.5.4",
+    "autoprefixer": "10.5.5",
     "eslint": "10.9.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-simple-import-sort": "14.0.0",
