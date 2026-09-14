@@ -178,7 +178,7 @@ jobs:
         env:
           RUSTUP_TOOLCHAIN: stable
         # renovate: datasource=crate depName=espflash
-        run: cargo install espflash --locked --version 4.5.0
+        run: cargo install espflash --locked --version 4.6.0
 
       - name: Install Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
