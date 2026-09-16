@@ -5,6 +5,35 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.9](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.8...v1.1.9) - 2026-09-16
+
+### Build System
+
+- Update html-eslint monorepo to v0.66.0 (#109) ([dc49eae](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/dc49eae4e7aa609216c5ecf89fc352c016142e2e))
+- Update dependency autoprefixer to v10.5.6 (#106) ([ee3bc9c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ee3bc9c3eb8809f59e5a3a5cbd7ef6c31acd6dee))
+- Update dependency vite to v8.3.0 (#105) ([3001c23](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3001c235ed0edceab50f81841867e5c0c2c032fc))
+- Update dependency @types/node to v26.5.1 (#104) ([60f28fd](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/60f28fde37e617c31a8c02008231a2c7badf9f33))
+- Update dependency typescript-eslint to v8.70.0 (#103) ([9f5b987](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9f5b9871747967b17b3db1fad94a1b5e8cfc12b8))
+- Update dependency @types/node to v26.5.0 (#102) ([9880c2b](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9880c2b6882ef41f353f6fb729060c36d5d2256d))
+- Resolve audit advisories ([e5ca83c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e5ca83c9954ee79c1038b7e98e927db4f310650f))
+- Update dependency stylelint to v17.15.0 (#99) ([74aea9d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/74aea9d6103c9999b295f711c5beede72db00cee))
+- Update dependency eslint to v10.10.0 (#98) ([8035a8a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8035a8ac3963bf816f4a7dcaede5875ca3aea220))
+- Update dependency autoprefixer to v10.5.5 (#97) ([9c5d254](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9c5d254dbfafaca57199c92066cc0c911102e6cf))
+- Update dependency @types/node to v26.4.1 (#92) ([d0418c8](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d0418c86557b4362a280936ecf201f042232250b))
+- Update dependency typescript-eslint to v8.69.0 (#89) ([e7097ce](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e7097ceefd409b6b5de1aea925aff0e38c2eacc8))
+
+### CI/CD
+
+- Update github actions (#100) ([1de7ea3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1de7ea336c4f54dcc175bb2f35658b53f30140e9))
+- Update taiki-e/install-action action to v2.87.2 (#96) ([47935fd](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/47935fd70a083c81bf9d88b4c8078f8fa036e45c))
+- Update softprops/action-gh-release action to v3.0.3 (#94) ([e80c1ce](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e80c1ce06d3a77c25c85d3b1611d27afa4691758))
+- Update taiki-e/install-action action to v2.87.1 (#93) ([e237720](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e2377204850eba846eb668fd592b53c4650bc7fa))
+- Update taiki-e/install-action action to v2.87.0 (#90) ([e37deed](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e37deed6befb9f8782940ce8e666a67bbacfa50a))
+
+### Dependencies
+
+- Update dependency espflash to v4.6.0 (#107) ([ca35151](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ca351510d72b8649f7e6756cc44d61c4369e4cdf))
+
 ## [1.1.8](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.7...v1.1.8) - 2026-09-03
 
 ### Build System
@@ -384,6 +413,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.2...v1.0.0) - 2026-07-03
 
+### Features
+
+- Rip out OTA because I gave up ([05daad0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/05daad0f117da6eb1d4c9acefc6e33753834a4d8))
+
 ### Documentation
 
 - Refresh portal screenshots ([55b7d7a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/55b7d7aed9e8cef68932bbb1a78262ad77e29695))
@@ -403,10 +436,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.1...v0.1.2) - 2026-07-02
 
-### Features
-
-- Rip out OTA because I gave up ([05daad0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/05daad0f117da6eb1d4c9acefc6e33753834a4d8))
-
 ### Bug Fixes
 
 - Sync package-lock with vite 8.1.3 ([8bf63d7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8bf63d7f50a7809ad588d91c1875286afca18325))
@@ -420,6 +449,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Show only user-facing changes in release notes ([9334c77](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9334c77e78421ddcb54b983a8d3f49222a6a30e4))
 - Match release notes format to ahe-ics ([8aa71f2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8aa71f2d929ae9dd24fb2308c07d5205b3a94a95))
+
+### Miscellaneous
+
+- Disable rust-toolchain manager for esp channel ([cc05f61](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/cc05f618932c7fd9aebebb0fe73c241bb66a288a))
 
 ## [0.1.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.0...v0.1.1) - 2026-07-02
 
@@ -441,10 +474,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update actions/attest-build-provenance action to v4 ([545115c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/545115c2b49197d4e8141fe01fc9073c66ddf2bc))
 - Split git-cliff config and include all commits ([22040c9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/22040c9a9dd907623221c7c5e3aed34ff7e4bfd5))
 - Install Xtensa toolchain via espup, drop broken rustup target add ([601b821](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/601b8213ecaf64656454e4dbc345ef3d9d0152dd))
-
-### Miscellaneous
-
-- Disable rust-toolchain manager for esp channel ([cc05f61](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/cc05f618932c7fd9aebebb0fe73c241bb66a288a))
+- Install Xtensa toolchain via espup, drop broken rustup target add ([6294223](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6294223431c6cd7426f52c7697518b4e4f18e67f))
 
 ## [0.1.0] - 2026-07-01
 
@@ -455,7 +485,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### CI/CD
 
-- Install Xtensa toolchain via espup, drop broken rustup target add ([6294223](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6294223431c6cd7426f52c7697518b4e4f18e67f))
 - Update taiki-e/install-action action to v2.82.3 (#1) ([ab69f0d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ab69f0d65c96df05ccfcad988b67f8c5f7987045))
 - Install Xtensa toolchain via espup instead of rustup target add ([8361ea5](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8361ea51ea1594f7101a83d8761a0c5763794539))
 
