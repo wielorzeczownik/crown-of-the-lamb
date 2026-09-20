@@ -62,10 +62,9 @@ interface RowState {
 }
 
 function isInPupil(relativeX: number, rowState: RowState): boolean {
-  if (relativeX <= 0) {
-    return rowState.halfWidthLeft > 0 && -relativeX <= rowState.halfWidthLeft;
-  }
-  return rowState.halfWidthRight > 0 && relativeX <= rowState.halfWidthRight;
+  return relativeX <= 0
+    ? rowState.halfWidthLeft > 0 && -relativeX <= rowState.halfWidthLeft
+    : rowState.halfWidthRight > 0 && relativeX <= rowState.halfWidthRight;
 }
 
 function computeRowState(
@@ -184,6 +183,36 @@ function writePixelColor(
   );
 }
 
+function renderRow(
+  pixels: Uint8ClampedArray,
+  row: number,
+  rowState: RowState,
+  centerX: number,
+  highlightX: number,
+  redFull: number,
+  greenFull: number,
+  blueFull: number
+): void {
+  for (let col = 0; col < DISPLAY_SIZE; col++) {
+    const pixelIndex = (row * DISPLAY_SIZE + col) * 4;
+    pixels[pixelIndex + 3] = RGB888_MAX;
+
+    if (rowState.isInOpenRegion) {
+      writePixelColor(
+        pixels,
+        pixelIndex,
+        col,
+        col - centerX,
+        rowState,
+        highlightX,
+        redFull,
+        greenFull,
+        blueFull
+      );
+    }
+  }
+}
+
 export function renderEye(
   context: CanvasRenderingContext2D,
   state: EyeRenderState
@@ -212,25 +241,16 @@ export function renderEye(
       highlightY
     );
 
-    for (let col = 0; col < DISPLAY_SIZE; col++) {
-      const pixelIndex = (row * DISPLAY_SIZE + col) * 4;
-      pixels[pixelIndex + 3] = RGB888_MAX;
-
-      if (rowState.isInOpenRegion) {
-        const relativeX = col - centerX;
-        writePixelColor(
-          pixels,
-          pixelIndex,
-          col,
-          relativeX,
-          rowState,
-          highlightX,
-          redFull,
-          greenFull,
-          blueFull
-        );
-      }
-    }
+    renderRow(
+      pixels,
+      row,
+      rowState,
+      centerX,
+      highlightX,
+      redFull,
+      greenFull,
+      blueFull
+    );
   }
 
   context.putImageData(imageData, 0, 0);
