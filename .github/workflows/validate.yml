@@ -342,7 +342,7 @@ jobs:
           persist-credentials: false
 
       - name: Format check
-        run: npx --yes prettier@3.9.8 --check .
+        run: npx --yes prettier@3.9.9 --check .
 
   shell:
     name: Shell (shfmt + shellcheck)
