@@ -1,9 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "vulnerabilityAlerts": {
-    "enabled": true
-  },
-  "osvVulnerabilityAlerts": true,
   "extends": ["group:monorepos", "group:recommended"],
   "platformAutomerge": true,
   "automergeType": "pr",
@@ -120,6 +116,10 @@
       "matchManagers": ["cargo"],
       "matchPackageNames": ["serde", "serde-json-core"],
       "groupName": "serde"
+    },
+    {
+      "matchPackageNames": ["typescript", "typescript-eslint"],
+      "groupName": "typescript"
     }
   ]
 }
