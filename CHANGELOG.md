@@ -5,6 +5,37 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.10](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.9...v1.1.10) - 2026-09-29
+
+### Bug Fixes
+
+- Cap typescript instead of grouping (#127) ([ed761bf](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ed761bfbf7b4572507db42c4335fd29960ac834c))
+
+### Build System
+
+- Update dependency @types/node to v26.6.3 (#128) ([550a476](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/550a4767d9d60e881b01396f635699c95082489b))
+- Update dependency vite to v8.3.1 (#123) ([7bae9ff](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/7bae9ff79a8e8c1dd2f4e442fa41756923c7a3f9))
+- Update dependency prettier to v3.9.9 (#122) ([1894ba3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1894ba37b982c5e92f0f538b89eac2ab95cf53b8))
+- Update dependency typescript-eslint to v8.70.1 (#121) ([59df46a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/59df46a982b811f0cc3405156262c0838a1bc998))
+- Update dependency eslint-plugin-unicorn to v76 (#119) ([dec2621](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/dec2621fd3bf16d22bcbcb1bc69d5d9844f2d288))
+- Update dependency subset-font to v2.9.0 (#120) ([8a7b8dd](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8a7b8ddb697d11d2d981dbb9c76c81a07c61d21c))
+- Update dependency eslint to v10.11.0 (#117) ([55d02fd](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/55d02fddedfea4e123db4d92c587a09e25fa82cb))
+- Update dependency @types/node to v26.6.2 (#118) ([2081d8d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2081d8d76c847e7f34bf81c9fa28dbc9231f459e))
+- Update dependency prettier to v3.9.8 (#116) ([eec0f9d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/eec0f9d357404541957628dfcfb1787a67b7ec52))
+- Update dependency eslint-plugin-unicorn to v75 (#114) ([78660db](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/78660db3f92e2deea3eba61a026ea6b23ff36a28))
+- Update dependency vitest to v5 (#95) ([aca3d50](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/aca3d50eefd221f11da8091117ee00d431309af8))
+- Update html-eslint monorepo to v0.66.1 (#115) ([5df11e8](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5df11e83dd966b8e7d4a5ea335d2663714b6207f))
+- Update dependency prettier to v3.9.7 (#113) ([f964671](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f9646711cc9db918d09291d0ae2df3ca277e34cf))
+- Update dependency @types/node to v26.6.1 (#112) ([80f2a52](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/80f2a52372c991f6e880d8465e5ff518aaf49066))
+- Update dependency eslint-plugin-sonarjs to v4.2.1 (#111) ([1ed9640](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1ed964087d46329938206dde1973d01129f9cf06))
+- Update dependency autoprefixer to v10.6.1 (#110) ([3f18d32](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3f18d322e898437a56cc098a457c26bfc0df3c85))
+- Update dependency autoprefixer to v10.6.0 (#108) ([c53ec83](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/c53ec83b7430ac939913e9831b869a058eb99b5b))
+
+### Miscellaneous
+
+- Group typescript+typescript-eslint (#125) ([75fea9a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/75fea9ae47da5a348311ad01779c367008d9258d))
+- Enable vulnerabilityAlerts (#124) ([5ec85ab](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5ec85ab6825dd2793413d98ce1c973f87bc17936))
+
 ## [1.1.9](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.8...v1.1.9) - 2026-09-16
 
 ### Build System
