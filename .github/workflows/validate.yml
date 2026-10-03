@@ -89,7 +89,7 @@ jobs:
         uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b # v2.87.4
         with:
           # renovate: datasource=crate depName=espup
-          tool: espup@0.17.1
+          tool: espup@0.18.0
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -138,7 +138,7 @@ jobs:
         uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b # v2.87.4
         with:
           # renovate: datasource=crate depName=espup
-          tool: espup@0.17.1
+          tool: espup@0.18.0
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -178,7 +178,7 @@ jobs:
         uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b # v2.87.4
         with:
           # renovate: datasource=crate depName=espup
-          tool: espup@0.17.1
+          tool: espup@0.18.0
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
