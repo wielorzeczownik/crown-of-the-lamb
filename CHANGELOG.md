@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.11](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.10...v1.1.11) - 2026-10-03
+
+### Build System
+
+- Update dependency vitest to v5.0.3 (#133) ([3a93a97](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3a93a97ef78b809925000bc091c66fde23f195c8))
+- Update dependency typescript-eslint to v8.71.0 (#131) ([411aa88](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/411aa88870d11427b000b6da677ec6ab4ec9bd18))
+- Update dependency eslint-plugin-sonarjs to v4.2.2 (#130) ([646538e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/646538e1f8c74fecf3bc8bd829c766e787e9bfd2))
+- Resolve audit advisories ([07e7e87](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/07e7e875bc4d7fc8e00fa8ec271833d4cb6d5304))
+- Update dependency vitest to v5.0.2 (#129) ([0fc4569](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/0fc45698ac2c81ab55bb4efaddeca7f921b6e584))
+
+### Dependencies
+
+- Update dependency espup to v0.18.0 (#134) ([501d2e7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/501d2e75724ddde6adeb1101e39a11135aca3145))
+
 ## [1.1.10](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.9...v1.1.10) - 2026-09-29
 
 ### Bug Fixes
