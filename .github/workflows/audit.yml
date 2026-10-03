@@ -69,7 +69,7 @@ jobs:
       - name: Find advisory issue
         id: advisory_issue
         if: ${{ steps.audit.outputs.unresolved == 'false' }}
-        uses: micalevisk/last-issue-action@0d40124cc99ac8601c2516007f0c98ef3d27537b # v2.3.0
+        uses: micalevisk/last-issue-action@010dfff63530f63c7a9fd54211bde51cc38cff73 # v2.4.0
         with:
           labels: security advisory
           state: open
@@ -149,7 +149,7 @@ jobs:
       - name: Find npm advisory issue
         id: npm_issue
         if: ${{ steps.audit.outputs.unresolved == 'false' }}
-        uses: micalevisk/last-issue-action@0d40124cc99ac8601c2516007f0c98ef3d27537b # v2.3.0
+        uses: micalevisk/last-issue-action@010dfff63530f63c7a9fd54211bde51cc38cff73 # v2.4.0
         with:
           labels: npm advisory
           state: open
