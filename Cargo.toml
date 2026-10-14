@@ -74,7 +74,7 @@ embedded-storage       = "0.3.1"
 embedded-storage-async = "0.4.1"
 
 # Serialization used by the web handlers
-serde-json-core = "0.6.0"
+serde-json-core = "0.7.0"
 
 # Utilities
 static_cell = "2.1.1"
