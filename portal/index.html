@@ -7,7 +7,7 @@
       name="viewport"
     />
     <title>Crown of the Lamb</title>
-    <link href="./src/assets/icon.svg?inline" rel="icon" />
+    <link href="src/assets/icon.svg?inline" rel="icon" />
     <meta content="#060700" name="theme-color" />
     <meta content="yes" name="mobile-web-app-capable" />
     <meta
@@ -26,8 +26,8 @@
     <div class="tabs-wrap">
       <nav class="tabs" role="tablist">
         <button
-          id="tab-btn-eye"
-          class="tab-btn active"
+          id="tab-button-eye"
+          class="tab-button active"
           aria-controls="panel-eye"
           aria-selected="true"
           data-tab="eye"
@@ -36,8 +36,8 @@
           Eye
         </button>
         <button
-          id="tab-btn-expression"
-          class="tab-btn"
+          id="tab-button-expression"
+          class="tab-button"
           aria-controls="panel-expression"
           aria-selected="false"
           data-tab="expression"
@@ -46,8 +46,8 @@
           Mimicry
         </button>
         <button
-          id="tab-btn-sound"
-          class="tab-btn"
+          id="tab-button-sound"
+          class="tab-button"
           aria-controls="panel-sound"
           aria-selected="false"
           data-tab="sound"
@@ -56,8 +56,8 @@
           Sound
         </button>
         <button
-          id="tab-btn-network"
-          class="tab-btn"
+          id="tab-button-network"
+          class="tab-button"
           aria-controls="panel-network"
           aria-selected="false"
           data-tab="network"
@@ -65,7 +65,7 @@
         >
           WiFi
         </button>
-        <div class="tab-btn">
+        <div class="tab-button">
           <select
             id="locale-select"
             class="locale-select"
@@ -84,7 +84,7 @@
       <section
         id="panel-eye"
         class="panel active"
-        aria-labelledby="tab-btn-eye"
+        aria-labelledby="tab-button-eye"
         role="tabpanel"
         tabindex="0"
       >
@@ -157,7 +157,7 @@
           </div>
         </div>
 
-        <button id="config-reset" class="btn btn--outline">
+        <button id="config-reset" class="button button--outline">
           Restore defaults
         </button>
       </section>
@@ -166,19 +166,21 @@
       <section
         id="panel-expression"
         class="panel"
-        aria-labelledby="tab-btn-expression"
+        aria-labelledby="tab-button-expression"
         role="tabpanel"
         tabindex="0"
       >
         <div class="card">
           <div id="card-title-expression" class="card__title">Mimicry</div>
 
-          <div class="card__expr-row">
-            <button id="expr-eyeroll" class="btn btn--outline">Eye roll</button>
-            <div class="card__expr-scale">
+          <div class="card__expression-row">
+            <button id="expression-eyeroll" class="button button--outline">
+              Eye roll
+            </button>
+            <div class="card__expression-scale">
               <label
                 id="label-eyeroll-chance"
-                class="card__expr-chance-label"
+                class="card__expression-chance-label"
                 for="eyeroll-rarity"
               >
                 Chance
@@ -187,7 +189,7 @@
                 id="eyeroll-rarity"
                 type="range"
                 aria-describedby="eyeroll-rarity-v"
-                aria-labelledby="expr-eyeroll label-eyeroll-chance"
+                aria-labelledby="expression-eyeroll label-eyeroll-chance"
                 max="100"
                 min="0"
                 value="15"
@@ -202,12 +204,14 @@
             </div>
           </div>
 
-          <div class="card__expr-row">
-            <button id="expr-startled" class="btn btn--outline">Fear</button>
-            <div class="card__expr-scale">
+          <div class="card__expression-row">
+            <button id="expression-startled" class="button button--outline">
+              Fear
+            </button>
+            <div class="card__expression-scale">
               <label
                 id="label-startled-chance"
-                class="card__expr-chance-label"
+                class="card__expression-chance-label"
                 for="startled-rarity"
               >
                 Chance
@@ -216,7 +220,7 @@
                 id="startled-rarity"
                 type="range"
                 aria-describedby="startled-rarity-v"
-                aria-labelledby="expr-startled label-startled-chance"
+                aria-labelledby="expression-startled label-startled-chance"
                 max="100"
                 min="0"
                 value="35"
@@ -231,14 +235,14 @@
             </div>
           </div>
 
-          <div class="card__expr-row">
-            <button id="expr-suspicious" class="btn btn--outline">
+          <div class="card__expression-row">
+            <button id="expression-suspicious" class="button button--outline">
               Suspicious
             </button>
-            <div class="card__expr-scale">
+            <div class="card__expression-scale">
               <label
                 id="label-suspicious-chance"
-                class="card__expr-chance-label"
+                class="card__expression-chance-label"
                 for="suspicious-rarity"
               >
                 Chance
@@ -247,7 +251,7 @@
                 id="suspicious-rarity"
                 type="range"
                 aria-describedby="suspicious-rarity-v"
-                aria-labelledby="expr-suspicious label-suspicious-chance"
+                aria-labelledby="expression-suspicious label-suspicious-chance"
                 max="100"
                 min="0"
                 value="28"
@@ -262,12 +266,14 @@
             </div>
           </div>
 
-          <div class="card__expr-row">
-            <button id="expr-angry" class="btn btn--outline">Angry</button>
-            <div class="card__expr-scale">
+          <div class="card__expression-row">
+            <button id="expression-angry" class="button button--outline">
+              Angry
+            </button>
+            <div class="card__expression-scale">
               <label
                 id="label-angry-chance"
-                class="card__expr-chance-label"
+                class="card__expression-chance-label"
                 for="angry-rarity"
               >
                 Chance
@@ -276,7 +282,7 @@
                 id="angry-rarity"
                 type="range"
                 aria-describedby="angry-rarity-v"
-                aria-labelledby="expr-angry label-angry-chance"
+                aria-labelledby="expression-angry label-angry-chance"
                 max="100"
                 min="0"
                 value="55"
@@ -287,12 +293,14 @@
             </div>
           </div>
 
-          <div class="card__expr-row">
-            <button id="expr-sin" class="btn btn--outline">Sin</button>
-            <div class="card__expr-scale">
+          <div class="card__expression-row">
+            <button id="expression-sin" class="button button--outline">
+              Sin
+            </button>
+            <div class="card__expression-scale">
               <label
                 id="label-sin-chance"
-                class="card__expr-chance-label"
+                class="card__expression-chance-label"
                 for="sin-rarity"
               >
                 Chance
@@ -301,7 +309,7 @@
                 id="sin-rarity"
                 type="range"
                 aria-describedby="sin-rarity-v"
-                aria-labelledby="expr-sin label-sin-chance"
+                aria-labelledby="expression-sin label-sin-chance"
                 max="100"
                 min="0"
                 value="1"
@@ -313,8 +321,10 @@
           </div>
         </div>
 
-        <button id="expr-reset" class="btn">Reset mimicry</button>
-        <button id="expression-reset" class="btn btn--outline">
+        <button id="expression-mimicry-reset" class="button">
+          Reset mimicry
+        </button>
+        <button id="expression-reset" class="button button--outline">
           Restore defaults
         </button>
       </section>
@@ -323,7 +333,7 @@
       <section
         id="panel-sound"
         class="panel"
-        aria-labelledby="tab-btn-sound"
+        aria-labelledby="tab-button-sound"
         role="tabpanel"
         tabindex="0"
       >
@@ -350,7 +360,7 @@
           </div>
         </div>
 
-        <button id="sound-reset" class="btn btn--outline">
+        <button id="sound-reset" class="button button--outline">
           Restore defaults
         </button>
       </section>
@@ -359,7 +369,7 @@
       <section
         id="panel-network"
         class="panel"
-        aria-labelledby="tab-btn-network"
+        aria-labelledby="tab-button-network"
         role="tabpanel"
         tabindex="0"
       >
@@ -382,8 +392,8 @@
           </div>
         </div>
 
-        <button id="wifi-save" class="btn">Save and restart</button>
-        <button id="wifi-reset" class="btn btn--outline">
+        <button id="wifi-save" class="button">Save and restart</button>
+        <button id="wifi-reset" class="button button--outline">
           Restore defaults
         </button>
       </section>
@@ -398,8 +408,10 @@
       <div class="modal">
         <p id="modal-message" class="modal__message"></p>
         <div class="modal__actions">
-          <button id="modal-cancel" class="btn btn--outline">Cancel</button>
-          <button id="modal-confirm" class="btn">Confirm</button>
+          <button id="modal-cancel" class="button button--outline">
+            Cancel
+          </button>
+          <button id="modal-confirm" class="button">Confirm</button>
         </div>
       </div>
     </div>
