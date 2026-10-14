@@ -5,6 +5,37 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.12](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.11...v1.1.12) - 2026-10-14
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v77 (#140) ([37107da](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/37107da3d6939abcc7812ecbc2b27428120be4fa))
+- Update dependency prettier to v3.9.10 (#149) ([010e2d3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/010e2d30495782a1676e3ddb62cebf8beaf1d047))
+- Update dependency @types/node to v26.6.5 (#147) ([f3f4ca8](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f3f4ca812ae642a3d9e9c988ea4d1a55c1fdda17))
+- Update dependency vite to v8.3.4 (#146) ([f8266a7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f8266a77175ccaafc44f3d9468eb302c814ca44d))
+- Resolve audit advisories ([6965980](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6965980463d2fc241a2f8f59a228fa575ca24d90))
+- Update dependency vite to v8.3.3 (#144) ([b9ff017](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b9ff017876e243129a947fc1859fa28d44603ec4))
+- Update dependency typescript-eslint to v8.71.1 (#142) ([44c093e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/44c093e7e0c895f217de01cb6608b42ed2c7b323))
+- Resolve audit advisories ([4ed6ab8](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/4ed6ab897f9ec367cbb2c342788e7d3886a2c4e9))
+- Update dependency eslint to v10.12.0 (#139) ([3f99512](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3f99512fd7ea50264185d20defb49b7abb8a69bb))
+- Update dependency @types/node to v26.6.4 (#137) ([648f91f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/648f91f26bff85e57dadef924c3d1902d617cd9f))
+- Update dependency stylelint to v17.16.0 (#136) ([301cb05](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/301cb058af3f39b7d846de157e21ac3b254bb2e2))
+- Update dependency vite to v8.3.2 (#135) ([bc02a95](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/bc02a958749a267f15024298013612c7234edc0a))
+
+### CI/CD
+
+- Update artifact actions (#151) ([9ed838f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9ed838f5682fc940ef385389bc3653cbdfacef4b))
+- Update taiki-e/install-action action to v2.87.26 (#150) ([3a5ae3c](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3a5ae3cfa315c3e728e8e4f0e22eb908400b5c9c))
+- Update taiki-e/install-action action to v2.87.25 (#148) ([9b63fee](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9b63fee1003f4cb1ceefdc50eb557ceaa4d55a1b))
+- Update github actions (#143) ([d3e1646](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d3e1646e9af4ed8735ac6eac7874e4a170bc0ede))
+- Update taiki-e/install-action action to v2.87.22 (#141) ([9d3b76b](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9d3b76b0ded55187578a9ef1525e14a90f72bc20))
+- Update codelytv/pr-size-labeler action to v1.11.1 (#138) ([29aa1a1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/29aa1a1c6fffc583fa6a338bb87c0346ed3f823e))
+- Update github actions (#101) ([06b1239](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/06b12394b0a65f1738ce7c42a9d54a878fc93af6))
+
+### Dependencies
+
+- Update rust crate serde-json-core to 0.7.0 (#145) ([64f9582](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/64f95820dcc59c73e14a4b18b7166814aac0354e))
+
 ## [1.1.11](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.10...v1.1.11) - 2026-10-03
 
 ### Build System
