@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.13](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.12...v1.1.13) - 2026-10-14
+
+### Dependencies
+
+- Update esp-rs crates (#84) ([d601e38](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d601e382bcb8a20d7ef1637d0c6535273462cf1d))
+
 ## [1.1.12](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.11...v1.1.12) - 2026-10-14
 
 ### Build System
