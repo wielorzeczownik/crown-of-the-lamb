@@ -15,16 +15,16 @@ import { saveWifi } from '@/wifi';
 // DOM references
 
 const tabButtonEye = document.getElementById(
-  'tab-btn-eye'
+  'tab-button-eye'
 ) as HTMLButtonElement;
 const tabButtonExpression = document.getElementById(
-  'tab-btn-expression'
+  'tab-button-expression'
 ) as HTMLButtonElement;
 const tabButtonSound = document.getElementById(
-  'tab-btn-sound'
+  'tab-button-sound'
 ) as HTMLButtonElement;
 const tabButtonNetwork = document.getElementById(
-  'tab-btn-network'
+  'tab-button-network'
 ) as HTMLButtonElement;
 const panelEye = document.getElementById('panel-eye')!;
 const panelExpression = document.getElementById('panel-expression')!;
@@ -346,24 +346,30 @@ async function sendExpression(mode: Expression): Promise<void> {
   }
 }
 
-document.getElementById('expr-eyeroll')!.addEventListener('click', () => {
+document.getElementById('expression-eyeroll')!.addEventListener('click', () => {
   void sendExpression(Expression.EyeRoll);
 });
-document.getElementById('expr-startled')!.addEventListener('click', () => {
-  void sendExpression(Expression.Startled);
-});
-document.getElementById('expr-suspicious')!.addEventListener('click', () => {
-  void sendExpression(Expression.Suspicious);
-});
-document.getElementById('expr-angry')!.addEventListener('click', () => {
+document
+  .getElementById('expression-startled')!
+  .addEventListener('click', () => {
+    void sendExpression(Expression.Startled);
+  });
+document
+  .getElementById('expression-suspicious')!
+  .addEventListener('click', () => {
+    void sendExpression(Expression.Suspicious);
+  });
+document.getElementById('expression-angry')!.addEventListener('click', () => {
   void sendExpression(Expression.Angry);
 });
-document.getElementById('expr-sin')!.addEventListener('click', () => {
+document.getElementById('expression-sin')!.addEventListener('click', () => {
   void sendExpression(Expression.Sin);
 });
-document.getElementById('expr-reset')!.addEventListener('click', () => {
-  void sendExpression(Expression.Reset);
-});
+document
+  .getElementById('expression-mimicry-reset')!
+  .addEventListener('click', () => {
+    void sendExpression(Expression.Reset);
+  });
 
 // Bootstrap
 

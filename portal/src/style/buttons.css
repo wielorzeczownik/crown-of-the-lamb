@@ -1,4 +1,4 @@
-.btn {
+.button {
   position: relative;
   width: 100%;
   min-height: 2.75rem;
@@ -20,7 +20,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.btn::before {
+.button::before {
   position: absolute;
   inset: -2px;
   z-index: -1;
@@ -31,31 +31,31 @@
   transition: border-color 0.06s;
 }
 
-.btn:active {
+.button:active {
   filter: brightness(1.55);
   transform: scale(0.96);
 }
 
-.btn:focus-visible {
+.button:focus-visible {
   outline: 2px solid var(--white);
   outline-offset: 3px;
 }
 
 /* Secondary dark fill, like inactive tab */
-.btn--outline {
+.button--outline {
   color: var(--white);
   background: var(--black);
 }
 
-.btn--outline::before {
+.button--outline::before {
   border-color: var(--accent);
 }
 
-.btn--outline:active {
+.button--outline:active {
   background: var(--accent);
   filter: none;
 }
 
-.btn--outline:active::before {
+.button--outline:active::before {
   border-color: var(--white);
 }
