@@ -29,14 +29,15 @@ use esp_hal::{
   clock::CpuClock,
   delay::Delay,
   gpio::{Level, Output, OutputConfig},
-  interrupt::software::SoftwareInterruptControl,
   rng::Rng,
   spi::master::{Config as SpiConfig, Spi},
   time::Rate,
   timer::timg::TimerGroup,
 };
 use esp_println as _;
-use esp_radio::wifi::{Config as WifiConfig, ControllerConfig, Interface, ap::AccessPointConfig};
+use esp_radio::wifi::{
+  Config as WifiConfig, ControllerConfig, Interface, Ssid, WifiController, ap::AccessPointConfig,
+};
 use esp_storage::FlashStorage;
 use mipidsi::{
   Builder,
@@ -87,7 +88,7 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
 esp_bootloader_esp_idf::esp_app_desc!();
 
 #[embassy_executor::task]
-async fn net_task(mut runner: Runner<'static, Interface<'static>>) -> ! {
+async fn net_task(mut runner: Runner<'static, Interface>) -> ! {
   runner.run().await
 }
 
@@ -106,11 +107,7 @@ async fn flash_save_task() -> ! {
   }
 }
 
-fn spawn_tasks(
-  spawner: Spawner,
-  stack: Stack<'static>,
-  net_runner: Runner<'static, Interface<'static>>,
-) {
+fn spawn_tasks(spawner: Spawner, stack: Stack<'static>, net_runner: Runner<'static, Interface>) {
   spawner.spawn(net_task(net_runner).unwrap());
   spawner.spawn(dhcp::dhcp_task(stack).unwrap());
   spawner.spawn(dns::dns_task(stack).unwrap());
@@ -183,19 +180,19 @@ fn setup_network(
   wifi: esp_hal::peripherals::WIFI<'static>,
   ssid: &str,
 ) -> (
-  esp_radio::wifi::WifiController<'static>,
+  WifiController<'static>,
   Stack<'static>,
-  Runner<'static, Interface<'static>>,
+  Runner<'static, Interface>,
 ) {
   let wifi_config = ControllerConfig::default().with_initial_config(WifiConfig::AccessPoint(
-    AccessPointConfig::default().with_ssid(ssid),
+    AccessPointConfig::default().with_ssid(Ssid::try_from(ssid).unwrap()),
   ));
-  let (wifi_ctrl, interfaces) = esp_radio::wifi::new(wifi, wifi_config).unwrap();
+  let wifi_ctrl = WifiController::new(wifi, wifi_config).unwrap();
 
   let net_resources = NET_RESOURCES.init(StackResources::new());
   let net_seed = random_seed(Rng::new());
   let (stack, net_runner) = embassy_net::new(
-    interfaces.access_point,
+    Interface::access_point(),
     NetConfig::ipv4_static(StaticConfigV4 {
       address: Ipv4Cidr::new(GATEWAY_IP, AP_SUBNET_PREFIX),
       gateway: Some(GATEWAY_IP),
@@ -228,8 +225,7 @@ async fn main(spawner: Spawner) -> ! {
   defmt::info!("config: loaded ssid={}", stored.ssid.as_str());
 
   let timg0 = TimerGroup::new(peripherals.TIMG0);
-  let sw_int = SoftwareInterruptControl::new(peripherals.SW_INTERRUPT);
-  esp_rtos::start(timg0.timer0, sw_int.software_interrupt0);
+  esp_rtos::start(timg0.timer0, peripherals.FROM_CPU_INTR0);
 
   // Display
   let mut display = setup_display(
