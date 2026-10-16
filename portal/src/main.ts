@@ -3,7 +3,7 @@ import { hexToRgb565, rgb565ToHex } from '@/color';
 import { createEyeConfigSaver } from '@/eye-config';
 import type { LocaleCode } from '@/i18n';
 import { applyTranslations, getLocale, setLocale, translate } from '@/i18n';
-import { confirm } from '@/modal';
+import { isConfirmed } from '@/modal';
 import { initPreview } from '@/preview';
 import { Expression } from '@/renderer';
 import { config } from '@/state';
@@ -238,7 +238,7 @@ const RARITY_DEFAULTS: Record<string, number> = {
 };
 
 async function handleConfigReset(): Promise<void> {
-  if (!(await confirm(translate('modalConfigResetMsg')))) return;
+  if (!(await isConfirmed(translate('modalConfigResetMsg')))) return;
   try {
     const response = await api.resetConfig();
     if (!response.ok) {
@@ -268,7 +268,7 @@ configResetButton.addEventListener('click', () => {
 });
 
 async function handleWifiReset(): Promise<void> {
-  if (!(await confirm(translate('modalWifiResetMsg')))) return;
+  if (!(await isConfirmed(translate('modalWifiResetMsg')))) return;
   try {
     await api.resetWifi();
     showToast(true, translate('toastRestarting'));
@@ -281,7 +281,7 @@ wifiResetButton.addEventListener('click', () => {
 });
 
 async function handleExpressionReset(): Promise<void> {
-  if (!(await confirm(translate('modalExpressionResetMsg')))) return;
+  if (!(await isConfirmed(translate('modalExpressionResetMsg')))) return;
   try {
     const response = await api.saveConfig(api.encodeConfig(RARITY_DEFAULTS));
     if (!response.ok) {
@@ -307,7 +307,7 @@ expressionResetButton.addEventListener('click', () => {
 const SOUND_THRESHOLD_DEFAULT = 40;
 
 async function handleSoundReset(): Promise<void> {
-  if (!(await confirm(translate('modalSoundResetMsg')))) return;
+  if (!(await isConfirmed(translate('modalSoundResetMsg')))) return;
   try {
     await api.saveConfig(
       api.encodeConfig({ sound_threshold: SOUND_THRESHOLD_DEFAULT })
