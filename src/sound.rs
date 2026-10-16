@@ -16,14 +16,16 @@ pub enum Direction {
   Right,
 }
 
-// How many windows to hold the detected direction before allowing it to change
-const DIRECTION_HOLD: u32 = 20;
+// Give the Lamb a minute to calm down before it reacts again (3 windows/s)
+const DIRECTION_HOLD: u32 = 180;
 // Minimum % difference between mics to recognise a direction
 const DIRECTION_DIFF_PCT: i32 = 20;
-// Startup debounce: keep the gate closed for the first frames
+// Ignore the mics for 5 s after boot, power-up noise is not a cultist
 const STARTUP_GATE_FRAMES: u32 = 300;
 // Usable FFT bins: rfft_64 yields N/2 complex bins; bin 0 is DC and skipped
 const FFT_BINS: usize = FFT_BUFFER_SIZE / 2;
+// FFT magnitude to sine amplitude
+const FFT_AMPLITUDE_SCALE: f32 = 2.0 / FFT_BUFFER_SIZE as f32;
 // Percentages run 0..PERCENT_SCALE
 const PERCENT_SCALE: i32 = 100;
 
@@ -85,7 +87,7 @@ impl SoundAnalyzer {
     }
   }
 
-  /// Returns the peak magnitude in the FFT spectrum
+  /// Amplitude of the strongest frequency
   fn fft_max_magnitude(samples: &[f32; FFT_BUFFER_SIZE]) -> f32 {
     let mut input = *samples;
     let _ = rfft_64(&mut input);
@@ -99,18 +101,22 @@ impl SoundAnalyzer {
         max_magnitude = magnitude;
       }
     }
-    max_magnitude
+    max_magnitude * FFT_AMPLITUDE_SCALE
   }
 
-  /// Dominant direction and confidence (0-100) from both mic FFT spectra
+  /// Dominant direction and confidence (0-100), or Silence below `threshold`
   pub fn fft_direction_analysis(
     left_samples: &[f32; FFT_BUFFER_SIZE],
     right_samples: &[f32; FFT_BUFFER_SIZE],
+    threshold: f32,
   ) -> (Direction, i32) {
     let left_magnitude = Self::fft_max_magnitude(left_samples);
     let right_magnitude = Self::fft_max_magnitude(right_samples);
 
     let loudest = left_magnitude.max(right_magnitude);
+    if loudest < threshold {
+      return (Direction::Silence, 0);
+    }
     let diff_pct = if loudest > 0.0 {
       ((left_magnitude - right_magnitude).abs() * PERCENT_SCALE as f32 / loudest) as i32
     } else {
@@ -134,6 +140,8 @@ pub struct SoundState {
   rotation_degrees: u16,
   pub squint: bool,
   pub dir_changed: bool,
+  // Latest change came after silence
+  pub after_silence: bool,
   hold_frames: u32,
   rng: Rand32,
 }
@@ -145,6 +153,7 @@ impl SoundState {
       rotation_degrees: 0,
       squint: false,
       dir_changed: false,
+      after_silence: false,
       hold_frames: 0,
       rng: Rand32::new(seed),
     }
@@ -157,12 +166,19 @@ impl SoundState {
       return;
     }
 
+    // Silence is not a reason to panic
+    if fft_direction == Direction::Silence {
+      self.direction = Direction::Silence;
+      return;
+    }
+
     // Occasionally skip, makes behaviour feel more natural and irregular
     if self.rng.rand_u32().is_multiple_of(SKIP_REACTION_ODDS) {
       return;
     }
 
     if fft_direction != self.direction {
+      self.after_silence = self.direction == Direction::Silence;
       self.direction = fft_direction;
       self.hold_frames = DIRECTION_HOLD;
       self.dir_changed = true;
@@ -222,7 +238,7 @@ mod tests {
   #[test]
   fn silence_reports_centre_and_no_confidence() {
     let quiet = [0.0; FFT_BUFFER_SIZE];
-    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&quiet, &quiet);
+    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&quiet, &quiet, 0.0);
 
     assert!(direction == Direction::Center);
     assert_eq!(diff, 0, "no signal cannot imply a direction");
@@ -230,7 +246,7 @@ mod tests {
 
   #[test]
   fn matched_microphones_report_centre() {
-    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(1.0));
+    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(1.0), 0.0);
 
     assert!(direction == Direction::Center);
     assert_eq!(diff, 0);
@@ -238,11 +254,11 @@ mod tests {
 
   #[test]
   fn the_louder_microphone_wins() {
-    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(0.2));
+    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(0.2), 0.0);
     assert!(direction == Direction::Left);
     assert!(diff > 0);
 
-    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(0.2), &tone(1.0));
+    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(0.2), &tone(1.0), 0.0);
     assert!(direction == Direction::Right);
     assert!(diff > 0);
   }
@@ -252,7 +268,7 @@ mod tests {
     let mut previous = -1;
     for step in 0..=10 {
       let quiet = 1.0 - step as f32 / 10.0;
-      let (_, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(quiet));
+      let (_, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(quiet), 0.0);
 
       assert!(
         (0..=100).contains(&diff),
@@ -268,10 +284,48 @@ mod tests {
 
   #[test]
   fn a_small_imbalance_still_counts_as_centre() {
-    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(0.95));
+    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(0.95), 0.0);
 
     assert!(diff < super::DIRECTION_DIFF_PCT);
     assert!(direction == Direction::Center);
+  }
+
+  #[test]
+  fn sound_below_the_threshold_is_silence() {
+    // tone(1.0) has an amplitude of 1 input unit
+    let (direction, diff) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(0.5), 1.5);
+    assert!(direction == Direction::Silence);
+    assert_eq!(diff, 0);
+
+    let (direction, _) = SoundAnalyzer::fft_direction_analysis(&tone(1.0), &tone(0.5), 0.9);
+    assert!(
+      direction == Direction::Left,
+      "the louder mic clears the threshold"
+    );
+  }
+
+  #[test]
+  fn going_quiet_is_not_a_reaction_but_marks_the_next_sound() {
+    let mut state = SoundState::new(5);
+    state.direction = Direction::Left;
+
+    state.update_from_fft(Direction::Silence, 0);
+    assert!(state.direction == Direction::Silence);
+    assert!(!state.dir_changed, "silence must not fire a gaze gesture");
+
+    let mut landed = false;
+    for _ in 0..200 {
+      state.update_from_fft(Direction::Left, 90);
+      if state.dir_changed {
+        landed = true;
+        break;
+      }
+    }
+    assert!(landed, "no change landed in 200 windows");
+    assert!(
+      state.after_silence,
+      "the same side again after a pause is a fresh sound"
+    );
   }
 
   #[test]

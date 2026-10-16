@@ -2,36 +2,30 @@
 
 use cotl::{
   config,
-  constants::{FFT_BUFFER_SIZE, RARITY_SCALE, SUSPICIOUS_GAZE_OFFSET},
+  constants::{FFT_BUFFER_SIZE, RARITY_SCALE, SUSPICIOUS_GAZE_OFFSET, TICK_MS},
   eye::{Expression, EyeState},
   sound::{Direction, SoundAnalyzer, SoundState},
 };
 use embassy_time::Instant;
 use oorandom::Rand32;
 
-// ADC samples per measurement window
-const ADC_SAMPLES: usize = 16;
 // Eye-tracking lerp blend speeds
 const EYE_LERP_SOUND: f32 = 0.15; // when tracking a sound gesture
 const EYE_LERP_IDLE: f32 = 0.04; // when settling back to centre
 const EYE_LERP_SQUINT: f32 = 0.06; // squint open/close
 // Anger trigger: rapid direction changes within a frame window
 const DIR_CHANGE_ANGRY_COUNT: u32 = 4;
-const DIR_CHANGE_WINDOW_FRAMES: u32 = 3_000;
+const DIR_CHANGE_WINDOW_FRAMES: u32 = 3_000; // animation ticks
 // Extra ms the debounce gate stays closed past the gaze gesture
 const GATE_EXTRA_MS: u32 = 100;
 
 pub struct SoundReactor {
   state: SoundState,
   analyzer: SoundAnalyzer,
-  left_buffer: [f32; FFT_BUFFER_SIZE],
-  right_buffer: [f32; FFT_BUFFER_SIZE],
-  buffer_idx: usize,
   sound_eye_x: f32,
   eye_close: f32,
   gesture_start: Option<Instant>,
   gesture_duration_ms: u32,
-  prev_direction: Direction,
   dir_change_count: u32,
   dir_change_window: u32,
   rng: Rand32,
@@ -45,14 +39,10 @@ impl SoundReactor {
     Self {
       state: SoundState::new(state_seed),
       analyzer: SoundAnalyzer::new(),
-      left_buffer: [0.0; FFT_BUFFER_SIZE],
-      right_buffer: [0.0; FFT_BUFFER_SIZE],
-      buffer_idx: 0,
       sound_eye_x: 0.0,
       eye_close: 0.0,
       gesture_start: None,
       gesture_duration_ms: 0,
-      prev_direction: Direction::Silence,
       dir_change_count: 0,
       dir_change_window: 0,
       rng,
@@ -83,12 +73,20 @@ impl SoundReactor {
       return;
     }
     self.state.dir_changed = false;
+    defmt::debug!(
+      "sound: {} after_silence={}",
+      self.state.direction,
+      self.state.after_silence
+    );
 
     let hold_ms = self.state.rotation_hold_ms();
     if hold_ms > 0 {
       self.gesture_start = Some(now);
       self.gesture_duration_ms = hold_ms;
-      self.analyzer.set_gate(hold_ms + GATE_EXTRA_MS);
+      // Gate counts ticks, not ms
+      self
+        .analyzer
+        .set_gate(((hold_ms + GATE_EXTRA_MS) as f32 / TICK_MS) as u32);
     } else {
       self.gesture_start = None;
       self.analyzer.set_gate(0);
@@ -96,8 +94,8 @@ impl SoundReactor {
 
     // Sound-triggered expressions
     if eye.expr_mode == Expression::Normal {
-      if self.prev_direction == Direction::Silence && self.rolls(config::startled_rarity()) {
-        // Sudden sound from silence -> startle
+      if self.state.after_silence && self.rolls(config::startled_rarity()) {
+        // A sudden noise after silence spooks the Lamb
         eye.trigger_expr(Expression::Startled, 0.0);
       } else {
         // Track rapid direction changes -> anger
@@ -119,7 +117,6 @@ impl SoundReactor {
         }
       }
     }
-    self.prev_direction = self.state.direction;
   }
 
   /// Independent rarity roll: true with probability `rarity`% (0 = never)
@@ -134,8 +131,8 @@ impl SoundReactor {
     })
   }
 
-  /// Reads one analysis window from the microphones, but only while the
-  /// debounce gate is open
+  /// Reads one mic window while the gate is open. `read` gives one sample
+  /// pair in ADC counts
   pub fn sample<F>(&mut self, mut read: F)
   where
     F: FnMut() -> (Option<f32>, Option<f32>),
@@ -143,23 +140,22 @@ impl SoundReactor {
     if !self.analyzer.is_gate_open() {
       return;
     }
-    for _ in 0..ADC_SAMPLES {
+    let mut left_buffer = [0.0; FFT_BUFFER_SIZE];
+    let mut right_buffer = [0.0; FFT_BUFFER_SIZE];
+    let (mut last_left, mut last_right) = (0.0, 0.0);
+    for (left_out, right_out) in left_buffer.iter_mut().zip(&mut right_buffer) {
       let (left, right) = read();
-      let idx = self.buffer_idx % FFT_BUFFER_SIZE;
-      if let Some(left) = left {
-        self.left_buffer[idx] = left;
-      }
-      if let Some(right) = right {
-        self.right_buffer[idx] = right;
-      }
-      self.buffer_idx += 1;
+      last_left = left.unwrap_or(last_left);
+      last_right = right.unwrap_or(last_right);
+      *left_out = last_left;
+      *right_out = last_right;
     }
-    if self.buffer_idx >= FFT_BUFFER_SIZE {
-      let (direction, diff_pct) =
-        SoundAnalyzer::fft_direction_analysis(&self.left_buffer, &self.right_buffer);
-      self.state.update_from_fft(direction, diff_pct as u16);
-      self.buffer_idx = 0;
-    }
+    let (direction, diff_pct) = SoundAnalyzer::fft_direction_analysis(
+      &left_buffer,
+      &right_buffer,
+      config::sound_threshold() as f32,
+    );
+    self.state.update_from_fft(direction, diff_pct as u16);
   }
 
   /// Smoothed horizontal gaze target driven by the current sound direction
