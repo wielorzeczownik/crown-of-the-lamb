@@ -155,8 +155,7 @@ async function wasFlashed(
     );
     return status >= 200 && status < 300;
   } catch {
-    // The whole image went out but the reply got lost in the restart:
-    // the device coming back is the real answer
+    // The whole image went out but the reply got lost in the restart
     return progressBar.value === 100 && (await isDeviceBack());
   }
 }
