@@ -16,7 +16,7 @@ const BLINK_HOLD_FRAMES: u32 = 2;
 const BLINK_INTERVAL_MIN: u32 = 180;
 const BLINK_INTERVAL_RANGE: u32 = 300;
 
-// expr_t advances this much per frame (1 ms); reaches 1.0 = expression done
+// expr_t step per ms, the expression ends at 1.0
 const EXPR_SPEED_EYEROLL: f32 = 1.0 / 1500.0; // 1.5 s full eye-roll arc
 const EXPR_SPEED_STARTLED: f32 = 1.0 / 1400.0; // 1.4 s slower tremor
 const EXPR_SPEED_SUSPICIOUS: f32 = 1.0 / 3000.0; // 3 s hold + squint reveal
@@ -152,8 +152,8 @@ impl EyeState {
     }
   }
 
-  /// At an idle blink close (nothing queued or playing), occasionally drop into
-  /// the Sin resting state otherwise settle back to `Normal`
+  /// Behind a closed lid nobody sees the Lamb slip into Sin now and then.
+  /// Otherwise it settles back to `Normal`
   fn roll_idle_sin(&mut self) {
     let rarity = crate::config::sin_rarity();
     let next = if rarity > 0 && self.rng.rand_u32() % RARITY_SCALE < rarity {
