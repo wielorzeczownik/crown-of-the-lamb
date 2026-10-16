@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.13...v2.0.0) - 2026-10-16
+
+### Features
+
+- Bring back OTA updates (#157) ([f9a3bd0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f9a3bd06ed7efdca237e8af81f0fa1c9f0569030))
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v78 (#156) ([b645f8f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b645f8f08ea8efe844314ceefa14fac651245dde))
+- Update dependency typescript-eslint to v8.71.2 (#155) ([2d4cb3e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2d4cb3e723b6ea115094842faf326a4b3872dd86))
+- Update dependency vitest to v5.0.4 (#154) ([984d796](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/984d7965422c26d2dddb199a8a1cf1005c3e0b99))
+
+### CI/CD
+
+- Update actions/setup-node action to v7.1.0 (#153) ([b5aef2a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b5aef2a5d916d6e0503217f51f5808fed5268332))
+
 ## [1.1.13](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.12...v1.1.13) - 2026-10-14
 
 ### Dependencies
