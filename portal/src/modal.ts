@@ -11,7 +11,7 @@ const cancelButton = document.getElementById(
 
 const FOCUSABLE = [cancelButton, confirmButton];
 
-export function confirm(message: string): Promise<boolean> {
+export function isConfirmed(message: string): Promise<boolean> {
   return new Promise((resolve) => {
     const previousFocus = document.activeElement as HTMLElement | null;
 
@@ -19,14 +19,14 @@ export function confirm(message: string): Promise<boolean> {
     overlay.classList.add('active');
     cancelButton.focus();
 
-    function cleanup(isConfirmed: boolean): void {
+    function cleanup(wasConfirmed: boolean): void {
       overlay.classList.remove('active');
       confirmButton.removeEventListener('click', onConfirm);
       cancelButton.removeEventListener('click', onCancel);
       overlay.removeEventListener('click', onOverlay);
       document.removeEventListener('keydown', onKey);
       previousFocus?.focus();
-      resolve(isConfirmed);
+      resolve(wasConfirmed);
     }
 
     function onConfirm(): void {
