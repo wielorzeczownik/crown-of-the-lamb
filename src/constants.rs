@@ -3,6 +3,9 @@
 // Suspicious-expression gaze offset (-1..1)
 pub const SUSPICIOUS_GAZE_OFFSET: f32 = 0.7;
 
+// Animation tick, 60 Hz like the portal preview
+pub const TICK_MS: f32 = 1000.0 / 60.0;
+
 // FFT buffer size
 pub const FFT_BUFFER_SIZE: usize = 64;
 

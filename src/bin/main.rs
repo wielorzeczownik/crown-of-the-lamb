@@ -7,22 +7,22 @@ extern crate alloc;
 
 mod dhcp;
 mod dns;
+mod lcd;
 mod reactor;
 mod web;
 
 use core::sync::atomic::Ordering::Relaxed;
 
 use cotl::{
-  constants::{GATEWAY_IP, SUSPICIOUS_GAZE_OFFSET},
+  constants::{GATEWAY_IP, SUSPICIOUS_GAZE_OFFSET, TICK_MS},
   control,
-  display::draw_eye,
+  display::Frame,
   eye::{Expression, EyeState},
   ota, storage,
 };
 use embassy_executor::Spawner;
 use embassy_net::{Config as NetConfig, Ipv4Cidr, Runner, Stack, StackResources, StaticConfigV4};
 use embassy_time::{Duration, Instant, Timer};
-use embedded_graphics::{draw_target::DrawTarget, pixelcolor::Rgb565};
 use embedded_hal_bus::spi::ExclusiveDevice;
 use esp_hal::{
   analog::adc::{Adc, AdcConfig, Attenuation},
@@ -39,6 +39,7 @@ use esp_radio::wifi::{
   Config as WifiConfig, ControllerConfig, Interface, Ssid, WifiController, ap::AccessPointConfig,
 };
 use esp_storage::FlashStorage;
+use lcd::Lcd;
 use mipidsi::{
   Builder,
   interface::SpiInterface,
@@ -57,9 +58,9 @@ const WEB_BUF_SIZE: usize = 2048;
 const WEB_RX_BUF_SIZE: usize = 8192;
 // embassy-net socket slots, shared by the 2 web tasks + DHCP + DNS
 const MAX_SOCKETS: usize = 4;
-// ESP32 12-bit ADC normalisation (raw range 0..4095)
-const ADC_MAX_VALUE: f32 = 4095.0;
-// Animation frames (~1 ms each) between sound samples
+// 8 kHz, so a 64-sample window is 8 ms
+const MIC_SAMPLE_PERIOD: Duration = Duration::from_micros(125);
+// Animation ticks between sound samples
 const SOUND_SAMPLE_INTERVAL: u32 = 20;
 // AP static-IP subnet prefix length
 const AP_SUBNET_PREFIX: u8 = 24;
@@ -69,9 +70,8 @@ const HEAP_SIZE: usize = 72_768;
 const RESTART_DELAY_MS: u64 = 400;
 // Main animation loop timing
 const MICROS_PER_MS: f32 = 1000.0;
-const MIN_FRAME_DT_MS: f32 = 1.0; // avoid a zero delta
 const MAX_FRAME_DT_MS: f32 = 50.0; // skip huge jumps after stalls
-const FRAME_DELAY_MS: u64 = 1; // ~1 kHz animation loop
+const FRAME_DELAY_MS: u64 = 1; // lets network tasks run between frames
 
 static NET_RESOURCES: StaticCell<StackResources<MAX_SOCKETS>> = StaticCell::new();
 
@@ -134,18 +134,17 @@ fn spawn_tasks(spawner: Spawner, stack: Stack<'static>, net_runner: Runner<'stat
   spawner.spawn(flash_save_task().unwrap());
 }
 
-static SPI_BUF: StaticCell<[u8; SPI_BUF_SIZE]> = StaticCell::new();
-
-/// Brings up the SPI bus and the GC9A01 panel
+/// Inits the GC9A01 with mipidsi, then hands the bus to the DMA streamer
 fn setup_display(
   spi: esp_hal::peripherals::SPI2<'static>,
+  dma: esp_hal::peripherals::DMA_SPI2<'static>,
   sck: esp_hal::peripherals::GPIO18<'static>,
   mosi: esp_hal::peripherals::GPIO23<'static>,
   cs: esp_hal::peripherals::GPIO5<'static>,
   dc: esp_hal::peripherals::GPIO2<'static>,
   rst: esp_hal::peripherals::GPIO4<'static>,
-) -> impl DrawTarget<Color = Rgb565> {
-  let spi_bus = Spi::new(
+) -> Lcd {
+  let mut spi_bus = Spi::new(
     spi,
     SpiConfig::default().with_frequency(Rate::from_mhz(DISPLAY_SPI_MHZ)),
   )
@@ -154,22 +153,31 @@ fn setup_display(
   .with_mosi(mosi);
 
   let pin_cfg = OutputConfig::default();
-  let chip_select = Output::new(cs, Level::High, pin_cfg);
-  let data_cmd = Output::new(dc, Level::Low, pin_cfg);
-  let display_rst = Output::new(rst, Level::High, pin_cfg);
+  let mut chip_select = Output::new(cs, Level::High, pin_cfg);
+  let mut data_cmd = Output::new(dc, Level::Low, pin_cfg);
+  let mut display_rst = Output::new(rst, Level::High, pin_cfg);
 
-  let spi_device = ExclusiveDevice::new_no_delay(spi_bus, chip_select).unwrap();
+  {
+    let spi_device = ExclusiveDevice::new_no_delay(&mut spi_bus, &mut chip_select).unwrap();
+    let mut iface_buf = [0u8; SPI_BUF_SIZE];
+    let display_iface = SpiInterface::new(spi_device, &mut data_cmd, &mut iface_buf);
+    let mut delay = Delay::new();
+    Builder::new(GC9A01, display_iface)
+      .color_order(ColorOrder::Bgr)
+      .invert_colors(ColorInversion::Inverted)
+      .reset_pin(&mut display_rst)
+      .init(&mut delay)
+      .expect("display init failed");
+  }
 
-  let iface_buf = SPI_BUF.init([0u8; SPI_BUF_SIZE]);
-
-  let display_iface = SpiInterface::new(spi_device, data_cmd, iface_buf);
-  let mut delay = Delay::new();
-  Builder::new(GC9A01, display_iface)
-    .color_order(ColorOrder::Bgr)
-    .invert_colors(ColorInversion::Inverted)
-    .reset_pin(display_rst)
-    .init(&mut delay)
-    .expect("display init failed")
+  // Panel is alone on the bus, keep CS low
+  chip_select.set_low();
+  let bufs = [
+    esp_hal::dma_tx_buffer!(lcd::CHUNK_BYTES).expect("lcd: DMA buffer"),
+    esp_hal::dma_tx_buffer!(lcd::CHUNK_BYTES).expect("lcd: DMA buffer"),
+    esp_hal::dma_tx_buffer!(lcd::CMD_BYTES).expect("lcd: DMA buffer"),
+  ];
+  Lcd::new(spi_bus, data_cmd, dma, bufs, [chip_select, display_rst])
 }
 
 /// Builds a 64-bit seed from the hardware RNG
@@ -232,6 +240,7 @@ async fn main(spawner: Spawner) -> ! {
   // Display
   let mut display = setup_display(
     peripherals.SPI2,
+    peripherals.DMA_SPI2,
     peripherals.GPIO18,
     peripherals.GPIO23,
     peripherals.GPIO5,
@@ -261,9 +270,9 @@ async fn main(spawner: Spawner) -> ! {
   let mut eye = EyeState::new(random_seed(rng));
   let mut reactor = reactor::SoundReactor::new(random_seed(rng));
 
-  let mut frame: u32 = 0;
+  let mut tick: u32 = 0;
   let mut last_frame_instant = Instant::now();
-
+  let mut pending_ms: f32 = 0.0;
   loop {
     // Web UI expression request
     if let Some(expr) = Expression::from_web_code(control::EXPRESSION.swap(0, Relaxed)) {
@@ -285,36 +294,50 @@ async fn main(spawner: Spawner) -> ! {
 
     let now = Instant::now();
     // Clamp to skip huge jumps after stalls
-    let dt_ms = (now.duration_since(last_frame_instant).as_micros() as f32 / MICROS_PER_MS)
-      .clamp(MIN_FRAME_DT_MS, MAX_FRAME_DT_MS);
+    pending_ms += (now.duration_since(last_frame_instant).as_micros() as f32 / MICROS_PER_MS)
+      .min(MAX_FRAME_DT_MS);
     last_frame_instant = now;
 
-    // Advance sound timers and react to any fresh direction change
-    reactor.update(&mut eye, now);
+    // Fixed ticks, so animation speed doesn't depend on draw time
+    let ticked = pending_ms >= TICK_MS;
+    while pending_ms >= TICK_MS {
+      pending_ms -= TICK_MS;
 
-    let gesture_active = reactor.is_gesture_active(now);
+      // Advance sound timers and react to any fresh direction change
+      reactor.update(&mut eye, now);
 
-    if frame.is_multiple_of(SOUND_SAMPLE_INTERVAL) {
-      reactor.sample(|| {
-        let left = nb::block!(adc1.read_oneshot(&mut mic_left))
-          .inspect_err(|()| defmt::warn!("adc: left read failed"))
-          .ok()
-          .map(|raw| f32::from(raw) / ADC_MAX_VALUE);
-        let right = nb::block!(adc1.read_oneshot(&mut mic_right))
-          .inspect_err(|()| defmt::warn!("adc: right read failed"))
-          .ok()
-          .map(|raw| f32::from(raw) / ADC_MAX_VALUE);
-        (left, right)
-      });
+      let gesture_active = reactor.is_gesture_active(now);
+
+      if tick.is_multiple_of(SOUND_SAMPLE_INTERVAL) {
+        let mut next_sample = Instant::now();
+        reactor.sample(|| {
+          // FFT needs evenly spaced samples
+          while Instant::now() < next_sample {}
+          next_sample += MIC_SAMPLE_PERIOD;
+          let left = nb::block!(adc1.read_oneshot(&mut mic_left))
+            .inspect_err(|()| defmt::warn!("adc: left read failed"))
+            .ok()
+            .map(f32::from);
+          let right = nb::block!(adc1.read_oneshot(&mut mic_right))
+            .inspect_err(|()| defmt::warn!("adc: right read failed"))
+            .ok()
+            .map(f32::from);
+          (left, right)
+        });
+      }
+
+      eye.sound_x = reactor.track_eye_x(gesture_active);
+      eye.extra_close = reactor.track_squint(gesture_active);
+
+      eye.update(TICK_MS);
+      tick = tick.wrapping_add(1);
     }
 
-    eye.sound_x = reactor.track_eye_x(gesture_active);
-    eye.extra_close = reactor.track_squint(gesture_active);
-
-    eye.update(dt_ms);
-    draw_eye(&mut display, &eye);
+    // Nothing changed since the last draw
+    if ticked {
+      display.draw(&Frame::new(&eye)).await;
+    }
 
     Timer::after(Duration::from_millis(FRAME_DELAY_MS)).await;
-    frame = frame.wrapping_add(1);
   }
 }
