@@ -155,21 +155,21 @@ On boot the prop starts a WiFi access point. Join it with a phone or laptop and 
 Every setting below is adjustable live from the portal. Values outside the
 accepted range are clamped by the firmware, so the portal never offers one.
 
-| Setting             | Default             | Range   | Meaning                                                            |
-| ------------------- | ------------------- | ------- | ------------------------------------------------------------------ |
-| Eye colour (red)    | `26`                | 0–31    | Rgb565 red channel, 5-bit                                          |
-| Eye colour (green)  | `5`                 | 0–63    | Rgb565 green channel, 6-bit                                        |
-| Eye colour (blue)   | `0`                 | 0–31    | Rgb565 blue channel, 5-bit                                         |
-| Pupil length        | `70`                | 20–120  | Pupil slit half-height, in pixels                                  |
-| Wiggle amplitude    | `140`               | 0–400   | Idle gaze drift, in hundredths of a pixel                          |
-| Blink interval      | `180`               | 60–600  | Minimum frames between blinks                                      |
-| Sound threshold     | `40`                | 10–400  | FFT magnitude a mic must clear to count as a sound                 |
-| `Sin` chance        | `1`                 | 0–100 % | Rolled on each blink; `0` disables it                              |
-| `EyeRoll` chance    | `15`                | 0–100 % | Rolled on each change of sound direction                           |
-| `Startled` chance   | `35`                | 0–100 % | Rolled on each change of sound direction                           |
-| `Suspicious` chance | `28`                | 0–100 % | Rolled on each change of sound direction                           |
-| `Angry` chance      | `55`                | 0–100 % | Rolled on each change of sound direction                           |
-| Access point SSID   | `Crown of the Lamb` | ≤ 32 B  | Name of the WiFi network the prop hosts; a longer name is rejected |
+| Setting             | Default             | Range   | Meaning                                                                               |
+| ------------------- | ------------------- | ------- | ------------------------------------------------------------------------------------- |
+| Eye colour (red)    | `26`                | 0–31    | Rgb565 red channel, 5-bit                                                             |
+| Eye colour (green)  | `5`                 | 0–63    | Rgb565 green channel, 6-bit                                                           |
+| Eye colour (blue)   | `0`                 | 0–31    | Rgb565 blue channel, 5-bit                                                            |
+| Pupil length        | `70`                | 20–120  | Pupil slit half-height, in pixels                                                     |
+| Wiggle amplitude    | `140`               | 0–400   | Idle gaze drift, in hundredths of a pixel                                             |
+| Blink interval      | `180`               | 60–600  | Minimum frames between blinks                                                         |
+| Sound threshold     | `40`                | 10–400  | Loudest tone a mic must reach to count as a sound, in ADC counts (quiet room ≈ 10–15) |
+| `Sin` chance        | `1`                 | 0–100 % | Rolled on each blink; `0` disables it                                                 |
+| `EyeRoll` chance    | `15`                | 0–100 % | Rolled on each change of sound direction                                              |
+| `Startled` chance   | `35`                | 0–100 % | Rolled on each change of sound direction                                              |
+| `Suspicious` chance | `28`                | 0–100 % | Rolled on each change of sound direction                                              |
+| `Angry` chance      | `55`                | 0–100 % | Rolled on each change of sound direction                                              |
+| Access point SSID   | `Crown of the Lamb` | ≤ 32 B  | Name of the WiFi network the prop hosts; a longer name is rejected                    |
 
 All values are saved to flash and reload on the next power-up. Reaction
 expressions roll independently on each detected change of sound direction; the

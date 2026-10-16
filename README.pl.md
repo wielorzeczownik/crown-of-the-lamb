@@ -159,21 +159,21 @@ Po starcie rekwizyt uruchamia punkt dostępowy WiFi. Połącz się telefonem lub
 Każde ustawienie poniżej zmienisz na żywo z portalu. Wartości poza zakresem
 firmware przycina, więc portal nigdy ich nie oferuje.
 
-| Ustawienie                | Domyślnie           | Zakres  | Znaczenie                                                          |
-| ------------------------- | ------------------- | ------- | ------------------------------------------------------------------ |
-| Kolor oka (czerwony)      | `26`                | 0–31    | Kanał czerwony Rgb565, 5 bitów                                     |
-| Kolor oka (zielony)       | `5`                 | 0–63    | Kanał zielony Rgb565, 6 bitów                                      |
-| Kolor oka (niebieski)     | `0`                 | 0–31    | Kanał niebieski Rgb565, 5 bitów                                    |
-| Długość źrenicy           | `70`                | 20–120  | Połowa wysokości szpary źrenicy, w pikselach                       |
-| Amplituda drgania         | `140`               | 0–400   | Dryf spojrzenia w bezruchu, w setnych piksela                      |
-| Interwał mrugania         | `180`               | 60–600  | Minimalna liczba klatek między mrugnięciami                        |
-| Próg dźwięku              | `40`                | 10–400  | Magnituda FFT, którą mikrofon musi przekroczyć, by zaliczyć dźwięk |
-| Szansa na `Grzech`        | `1`                 | 0–100 % | Losowana przy każdym mrugnięciu; `0` wyłącza                       |
-| Szansa na `Zażenowanie`   | `15`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
-| Szansa na `Strach`        | `35`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
-| Szansa na `Podejrzliwość` | `28`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
-| Szansa na `Złość`         | `55`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                      |
-| SSID punktu dostępowego   | `Crown of the Lamb` | ≤ 32 B  | Nazwa sieci WiFi hostowanej przez rekwizyt; dłuższa jest odrzucana |
+| Ustawienie                | Domyślnie           | Zakres  | Znaczenie                                                                                                     |
+| ------------------------- | ------------------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| Kolor oka (czerwony)      | `26`                | 0–31    | Kanał czerwony Rgb565, 5 bitów                                                                                |
+| Kolor oka (zielony)       | `5`                 | 0–63    | Kanał zielony Rgb565, 6 bitów                                                                                 |
+| Kolor oka (niebieski)     | `0`                 | 0–31    | Kanał niebieski Rgb565, 5 bitów                                                                               |
+| Długość źrenicy           | `70`                | 20–120  | Połowa wysokości szpary źrenicy, w pikselach                                                                  |
+| Amplituda drgania         | `140`               | 0–400   | Dryf spojrzenia w bezruchu, w setnych piksela                                                                 |
+| Interwał mrugania         | `180`               | 60–600  | Minimalna liczba klatek między mrugnięciami                                                                   |
+| Próg dźwięku              | `40`                | 10–400  | Najgłośniejszy ton, który mikrofon musi osiągnąć, by zaliczyć dźwięk, w jednostkach ADC (cichy pokój ≈ 10–15) |
+| Szansa na `Grzech`        | `1`                 | 0–100 % | Losowana przy każdym mrugnięciu; `0` wyłącza                                                                  |
+| Szansa na `Zażenowanie`   | `15`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                                                                 |
+| Szansa na `Strach`        | `35`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                                                                 |
+| Szansa na `Podejrzliwość` | `28`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                                                                 |
+| Szansa na `Złość`         | `55`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                                                                 |
+| SSID punktu dostępowego   | `Crown of the Lamb` | ≤ 32 B  | Nazwa sieci WiFi hostowanej przez rekwizyt; dłuższa jest odrzucana                                            |
 
 Wszystkie wartości zapisują się we flashu i wczytują po kolejnym włączeniu. Miny
 reaktywne losują się niezależnie przy każdej wykrytej zmianie kierunku dźwięku;
