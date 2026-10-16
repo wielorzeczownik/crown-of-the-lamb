@@ -51,6 +51,13 @@ pub async fn init(flash: FlashStorage<'static>) {
   *FLASH.lock().await = Some(flash);
 }
 
+/// Async flash access for operations outside sequential-storage
+#[cfg(target_arch = "xtensa")]
+pub(crate) async fn with_flash<R>(op: impl FnOnce(&mut FlashStorage<'static>) -> R) -> R {
+  let mut guard = FLASH.lock().await;
+  op(guard.as_mut().expect("storage::init() was not called"))
+}
+
 // Wraps blocking FlashStorage as async NorFlash for sequential-storage
 #[cfg(target_arch = "xtensa")]
 struct BlockingFlash<'a>(&'a mut FlashStorage<'static>);

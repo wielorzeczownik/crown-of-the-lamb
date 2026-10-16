@@ -21,3 +21,4 @@ target/
 
 portal/node_modules
 portal/dist
+portal/generated

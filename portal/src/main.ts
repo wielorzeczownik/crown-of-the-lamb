@@ -4,6 +4,7 @@ import { createEyeConfigSaver } from '@/eye-config';
 import type { LocaleCode } from '@/i18n';
 import { applyTranslations, getLocale, setLocale, translate } from '@/i18n';
 import { isConfirmed } from '@/modal';
+import { initOta } from '@/ota';
 import { initPreview } from '@/preview';
 import { Expression } from '@/renderer';
 import { config } from '@/state';
@@ -26,10 +27,14 @@ const tabButtonSound = document.getElementById(
 const tabButtonNetwork = document.getElementById(
   'tab-button-network'
 ) as HTMLButtonElement;
+const tabButtonOta = document.getElementById(
+  'tab-button-ota'
+) as HTMLButtonElement;
 const panelEye = document.getElementById('panel-eye')!;
 const panelExpression = document.getElementById('panel-expression')!;
 const panelSound = document.getElementById('panel-sound')!;
 const panelNetwork = document.getElementById('panel-network')!;
+const panelOta = document.getElementById('panel-ota')!;
 const previewCanvas = document.getElementById(
   'eye-preview'
 ) as HTMLCanvasElement;
@@ -157,12 +162,14 @@ const allTabButtons: HTMLButtonElement[] = [
   tabButtonExpression,
   tabButtonSound,
   tabButtonNetwork,
+  tabButtonOta,
 ];
 const allTabPanels: HTMLElement[] = [
   panelEye,
   panelExpression,
   panelSound,
   panelNetwork,
+  panelOta,
 ];
 
 const { scheduleEyeSave } = createEyeConfigSaver(eyeColorInput);
@@ -196,6 +203,8 @@ for (const [index, button] of allTabButtons.entries()) {
     )!;
     targetPanel.dataset.dir = direction;
     targetPanel.classList.add('active');
+
+    if (button.dataset.tab === 'ota') initOta();
   });
 }
 

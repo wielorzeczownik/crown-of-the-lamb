@@ -201,6 +201,13 @@ jobs:
             target/xtensa-esp32-none-elf/release/crown-of-the-lamb \
             dist/crown-of-the-lamb.bin
 
+      - name: Build OTA image (app only)
+        run: |
+          espflash save-image \
+            --chip esp32 \
+            target/xtensa-esp32-none-elf/release/crown-of-the-lamb \
+            dist/crown-of-the-lamb-ota.bin
+
       - name: Upload firmware artifact
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
