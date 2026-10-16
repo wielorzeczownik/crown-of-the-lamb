@@ -1,5 +1,5 @@
 [target.xtensa-esp32-none-elf]
-runner = "espflash flash --monitor --chip esp32 --partition-table partitions.csv"
+runner = "espflash flash --monitor --chip esp32 --partition-table partitions.csv --erase-parts otadata"
 
 [env]
 # defmt log level compiled into the firmware (per-module e.g. "info,cotl::sound=debug")

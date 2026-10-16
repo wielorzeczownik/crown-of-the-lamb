@@ -6,12 +6,13 @@
    and the glyph set is subset to the characters the UI uses (full ASCII for
    typed SSIDs/filenames + Polish letters). Anything outside that set falls back
    to the system stack in base.css. The woff2 are generated at build from the
-   variable source font by plugins/subset-font.ts. See fonts/OFL.txt. */
+   variable source font by plugins/subset-font.ts into portal/generated.
+   See fonts/OFL.txt. */
 @font-face {
   font-family: Piazzolla;
   font-style: normal;
   font-weight: 600;
-  src: url('./fonts/piazzolla-600.woff2') format('woff2');
+  src: url('../../generated/fonts/piazzolla-600.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -19,6 +20,6 @@
   font-family: Piazzolla;
   font-style: normal;
   font-weight: 700;
-  src: url('./fonts/piazzolla-700.woff2') format('woff2');
+  src: url('../../generated/fonts/piazzolla-700.woff2') format('woff2');
   font-display: swap;
 }

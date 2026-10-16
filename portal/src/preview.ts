@@ -44,17 +44,19 @@ export function initPreview(context: CanvasRenderingContext2D): void {
       }
     }
 
-    renderEye(context, {
-      eyeX: 0,
-      eyeY: 0,
-      blink: preview.blink,
-      phase: preview.phase,
-      pupilRadius: config.pupil_length,
-      wiggleAmplitude: config.wiggle_amp / WIGGLE_AMP_PERCENT,
-      eyeRed: config.eye_red,
-      eyeGreen: config.eye_green,
-      eyeBlue: config.eye_blue,
-    });
+    // Per-pixel render is costly, skip it while the eye tab is hidden
+    if (context.canvas.offsetParent !== null)
+      renderEye(context, {
+        eyeX: 0,
+        eyeY: 0,
+        blink: preview.blink,
+        phase: preview.phase,
+        pupilRadius: config.pupil_length,
+        wiggleAmplitude: config.wiggle_amp / WIGGLE_AMP_PERCENT,
+        eyeRed: config.eye_red,
+        eyeGreen: config.eye_green,
+        eyeBlue: config.eye_blue,
+      });
 
     requestAnimationFrame(loop);
   }

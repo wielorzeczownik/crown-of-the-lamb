@@ -12,7 +12,7 @@
 
 <p align="center">🇬🇧 English | 🇵🇱 <a href="README.pl.md">Polski</a></p>
 
-Open-source **ESP32 firmware** written in **Rust** (`no_std`, [Embassy](https://embassy.dev)) for an animatronic **Cult of the Lamb** crown prop. A round **GC9A01** LCD renders a living, blinking eye that looks around, reacts to the direction of sound, and slips into darker expressions – all tunable wirelessly from your phone through the prop's own **WiFi captive portal**.
+Open-source **ESP32 firmware** written in **Rust** (`no_std`, [Embassy](https://embassy.dev)) for an animatronic **Cult of the Lamb** crown prop. A round **GC9A01** LCD renders a living, blinking eye that looks around, reacts to the direction of sound, and slips into darker expressions all tunable wirelessly from your phone through the prop's own **WiFi captive portal**, with **over-the-air** firmware updates.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/demo.jpg" alt="The finished crown with the eye lit up" width="70%" />
@@ -25,6 +25,7 @@ Open-source **ESP32 firmware** written in **Rust** (`no_std`, [Embassy](https://
 - **The Sin** resting expression that surfaces at random during quiet moments.
 - **WiFi access point + captive portal**: connect to the prop's network and a configuration UI opens automatically (DHCP + DNS + HTTP served on-device).
 - **Live configuration**: eye colour, pupil shape, blink cadence, sound threshold, and per-expression probabilities – applied instantly and persisted to flash.
+- **Over-the-air updates**: flash new firmware from the portal, no cable required.
 
 ## Hardware
 
@@ -136,7 +137,8 @@ It's a tight fit. A few notes from putting mine together:
 
 Grab the latest prebuilt firmware from the [GitHub Releases](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest):
 
-- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – full image (bootloader + partition table + app)
+- **[crown-of-the-lamb.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb.bin)** – full image (bootloader + partition table + app) for flashing over USB at offset `0x0`.
+- **[crown-of-the-lamb-ota.bin](https://github.com/wielorzeczownik/crown-of-the-lamb/releases/latest/download/crown-of-the-lamb-ota.bin)** – application image for over-the-air updates via the captive portal.
 
 Flash it at `0x0`:
 

@@ -8,7 +8,7 @@ const fromRoot = (path: string): string =>
   fileURLToPath(new URL(`../${path}`, import.meta.url));
 
 const SOURCE_FONT = fromRoot('src/style/fonts/Piazzolla[opsz,wght].ttf');
-const OUTPUT_DIR = fromRoot('src/style/fonts');
+const OUTPUT_DIR = fromRoot('generated/fonts');
 const TEXT_SOURCES = ['src/i18n/en.ts', 'src/i18n/pl.ts', 'index.html'];
 const POLISH_LETTERS = 'ąćęłńóśźżĄĆĘŁŃÓŚŹŻ';
 const WEIGHTS = [600, 700];

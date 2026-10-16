@@ -17,7 +17,7 @@ use cotl::{
   control,
   display::draw_eye,
   eye::{Expression, EyeState},
-  storage,
+  ota, storage,
 };
 use embassy_executor::Spawner;
 use embassy_net::{Config as NetConfig, Ipv4Cidr, Runner, Stack, StackResources, StaticConfigV4};
@@ -53,6 +53,8 @@ const DISPLAY_SPI_MHZ: u32 = 80;
 const SPI_BUF_SIZE: usize = 512;
 // Per-socket buffers for each web server task
 const WEB_BUF_SIZE: usize = 2048;
+// TCP receive buffer per web task
+const WEB_RX_BUF_SIZE: usize = 8192;
 // embassy-net socket slots, shared by the 2 web tasks + DHCP + DNS
 const MAX_SOCKETS: usize = 4;
 // ESP32 12-bit ADC normalisation (raw range 0..4095)
@@ -75,8 +77,8 @@ static NET_RESOURCES: StaticCell<StackResources<MAX_SOCKETS>> = StaticCell::new(
 
 static WEB_HTTP_BUF_0: StaticCell<[u8; WEB_BUF_SIZE]> = StaticCell::new();
 static WEB_HTTP_BUF_1: StaticCell<[u8; WEB_BUF_SIZE]> = StaticCell::new();
-static WEB_RX_BUF_0: StaticCell<[u8; WEB_BUF_SIZE]> = StaticCell::new();
-static WEB_RX_BUF_1: StaticCell<[u8; WEB_BUF_SIZE]> = StaticCell::new();
+static WEB_RX_BUF_0: StaticCell<[u8; WEB_RX_BUF_SIZE]> = StaticCell::new();
+static WEB_RX_BUF_1: StaticCell<[u8; WEB_RX_BUF_SIZE]> = StaticCell::new();
 static WEB_TX_BUF_0: StaticCell<[u8; WEB_BUF_SIZE]> = StaticCell::new();
 static WEB_TX_BUF_1: StaticCell<[u8; WEB_BUF_SIZE]> = StaticCell::new();
 #[panic_handler]
@@ -115,7 +117,7 @@ fn spawn_tasks(spawner: Spawner, stack: Stack<'static>, net_runner: Runner<'stat
     web::web_task(
       stack,
       WEB_HTTP_BUF_0.init([0u8; WEB_BUF_SIZE]),
-      WEB_RX_BUF_0.init([0u8; WEB_BUF_SIZE]),
+      WEB_RX_BUF_0.init([0u8; WEB_RX_BUF_SIZE]),
       WEB_TX_BUF_0.init([0u8; WEB_BUF_SIZE]),
     )
     .unwrap(),
@@ -124,7 +126,7 @@ fn spawn_tasks(spawner: Spawner, stack: Stack<'static>, net_runner: Runner<'stat
     web::web_task(
       stack,
       WEB_HTTP_BUF_1.init([0u8; WEB_BUF_SIZE]),
-      WEB_RX_BUF_1.init([0u8; WEB_BUF_SIZE]),
+      WEB_RX_BUF_1.init([0u8; WEB_RX_BUF_SIZE]),
       WEB_TX_BUF_1.init([0u8; WEB_BUF_SIZE]),
     )
     .unwrap(),
@@ -250,6 +252,8 @@ async fn main(spawner: Spawner) -> ! {
 
   // Spawn background tasks
   spawn_tasks(spawner, stack, net_runner);
+  // AP and portal are up, so this image can receive the next OTA
+  ota::confirm_boot().await;
   defmt::info!("boot: ready, entering main loop");
 
   // Animation state. Each PRNG is seeded from the hardware RNG
