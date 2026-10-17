@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.0.2...v2.1.0) - 2026-10-17
+
+### Features
+
+- Make the eye feel alive (#163) ([6946ff7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6946ff73eb1a5344303c0109f89308b15cdd3ada))
+
 ## [2.0.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.0.1...v2.0.2) - 2026-10-17
 
 ### Bug Fixes
