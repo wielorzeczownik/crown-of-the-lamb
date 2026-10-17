@@ -21,7 +21,7 @@ Otwartoźródłowy **firmware na ESP32** napisany w **Rust** (`no_std`, [Embassy
 ## Funkcje
 
 - **Animowane oko** na okrągłym wyświetlaczu GC9A01 240×240: rozglądanie się, naturalne mruganie, drganie źrenicy i refleks świetlny.
-- **Miny reagujące na dźwięk**: dwa mikrofony zasilają FFT, które szacuje kierunek dźwięku; oko podąża w jego stronę i może zareagować minami **Strach**, **Podejrzliwość**, **Złość** lub **Zażenowanie**.
+- **Miny reagujące na dźwięk**: dwa mikrofony zasilają FFT, które szacuje kierunek dźwięku; oko podąża w jego stronę i może zareagować minami **Strach**, **Podejrzliwość**, **Złość**, **Oszołomienie**, **Zażenowanie** albo **Zachwyt**, gdy ktoś się pojawi, a Baranek już przysypiał. Zostawiony sam robi się senny i **Ziewa**.
 - **Grzech (Sin)** – mina spoczynkowa pojawiająca się losowo w chwilach ciszy.
 - **Punkt dostępowy WiFi + captive portal**: po połączeniu z siecią rekwizytu automatycznie otwiera się panel konfiguracji (DHCP + DNS + HTTP na urządzeniu).
 - **Konfiguracja na żywo**: kolor oka, kształt źrenicy, tempo mrugania, próg dźwięku i szanse na poszczególne miny – stosowane natychmiast i zapisywane we flashu.
@@ -173,6 +173,9 @@ firmware przycina, więc portal nigdy ich nie oferuje.
 | Szansa na `Strach`        | `35`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                                                                 |
 | Szansa na `Podejrzliwość` | `28`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                                                                 |
 | Szansa na `Złość`         | `55`                | 0–100 % | Losowana przy każdej zmianie kierunku dźwięku                                                                 |
+| Szansa na `Ziewanie`      | `20`                | 0–100 % | Losowana przy każdym rozejrzeniu się, gdy oko jest senne                                                      |
+| Szansa na `Zachwyt`       | `40`                | 0–100 % | Losowana przy dźwięku, który pojawi się, gdy oko jest senne                                                   |
+| Szansa na `Oszołomienie`  | `50`                | 0–100 % | Losowana, gdy po szybkich zmianach kierunku dźwięku nie wypadnie `Złość`                                      |
 | SSID punktu dostępowego   | `Crown of the Lamb` | ≤ 32 B  | Nazwa sieci WiFi hostowanej przez rekwizyt; dłuższa jest odrzucana                                            |
 
 Wszystkie wartości zapisują się we flashu i wczytują po kolejnym włączeniu. Miny

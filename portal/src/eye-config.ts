@@ -25,6 +25,9 @@ export function createEyeConfigSaver(colorInput: HTMLInputElement): {
       startled_rarity: config.startled_rarity,
       suspicious_rarity: config.suspicious_rarity,
       angry_rarity: config.angry_rarity,
+      yawn_rarity: config.yawn_rarity,
+      delight_rarity: config.delight_rarity,
+      dizzy_rarity: config.dizzy_rarity,
     });
 
     storePending(body);

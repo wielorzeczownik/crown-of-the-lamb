@@ -134,6 +134,24 @@ const raritySliders: SliderDefine[] = [
     suffix: '%',
   },
   {
+    inputId: 'yawn-rarity',
+    displayId: 'yawn-rarity-v',
+    configKey: 'yawn_rarity',
+    suffix: '%',
+  },
+  {
+    inputId: 'delight-rarity',
+    displayId: 'delight-rarity-v',
+    configKey: 'delight_rarity',
+    suffix: '%',
+  },
+  {
+    inputId: 'dizzy-rarity',
+    displayId: 'dizzy-rarity-v',
+    configKey: 'dizzy_rarity',
+    suffix: '%',
+  },
+  {
     inputId: 'sin-rarity',
     displayId: 'sin-rarity-v',
     configKey: 'sin_rarity',
@@ -243,6 +261,9 @@ const RARITY_DEFAULTS: Record<string, number> = {
   startled_rarity: 35,
   suspicious_rarity: 28,
   angry_rarity: 55,
+  yawn_rarity: 20,
+  delight_rarity: 40,
+  dizzy_rarity: 50,
   sin_rarity: 1,
 };
 
@@ -370,6 +391,15 @@ document
   });
 document.getElementById('expression-angry')!.addEventListener('click', () => {
   void sendExpression(Expression.Angry);
+});
+document.getElementById('expression-yawn')!.addEventListener('click', () => {
+  void sendExpression(Expression.Yawn);
+});
+document.getElementById('expression-delight')!.addEventListener('click', () => {
+  void sendExpression(Expression.Delight);
+});
+document.getElementById('expression-dizzy')!.addEventListener('click', () => {
+  void sendExpression(Expression.Dizzy);
 });
 document.getElementById('expression-sin')!.addEventListener('click', () => {
   void sendExpression(Expression.Sin);

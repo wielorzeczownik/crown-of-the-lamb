@@ -11,4 +11,7 @@ export type EyeConfig = {
   startled_rarity: number;
   suspicious_rarity: number;
   angry_rarity: number;
+  yawn_rarity: number;
+  delight_rarity: number;
+  dizzy_rarity: number;
 };

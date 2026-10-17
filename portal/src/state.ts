@@ -13,4 +13,7 @@ export const config: EyeConfig = {
   startled_rarity: 35,
   suspicious_rarity: 28,
   angry_rarity: 55,
+  yawn_rarity: 20,
+  delight_rarity: 40,
+  dizzy_rarity: 50,
 };

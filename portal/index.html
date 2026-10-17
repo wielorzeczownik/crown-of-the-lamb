@@ -304,6 +304,91 @@
           </div>
 
           <div class="card__expression-row">
+            <button id="expression-yawn" class="button button--outline">
+              Yawn
+            </button>
+            <div class="card__expression-scale">
+              <label
+                id="label-yawn-chance"
+                class="card__expression-chance-label"
+                for="yawn-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="yawn-rarity"
+                type="range"
+                aria-describedby="yawn-rarity-v"
+                aria-labelledby="expression-yawn label-yawn-chance"
+                max="100"
+                min="0"
+                value="20"
+              />
+              <span id="yawn-rarity-v" class="card__value" aria-live="polite">
+                20%
+              </span>
+            </div>
+          </div>
+
+          <div class="card__expression-row">
+            <button id="expression-delight" class="button button--outline">
+              Delight
+            </button>
+            <div class="card__expression-scale">
+              <label
+                id="label-delight-chance"
+                class="card__expression-chance-label"
+                for="delight-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="delight-rarity"
+                type="range"
+                aria-describedby="delight-rarity-v"
+                aria-labelledby="expression-delight label-delight-chance"
+                max="100"
+                min="0"
+                value="40"
+              />
+              <span
+                id="delight-rarity-v"
+                class="card__value"
+                aria-live="polite"
+              >
+                40%
+              </span>
+            </div>
+          </div>
+
+          <div class="card__expression-row">
+            <button id="expression-dizzy" class="button button--outline">
+              Dizzy
+            </button>
+            <div class="card__expression-scale">
+              <label
+                id="label-dizzy-chance"
+                class="card__expression-chance-label"
+                for="dizzy-rarity"
+              >
+                Chance
+              </label>
+              <input
+                id="dizzy-rarity"
+                type="range"
+                aria-describedby="dizzy-rarity-v"
+                aria-labelledby="expression-dizzy label-dizzy-chance"
+                max="100"
+                min="0"
+                value="50"
+              />
+              <span id="dizzy-rarity-v" class="card__value" aria-live="polite">
+                50%
+              </span>
+            </div>
+          </div>
+
+          <div class="card__expression-row">
             <button id="expression-sin" class="button button--outline">
               Sin
             </button>
