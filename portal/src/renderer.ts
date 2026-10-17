@@ -19,7 +19,7 @@ const EYE_MOVE_Y = 20;
 const HIGHLIGHT_OFFSET_X = 22;
 const HIGHLIGHT_OFFSET_Y = -26;
 
-// Gradient normalisation:
+// Gradient normalisation
 const DISPLAY_RADIUS_SQ = DISPLAY_CENTER * DISPLAY_CENTER; // 14 400
 
 // Highlight spot colour
@@ -39,6 +39,9 @@ export enum Expression {
   Startled = 4,
   Suspicious = 5,
   Angry = 7,
+  Yawn = 8,
+  Delight = 9,
+  Dizzy = 10,
 }
 
 export interface EyeRenderState {
@@ -74,8 +77,9 @@ function computeRowState(
   centerY: number,
   highlightY: number
 ): RowState {
-  const isInOpenRegion = Math.abs(row - DISPLAY_CENTER) <= openHalfHeight;
-  const gradientDY2 = (row - DISPLAY_CENTER) ** 2;
+  const delta = row - DISPLAY_CENTER;
+  const isInOpenRegion = delta >= -openHalfHeight && delta < openHalfHeight;
+  const gradientDY2 = delta ** 2;
   const highlightDY = row - highlightY;
 
   const pupilNormY = (row - centerY) / state.pupilRadius;

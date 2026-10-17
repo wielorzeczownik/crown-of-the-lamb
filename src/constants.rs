@@ -25,6 +25,9 @@ pub const DEFAULT_EYEROLL_RARITY: u32 = 15;
 pub const DEFAULT_STARTLED_RARITY: u32 = 35;
 pub const DEFAULT_SUSPICIOUS_RARITY: u32 = 28;
 pub const DEFAULT_ANGRY_RARITY: u32 = 55;
+pub const DEFAULT_YAWN_RARITY: u32 = 20;
+pub const DEFAULT_DELIGHT_RARITY: u32 = 40;
+pub const DEFAULT_DIZZY_RARITY: u32 = 50;
 
 // Captive portal network
 pub const GATEWAY_IP: core::net::Ipv4Addr = core::net::Ipv4Addr::new(192, 168, 4, 1);

@@ -98,6 +98,9 @@ describe('default config', () => {
       ['startled_rarity', 'DEFAULT_STARTLED_RARITY'],
       ['suspicious_rarity', 'DEFAULT_SUSPICIOUS_RARITY'],
       ['angry_rarity', 'DEFAULT_ANGRY_RARITY'],
+      ['yawn_rarity', 'DEFAULT_YAWN_RARITY'],
+      ['delight_rarity', 'DEFAULT_DELIGHT_RARITY'],
+      ['dizzy_rarity', 'DEFAULT_DIZZY_RARITY'],
     ];
 
     for (const [field, constant] of pairs) {
@@ -150,7 +153,7 @@ describe('slider ranges', () => {
         max: Number(match[3]),
       }));
 
-    expect(clamps).toHaveLength(5);
+    expect(clamps).toHaveLength(8);
 
     for (const { id, min, max } of clamps) {
       expect(sliderRange(id), `slider ${id}`).toEqual({ min, max });

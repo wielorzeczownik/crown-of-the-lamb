@@ -280,7 +280,12 @@ async fn main(spawner: Spawner) -> ! {
     if let Some(expr) = Expression::from_web_code(control::EXPRESSION.swap(0, Relaxed)) {
       defmt::info!("expr: web request {}", expr);
       let param = if expr == Expression::Suspicious {
-        SUSPICIOUS_GAZE_OFFSET
+        // No sound to look at, so the Lamb picks a side to be suspicious of
+        if rng.random().is_multiple_of(2) {
+          -SUSPICIOUS_GAZE_OFFSET
+        } else {
+          SUSPICIOUS_GAZE_OFFSET
+        }
       } else {
         0.0
       };

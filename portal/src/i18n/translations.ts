@@ -18,6 +18,9 @@ export type Translations = {
   btnStartled: string;
   btnSuspicious: string;
   btnAngry: string;
+  btnYawn: string;
+  btnDelight: string;
+  btnDizzy: string;
   btnSinExpr: string;
   btnExprReset: string;
   btnExpressionReset: string;

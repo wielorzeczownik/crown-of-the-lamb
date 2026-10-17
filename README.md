@@ -21,7 +21,7 @@ Open-source **ESP32 firmware** written in **Rust** (`no_std`, [Embassy](https://
 ## Features
 
 - **Animated eye** on a GC9A01 240×240 round display: idle look-around, natural blinking, pupil wiggle, and a specular highlight.
-- **Sound-reactive expressions**: two microphones feed an FFT that estimates which direction a sound came from; the eye tracks toward it and can react with **Startled**, **Suspicious**, **Angry**, or an **EyeRoll**.
+- **Sound-reactive expressions**: two microphones feed an FFT that estimates which direction a sound came from; the eye tracks toward it and can react with **Startled**, **Suspicious**, **Angry**, **Dizzy**, an **EyeRoll**, or **Delight** when someone shows up while it was dozing off. Left alone it gets drowsy and **Yawns**.
 - **The Sin** resting expression that surfaces at random during quiet moments.
 - **WiFi access point + captive portal**: connect to the prop's network and a configuration UI opens automatically (DHCP + DNS + HTTP served on-device).
 - **Live configuration**: eye colour, pupil shape, blink cadence, sound threshold, and per-expression probabilities – applied instantly and persisted to flash.
@@ -169,6 +169,9 @@ accepted range are clamped by the firmware, so the portal never offers one.
 | `Startled` chance   | `35`                | 0–100 % | Rolled on each change of sound direction                                              |
 | `Suspicious` chance | `28`                | 0–100 % | Rolled on each change of sound direction                                              |
 | `Angry` chance      | `55`                | 0–100 % | Rolled on each change of sound direction                                              |
+| `Yawn` chance       | `20`                | 0–100 % | Rolled on each look around while the eye is drowsy                                    |
+| `Delight` chance    | `40`                | 0–100 % | Rolled on a sound that arrives while the eye is drowsy                                |
+| `Dizzy` chance      | `50`                | 0–100 % | Rolled when `Angry` doesn't fire after rapid changes of sound direction               |
 | Access point SSID   | `Crown of the Lamb` | ≤ 32 B  | Name of the WiFi network the prop hosts; a longer name is rejected                    |
 
 All values are saved to flash and reload on the next power-up. Reaction

@@ -13,9 +13,11 @@ use oorandom::Rand32;
 const EYE_LERP_SOUND: f32 = 0.15; // when tracking a sound gesture
 const EYE_LERP_IDLE: f32 = 0.04; // when settling back to centre
 const EYE_LERP_SQUINT: f32 = 0.06; // squint open/close
-// Anger trigger: rapid direction changes within a frame window
+// Anger trigger, rapid direction changes within a frame window
 const DIR_CHANGE_ANGRY_COUNT: u32 = 4;
 const DIR_CHANGE_WINDOW_FRAMES: u32 = 3_000; // animation ticks
+// A sound only delights a Lamb that was already nodding off
+const DELIGHT_DROWSINESS: f32 = 0.3;
 // Extra ms the debounce gate stays closed past the gaze gesture
 const GATE_EXTRA_MS: u32 = 100;
 
@@ -66,7 +68,7 @@ impl SoundReactor {
     }
   }
 
-  /// On a fresh direction change: arm the gaze gesture and maybe fire a
+  /// On a fresh direction change, arm the gaze gesture and maybe fire a
   /// sound-triggered expression
   fn react_to_direction_change(&mut self, eye: &mut EyeState, now: Instant) {
     if !self.state.dir_changed {
@@ -94,15 +96,23 @@ impl SoundReactor {
 
     // Sound-triggered expressions
     if eye.expr_mode == Expression::Normal {
-      if self.state.after_silence && self.rolls(config::startled_rarity()) {
+      if eye.drowsiness() > DELIGHT_DROWSINESS && self.rolls(config::delight_rarity()) {
+        // Company at last
+        eye.trigger_expr(Expression::Delight, 0.0);
+      } else if self.state.after_silence && self.rolls(config::startled_rarity()) {
         // A sudden noise after silence spooks the Lamb
         eye.trigger_expr(Expression::Startled, 0.0);
       } else {
         // Track rapid direction changes -> anger
         self.dir_change_count = self.dir_change_count.saturating_add(1);
         self.dir_change_window = DIR_CHANGE_WINDOW_FRAMES;
-        if self.dir_change_count >= DIR_CHANGE_ANGRY_COUNT && self.rolls(config::angry_rarity()) {
+        let spun_around = self.dir_change_count >= DIR_CHANGE_ANGRY_COUNT;
+        if spun_around && self.rolls(config::angry_rarity()) {
           eye.trigger_expr(Expression::Angry, 0.0);
+          self.dir_change_count = 0;
+        } else if spun_around && self.rolls(config::dizzy_rarity()) {
+          // Too much back and forth, the room is spinning
+          eye.trigger_expr(Expression::Dizzy, 0.0);
           self.dir_change_count = 0;
         } else if self.rolls(config::suspicious_rarity()) {
           // Random suspicion
@@ -119,7 +129,7 @@ impl SoundReactor {
     }
   }
 
-  /// Independent rarity roll: true with probability `rarity`% (0 = never)
+  /// Independent rarity roll, true with probability `rarity`% (0 = never)
   fn rolls(&mut self, rarity: u32) -> bool {
     rarity > 0 && self.rng.rand_u32() % RARITY_SCALE < rarity
   }

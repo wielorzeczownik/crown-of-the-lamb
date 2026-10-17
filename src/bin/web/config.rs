@@ -33,6 +33,9 @@ pub struct ConfigQuery {
   pub startled_rarity: Option<i32>,
   pub suspicious_rarity: Option<i32>,
   pub angry_rarity: Option<i32>,
+  pub yawn_rarity: Option<i32>,
+  pub delight_rarity: Option<i32>,
+  pub dizzy_rarity: Option<i32>,
 }
 
 pub async fn get() -> impl IntoResponse {
@@ -50,12 +53,16 @@ pub async fn get() -> impl IntoResponse {
     startled_rarity: u32,
     suspicious_rarity: u32,
     angry_rarity: u32,
+    yawn_rarity: u32,
+    delight_rarity: u32,
+    dizzy_rarity: u32,
   }
 
   use cotl::config::{
-    ANGRY_RARITY_CFG, BLINK_INTERVAL_CFG, EYE_COLOR_BLUE, EYE_COLOR_GREEN, EYE_COLOR_RED,
-    EYEROLL_RARITY_CFG, PUPIL_HEIGHT_CFG, SIN_RARITY_CFG, SOUND_THRESHOLD, STARTLED_RARITY_CFG,
-    SUSPICIOUS_RARITY_CFG, WIGGLE_AMPLITUDE_CFG,
+    ANGRY_RARITY_CFG, BLINK_INTERVAL_CFG, DELIGHT_RARITY_CFG, DIZZY_RARITY_CFG, EYE_COLOR_BLUE,
+    EYE_COLOR_GREEN, EYE_COLOR_RED, EYEROLL_RARITY_CFG, PUPIL_HEIGHT_CFG, SIN_RARITY_CFG,
+    SOUND_THRESHOLD, STARTLED_RARITY_CFG, SUSPICIOUS_RARITY_CFG, WIGGLE_AMPLITUDE_CFG,
+    YAWN_RARITY_CFG,
   };
 
   let current = CurrentConfig {
@@ -71,6 +78,9 @@ pub async fn get() -> impl IntoResponse {
     startled_rarity: STARTLED_RARITY_CFG.load(Relaxed),
     suspicious_rarity: SUSPICIOUS_RARITY_CFG.load(Relaxed),
     angry_rarity: ANGRY_RARITY_CFG.load(Relaxed),
+    yawn_rarity: YAWN_RARITY_CFG.load(Relaxed),
+    delight_rarity: DELIGHT_RARITY_CFG.load(Relaxed),
+    dizzy_rarity: DIZZY_RARITY_CFG.load(Relaxed),
   };
 
   let mut data = [0u8; JSON_RESPONSE_CAP];
@@ -85,9 +95,10 @@ pub async fn get() -> impl IntoResponse {
 
 pub async fn set(Form(query): Form<ConfigQuery>) -> impl IntoResponse {
   use cotl::config::{
-    ANGRY_RARITY_CFG, BLINK_INTERVAL_CFG, EYE_COLOR_BLUE, EYE_COLOR_GREEN, EYE_COLOR_RED,
-    EYEROLL_RARITY_CFG, PUPIL_HEIGHT_CFG, SIN_RARITY_CFG, SOUND_THRESHOLD, STARTLED_RARITY_CFG,
-    SUSPICIOUS_RARITY_CFG, WIGGLE_AMPLITUDE_CFG,
+    ANGRY_RARITY_CFG, BLINK_INTERVAL_CFG, DELIGHT_RARITY_CFG, DIZZY_RARITY_CFG, EYE_COLOR_BLUE,
+    EYE_COLOR_GREEN, EYE_COLOR_RED, EYEROLL_RARITY_CFG, PUPIL_HEIGHT_CFG, SIN_RARITY_CFG,
+    SOUND_THRESHOLD, STARTLED_RARITY_CFG, SUSPICIOUS_RARITY_CFG, WIGGLE_AMPLITUDE_CFG,
+    YAWN_RARITY_CFG,
   };
 
   if let Some(value) = query.pupil_length {
@@ -131,6 +142,15 @@ pub async fn set(Form(query): Form<ConfigQuery>) -> impl IntoResponse {
   }
   if let Some(value) = query.angry_rarity {
     ANGRY_RARITY_CFG.store(value.clamp(0, 100) as u32, Relaxed);
+  }
+  if let Some(value) = query.yawn_rarity {
+    YAWN_RARITY_CFG.store(value.clamp(0, 100) as u32, Relaxed);
+  }
+  if let Some(value) = query.delight_rarity {
+    DELIGHT_RARITY_CFG.store(value.clamp(0, 100) as u32, Relaxed);
+  }
+  if let Some(value) = query.dizzy_rarity {
+    DIZZY_RARITY_CFG.store(value.clamp(0, 100) as u32, Relaxed);
   }
 
   cotl::storage::SAVE_SIGNAL.signal(());
