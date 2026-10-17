@@ -223,6 +223,9 @@ async fn main(spawner: Spawner) -> ! {
   let hal_config = esp_hal::Config::default().with_cpu_clock(CpuClock::max());
   let peripherals = esp_hal::init(hal_config);
 
+  // Dark until the first frame lands, GRAM wakes up full of confetti
+  let mut backlight = Output::new(peripherals.GPIO15, Level::Low, OutputConfig::default());
+
   esp_alloc::heap_allocator!(size: HEAP_SIZE);
 
   defmt::info!("boot: firmware v{}", env!("CARGO_PKG_VERSION"));
@@ -236,9 +239,6 @@ async fn main(spawner: Spawner) -> ! {
 
   let timg0 = TimerGroup::new(peripherals.TIMG0);
   esp_rtos::start(timg0.timer0, peripherals.FROM_CPU_INTR0);
-
-  // Dark until the first frame lands, GRAM wakes up full of confetti
-  let mut backlight = Output::new(peripherals.GPIO15, Level::Low, OutputConfig::default());
 
   // Display
   let mut display = setup_display(

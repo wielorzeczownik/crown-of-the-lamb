@@ -20,6 +20,8 @@ pub const CMD_BYTES: usize = 4;
 const CASET: u8 = 0x2A;
 const RASET: u8 = 0x2B;
 const RAMWR: u8 = 0x2C;
+const DISPOFF: u8 = 0x28;
+const DISPON: u8 = 0x29;
 
 type Transfer = SpiDmaTransfer<'static, Blocking, DmaTxBuf>;
 
@@ -76,8 +78,10 @@ impl Lcd {
     [first, second, cmd]: [DmaTxBuf; 3],
     pins: [Output<'static>; 2],
   ) -> Self {
-    // Full width once, rows are set per chunk
+    // mipidsi turns the panel on with random GRAM, hide it until the first frame
     dc.set_low();
+    spi.write(&[DISPOFF]).expect("lcd: command write failed");
+    // Full width once, rows are set per chunk
     spi.write(&[CASET]).expect("lcd: command write failed");
     dc.set_high();
     spi
@@ -157,6 +161,9 @@ impl Lcd {
       let (spi, done) = finish(transfer).await;
       self.spi = Some(spi);
       spare = Some(done);
+    }
+    if !self.primed {
+      self.command(DISPON, &[]);
     }
     self.primed = true;
     self.bufs = [Some(next), spare];
