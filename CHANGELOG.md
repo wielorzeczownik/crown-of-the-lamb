@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.0.0...v2.0.1) - 2026-10-17
+
+### Bug Fixes
+
+- Keep backlight off until the first frame is drawn (#160) ([1d4daf2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1d4daf230738c73bfef34e07e141d40d35258ad9))
+
+### Performance
+
+- Perf/display-dma (#158) ([55021dc](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/55021dc8f3ecd9d3f12ccacc2991ffc062344220))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.87.27 (#159) ([69c2bd2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/69c2bd2870657b2ea61c3551dec050b01a4019d2))
+
 ## [2.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.13...v2.0.0) - 2026-10-16
 
 ### Features

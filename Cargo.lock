@@ -191,7 +191,7 @@ checksum = "790eea4361631c5e7d22598ecd5723ff611904e3344ce8720784c93e3d83d40b"
 
 [[package]]
 name = "crown-of-the-lamb"
-version = "2.0.0"
+version = "2.0.1"
 dependencies = [
  "defmt",
  "edge-dhcp",
