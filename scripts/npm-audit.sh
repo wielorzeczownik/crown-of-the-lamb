@@ -6,19 +6,18 @@ set -uo pipefail
 
 report="${REPORT_FILE:-npm-audit-report.txt}"
 report_path="${PWD}/${report}"
+script_dir="$(cd "$(dirname "$0")" && pwd)"
 
 emit() {
   echo "$1=$2" >>"$GITHUB_OUTPUT"
 }
 
 emit_report() {
+  local markdown
+  markdown=$(cd "$NPM_DIR" && bash "$script_dir/npm-audit-report.sh")
   {
     echo 'report<<NPM_AUDIT_EOF'
-    if [[ -s "$report_path" ]]; then
-      cat "$report_path"
-    else
-      echo 'npm audit produced no output, see the workflow logs.'
-    fi
+    echo "${markdown:-npm audit produced no output, see the workflow logs.}"
     echo 'NPM_AUDIT_EOF'
   } >>"$GITHUB_OUTPUT"
 }

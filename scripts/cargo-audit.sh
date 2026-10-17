@@ -10,13 +10,11 @@ emit() {
 }
 
 emit_report() {
+  local markdown
+  markdown=$(bash "$(dirname "$0")/cargo-audit-report.sh")
   {
     echo 'report<<CARGO_AUDIT_EOF'
-    if [[ -s "$report" ]]; then
-      cat "$report"
-    else
-      echo 'cargo audit produced no output, see the workflow logs.'
-    fi
+    echo "${markdown:-cargo audit produced no output, see the workflow logs.}"
     echo 'CARGO_AUDIT_EOF'
   } >>"$GITHUB_OUTPUT"
 }
