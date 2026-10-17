@@ -237,6 +237,9 @@ async fn main(spawner: Spawner) -> ! {
   let timg0 = TimerGroup::new(peripherals.TIMG0);
   esp_rtos::start(timg0.timer0, peripherals.FROM_CPU_INTR0);
 
+  // Dark until the first frame lands, GRAM wakes up full of confetti
+  let mut backlight = Output::new(peripherals.GPIO15, Level::Low, OutputConfig::default());
+
   // Display
   let mut display = setup_display(
     peripherals.SPI2,
@@ -247,7 +250,6 @@ async fn main(spawner: Spawner) -> ! {
     peripherals.GPIO2,
     peripherals.GPIO4,
   );
-  let _backlight = Output::new(peripherals.GPIO15, Level::High, OutputConfig::default());
 
   // ADC
   let mut adc1_config = AdcConfig::new();
@@ -336,6 +338,7 @@ async fn main(spawner: Spawner) -> ! {
     // Nothing changed since the last draw
     if ticked {
       display.draw(&Frame::new(&eye)).await;
+      backlight.set_high();
     }
 
     Timer::after(Duration::from_millis(FRAME_DELAY_MS)).await;
