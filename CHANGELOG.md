@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.1.0...v3.0.0) - 2026-10-17
+
+### Refactoring
+
+- Drop the old config layout (#164) ([a5c10c0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a5c10c0c8e4f7b76e16ed07adbb4b60d6499a512))
+
 ## [2.1.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.0.2...v2.1.0) - 2026-10-17
 
 ### Features
