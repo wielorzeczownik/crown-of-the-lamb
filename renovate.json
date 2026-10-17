@@ -4,6 +4,8 @@
   "platformAutomerge": true,
   "automergeType": "pr",
   "semanticCommits": "enabled",
+  "schedule": ["before 6am on monday"],
+  "rebaseWhen": "conflicted",
   "minimumReleaseAge": "3 days",
   "rust-toolchain": {
     "description": "The esp channel is managed by espup, not Renovate.",
@@ -45,6 +47,7 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "all non-major",
       "automerge": true
     },
     {
