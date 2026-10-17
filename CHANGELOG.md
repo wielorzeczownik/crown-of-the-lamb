@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.0.1...v2.0.2) - 2026-10-17
+
+### Bug Fixes
+
+- Keep the panel off until the first frame is drawn ([6c658b9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6c658b91500dd4c0870d50258a1c8ff66d4542c8))
+
 ## [2.0.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.0.0...v2.0.1) - 2026-10-17
 
 ### Bug Fixes
