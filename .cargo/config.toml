@@ -15,3 +15,10 @@ target = "xtensa-esp32-none-elf"
 
 [unstable]
 build-std = ["alloc", "core"]
+profile-rustflags = true
+
+[profile.release]
+rustflags = ["-Zunstable-options", "-Cpanic=immediate-abort"]
+
+[profile.release.build-override]
+rustflags = []
