@@ -53,20 +53,8 @@ if [[ "$(printf '%s\n' "$current_version" "$next_version" | sort -V | tail -1)" 
   exit 0
 fi
 
-# Bump the version with a plain text edit rather than cargo set-version
-tmp=$(mktemp)
-awk -v v="$next_version" '
-  !done && /^version[[:space:]]*=[[:space:]]*"/ { sub(/"[^"]*"/, "\"" v "\""); done=1 }
-  { print }
-' Cargo.toml >"$tmp" && mv "$tmp" Cargo.toml
-
-# Keep the package entry in Cargo.lock in sync
-tmp=$(mktemp)
-awk -v v="$next_version" '
-  /^name = "crown-of-the-lamb"$/ { inpkg=1 }
-  inpkg && /^version[[:space:]]*=[[:space:]]*"/ { sub(/"[^"]*"/, "\"" v "\""); inpkg=0 }
-  { print }
-' Cargo.lock >"$tmp" && mv "$tmp" Cargo.lock
+cargo set-version "$next_version"
+cargo metadata --format-version 1 >/dev/null
 
 {
   echo "released=true"
