@@ -1,5 +1,3 @@
-cargo-features = ["panic-immediate-abort"]
-
 [package]
 name = "crown-of-the-lamb"
 version = "3.0.0"
@@ -94,7 +92,6 @@ incremental = false
 lto = 'fat'
 opt-level = 's'
 overflow-checks = false
-panic = "immediate-abort"
 
 [lints.clippy]
 mem_forget = "deny"
