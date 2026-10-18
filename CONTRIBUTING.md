@@ -25,9 +25,7 @@ Thank you for considering a contribution. This document covers everything you ne
 │   ├── plugins/               Vite font-subsetting plugin
 │   └── tests/                 Vitest suites, incl. the firmware contract test
 ├── scripts/
-│   ├── bump-version.sh        determines next release version from git-cliff and bumps Cargo.toml
-│   ├── cargo-audit.sh         runs cargo audit, attempts a fix, drives its tracking issue
-│   └── npm-audit.sh           runs npm audit for the portal, same contract
+│   └── bump-version.sh        determines next release version from git-cliff and bumps Cargo.toml
 ├── partitions.csv             flash partition table
 └── build.rs                   bundles the portal into the firmware
 ```
@@ -67,7 +65,6 @@ These are exactly the checks CI runs.
 cargo fmt --check
 cargo clippy --locked -- -D warnings
 cargo build --release --locked
-cargo audit
 
 # Rust library and its tests (host)
 export HOST_TARGET="$(rustc -vV | sed -n 's/^host: //p')"
@@ -84,7 +81,6 @@ npm run lint:css
 npm run typecheck
 npm test
 npm run build
-npm audit
 cd ..
 
 # Shell
