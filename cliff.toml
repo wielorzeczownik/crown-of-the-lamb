@@ -42,6 +42,7 @@ commit_parsers = [
   { message = "^Merge ", skip = true },
   { breaking = true, group = "<!-- 01 -->Breaking Changes" },
   { message = "^feat", group = "<!-- 02 -->Features" },
+  { message = "^fix\\(deps\\)", group = "<!-- 11 -->Dependencies" },
   { message = "^fix", group = "<!-- 03 -->Bug Fixes" },
   { message = "^perf", group = "<!-- 04 -->Performance" },
   { message = "^refactor", group = "<!-- 05 -->Refactoring" },
