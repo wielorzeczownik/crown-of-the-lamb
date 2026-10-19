@@ -40,7 +40,7 @@ split_commits = false
 commit_parsers = [
   { message = "^chore\\(release\\)", skip = true },
   { message = "^Merge ", skip = true },
-  { breaking = true, group = "<!-- 01 -->Breaking Changes" },
+  { field = "breaking", pattern = "true", group = "<!-- 01 -->Breaking Changes" },
   { message = "^feat", group = "<!-- 02 -->Features" },
   { message = "^fix\\(deps\\)", group = "<!-- 11 -->Dependencies" },
   { message = "^fix", group = "<!-- 03 -->Bug Fixes" },
