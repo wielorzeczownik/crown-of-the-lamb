@@ -9,6 +9,14 @@ concurrency:
   group: validate-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  # renovate: datasource=github-releases depName=rhysd/actionlint extractVersion=^v(?<version>.+)$
+  ACTIONLINT_VERSION: 1.7.12
+  # renovate: datasource=crate depName=espup
+  ESPUP_VERSION: 0.18.0
+  # renovate: datasource=npm depName=prettier
+  PRETTIER_VERSION: 3.9.10
+
 jobs:
   checks:
     name: Checks
@@ -83,13 +91,12 @@ jobs:
         if: ${{ !cancelled() && steps.filter.outputs.workflows == 'true' }}
         uses: raven-actions/actionlint@3d39aea434753780c3b3d4a1a31c854b4dbf49d7 # v2.2.0
         with:
-          # renovate: datasource=github-releases depName=rhysd/actionlint
-          version: 1.7.12
+          version: ${{ env.ACTIONLINT_VERSION }}
           shellcheck: true
 
       - name: Format check
         if: ${{ !cancelled() && steps.filter.outputs.format == 'true' }}
-        run: npx --yes prettier@3.9.10 --check .
+        run: npx --yes "prettier@${PRETTIER_VERSION}" --check .
 
       - name: Lint Markdown
         if: ${{ !cancelled() && steps.filter.outputs.markdown == 'true' }}
@@ -114,8 +121,7 @@ jobs:
       - name: Install espup
         uses: taiki-e/install-action@ab6895351a88b908e96a4697860d4ffea5e57dbe # v2.87.27
         with:
-          # renovate: datasource=crate depName=espup
-          tool: espup@0.18.0
+          tool: espup@${{ env.ESPUP_VERSION }}
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -165,8 +171,7 @@ jobs:
       - name: Install espup
         uses: taiki-e/install-action@ab6895351a88b908e96a4697860d4ffea5e57dbe # v2.87.27
         with:
-          # renovate: datasource=crate depName=espup
-          tool: espup@0.18.0
+          tool: espup@${{ env.ESPUP_VERSION }}
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
@@ -207,8 +212,7 @@ jobs:
       - name: Install espup
         uses: taiki-e/install-action@ab6895351a88b908e96a4697860d4ffea5e57dbe # v2.87.27
         with:
-          # renovate: datasource=crate depName=espup
-          tool: espup@0.18.0
+          tool: espup@${{ env.ESPUP_VERSION }}
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
