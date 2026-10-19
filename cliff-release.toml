@@ -34,6 +34,15 @@ you have a fresh tag to flash.
 
 New bugs were absolutely added. We just have not found them yet.
 {% endif %}
+{%- if remote.github.owner and remote.github.repo %}
+#### Verify
+
+Release files carry a signed build provenance attestation. Check a download with:
+
+```sh
+gh attestation verify <file> --repo {{ remote.github.owner }}/{{ remote.github.repo }}
+```
+{% endif %}
 {%- if previous.version and remote.github.owner and remote.github.repo %}
 ---
 **Full Changelog:** [{{ previous.version }}...{{ version }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }})
