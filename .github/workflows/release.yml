@@ -175,6 +175,8 @@ jobs:
 
       - name: Install Xtensa toolchain
         run: espup install --targets esp32
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Source Xtensa environment
         run: |
