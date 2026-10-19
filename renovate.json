@@ -2,7 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>wielorzeczownik/.github"],
   "rust-toolchain": {
-    "description": "The esp channel is managed by espup, not Renovate.",
     "enabled": false
   },
   "customManagers": [
