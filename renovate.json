@@ -1,37 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "osvVulnerabilityAlerts": true,
-  "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true
-  },
-  "extends": ["group:monorepos", "group:recommended"],
-  "platformAutomerge": true,
-  "automergeType": "pr",
-  "semanticCommits": "enabled",
-  "schedule": ["before 6am on monday"],
-  "rebaseWhen": "conflicted",
-  "minimumReleaseAge": "3 days",
+  "extends": ["github>wielorzeczownik/.github"],
   "rust-toolchain": {
     "description": "The esp channel is managed by espup, not Renovate.",
     "enabled": false
   },
   "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
-      "matchStrings": ["prettier@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
-      "depNameTemplate": "prettier",
-      "datasourceTemplate": "npm"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+version: (?<currentValue>\\S+)"
-      ],
-      "versioningTemplate": "semver"
-    },
     {
       "customType": "regex",
       "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
@@ -51,26 +25,8 @@
   ],
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
-    },
-    {
       "matchDepTypes": ["buildDependencies", "devDependencies"],
       "semanticCommitType": "build"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "pinDigests": true,
-      "minimumReleaseAge": "7 days",
-      "semanticCommitType": "ci"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "matchPackageNames": [
-        "actions/upload-artifact",
-        "actions/download-artifact"
-      ],
-      "groupName": "artifact actions"
     },
     {
       "matchManagers": ["cargo"],
