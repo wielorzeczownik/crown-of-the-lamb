@@ -4,24 +4,6 @@
   "rust-toolchain": {
     "enabled": false
   },
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+tool: \\S+@(?<currentValue>\\S+)"
-      ],
-      "versioningTemplate": "semver"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+run: cargo install \\S+ --locked --version (?<currentValue>\\S+)"
-      ],
-      "versioningTemplate": "semver"
-    }
-  ],
   "packageRules": [
     {
       "matchSourceUrls": ["https://github.com/esp-rs/esp-hal"],
