@@ -28,26 +28,11 @@
       "semanticCommitType": "build"
     },
     {
-      "matchManagers": ["cargo"],
-      "matchPackageNames": [
-        "esp-hal",
-        "esp-rtos",
-        "esp-radio",
-        "esp-alloc",
-        "esp-storage",
-        "esp-println",
-        "esp-bootloader-esp-idf"
-      ],
+      "matchSourceUrls": ["https://github.com/esp-rs/esp-hal"],
       "groupName": "esp-rs crates"
     },
     {
-      "matchManagers": ["cargo"],
-      "matchPackageNames": [
-        "embassy-executor",
-        "embassy-sync",
-        "embassy-time",
-        "embassy-net"
-      ],
+      "matchSourceUrls": ["https://github.com/embassy-rs/embassy"],
       "groupName": "embassy crates"
     },
     {
