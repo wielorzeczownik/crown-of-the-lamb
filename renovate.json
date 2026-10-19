@@ -24,10 +24,6 @@
   ],
   "packageRules": [
     {
-      "matchDepTypes": ["buildDependencies", "devDependencies"],
-      "semanticCommitType": "build"
-    },
-    {
       "matchSourceUrls": ["https://github.com/esp-rs/esp-hal"],
       "groupName": "esp-rs crates"
     },
@@ -58,10 +54,6 @@
       "matchManagers": ["cargo"],
       "matchPackageNames": ["serde", "serde-json-core"],
       "groupName": "serde"
-    },
-    {
-      "matchPackageNames": ["typescript"],
-      "allowedVersions": "<6.1.0"
     }
   ]
 }
