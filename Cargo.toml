@@ -1,6 +1,6 @@
 [package]
 name = "crown-of-the-lamb"
-version = "3.0.0"
+version = "3.0.1"
 edition = "2024"
 rust-version = "1.88"
 description = "ESP32 firmware in Rust for an animatronic COTL prop: GC9A01 round display, dual-mic FFT direction detection, WiFi AP + captive portal config UI"

@@ -5,9 +5,48 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.0...v3.0.1) - 2026-10-21
+
+### Bug Fixes
+
+- Match breaking changes by field so they get their own section ([2665393](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2665393466082285d05885511f9c53e489531619))
+- Group fix(deps) updates under dependencies ([f175f35](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f175f35b89ab376283f582b2edd27e2ad3a0f75e))
+
+### Documentation
+
+- Explain how to verify attestations in release notes ([beea8a2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/beea8a2db338f2f2c8a9d9177ab9dd5b92f8d225))
+- Use shared pull request template from .github ([378d9a6](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/378d9a6420409f7486d9ff497f26f16c81cc5232))
+- Use shared code of conduct from .github ([fec44ea](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/fec44eae8bd11f21b74274b17ce4bbcd40d0e7f0))
+
+### Build System
+
+- Use built-in manager for workflow tool versions ([9150584](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9150584f7d6fd1bd9c86901e2df8b0280888f036))
+- Drop rules covered by shared preset ([3f7c461](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3f7c4611efb22797c878e86c5e7c7b9ea4cd8df4))
+- Group esp-rs and embassy crates by source repository ([1a65cf5](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1a65cf57a76c6e4a97bacc68fe7989711ec6a3ce))
+- Drop descriptions ([372a8b3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/372a8b37412bbf0c59e5490cc6a6cbdaf9c4515e))
+- Extend shared preset from .github ([f4dc9a5](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f4dc9a5d7fd4d3f4f6530cdcaca58e68617cea92))
+- Open one pull request per dependency (#171) ([b7a8f76](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b7a8f7620d99edebad88d73b13fc5bacd83bea2f))
+- Update all non-major (#169) ([ff545f0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ff545f0b29cc5ba3be3d6471a4365d2a07c1da20))
+- Let stable cargo read the manifest (#168) ([9a738cc](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9a738cc50831b5f7e1afebae42a0598e8e8bd94b))
+- Update html-eslint monorepo to v0.67.0 (#162) ([7c929ee](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/7c929ee6ce595d3e52ce69097c715cb458259b46))
+
+### CI/CD
+
+- Attach an spdx sbom to releases ([1b72ef7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1b72ef7176702c2265ca0ef8849cf4edf41c6d02))
+- Move pinned tool versions to workflow env ([f316cfa](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f316cfa1c9c722ba92bfc34170dd702c4b0d674f))
+- Authenticate github api calls (#172) ([9d706bc](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9d706bc9a3b3c872460cac7e173c2fd0ec71ac4c))
+- Name the release jobs like the other repos (#167) ([5c26286](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5c2628604188c75632058d13661c3360ada0da40))
+- Hand dependency fixes to renovate (#166) ([7f27e0b](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/7f27e0b0caf94caf8d6f25def21b72baa30ba3b0))
+- Merge light checks into one job and render audit reports ([4b22868](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/4b228685ef1df1b915fc9b8318744e235c5fbc22))
+- Batch updates weekly and skip bot PRs in label/assign ([ff13617](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ff13617a390fe48e0dfeca58a6fa0a9fa060a824))
+
+### Dependencies
+
+- Lock file maintenance (#170) ([33e4c53](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/33e4c535b33ebc4200489ab5636db4bfe00e7c07))
+
 ## [3.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v2.1.0...v3.0.0) - 2026-10-17
 
-### Refactoring
+### Breaking Changes
 
 - Drop the old config layout (#164) ([a5c10c0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a5c10c0c8e4f7b76e16ed07adbb4b60d6499a512))
 
@@ -39,7 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v1.1.13...v2.0.0) - 2026-10-16
 
-### Features
+### Breaking Changes
 
 - Bring back OTA updates (#157) ([f9a3bd0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/f9a3bd06ed7efdca237e8af81f0fa1c9f0569030))
 
@@ -543,17 +582,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v0.1.2...v1.0.0) - 2026-07-03
 
-### Features
+### Breaking Changes
 
+- Collapse OTA partition layout ([a5cdfe3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a5cdfe3f9b0e0324020388511cb0e651e98f2c07))
 - Rip out OTA because I gave up ([05daad0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/05daad0f117da6eb1d4c9acefc6e33753834a4d8))
 
 ### Documentation
 
 - Refresh portal screenshots ([55b7d7a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/55b7d7aed9e8cef68932bbb1a78262ad77e29695))
-
-### Build System
-
-- Collapse OTA partition layout ([a5cdfe3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a5cdfe3f9b0e0324020388511cb0e651e98f2c07))
 
 ### CI/CD
 
@@ -568,7 +604,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Bug Fixes
 
-- Sync package-lock with vite 8.1.3 ([8bf63d7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8bf63d7f50a7809ad588d91c1875286afca18325))
 - Scope release notes to the current release ([0f06390](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/0f063907088a703d76b0ecc91cb1f2c3262d3c7c))
 
 ### Documentation
@@ -579,6 +614,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Show only user-facing changes in release notes ([9334c77](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9334c77e78421ddcb54b983a8d3f49222a6a30e4))
 - Match release notes format to ahe-ics ([8aa71f2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8aa71f2d929ae9dd24fb2308c07d5205b3a94a95))
+
+### Dependencies
+
+- Sync package-lock with vite 8.1.3 ([8bf63d7](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8bf63d7f50a7809ad588d91c1875286afca18325))
 
 ### Miscellaneous
 
