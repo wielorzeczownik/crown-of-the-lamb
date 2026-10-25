@@ -53,6 +53,17 @@ if [[ "$(printf '%s\n' "$current_version" "$next_version" | sort -V | tail -1)" 
   exit 0
 fi
 
+if [[ "${RELEASE_KIND:-stable}" == "rc" ]]; then
+  rc=$(($(git tag -l "${next_tag}-rc.*" | wc -l) + 1))
+  {
+    echo "released=true"
+    echo "version=${next_version}-rc.${rc}"
+    echo "tag=${next_tag}-rc.${rc}"
+    echo "commit_changes=false"
+  } >>"$GITHUB_OUTPUT"
+  exit 0
+fi
+
 cargo set-version "$next_version"
 cargo metadata --format-version 1 >/dev/null
 
