@@ -63,6 +63,7 @@ split_commits = false
 # Release notes list only user-facing changes; the rest is skipped
 # (CHANGELOG.md keeps everything via cliff.toml).
 commit_parsers = [
+  { message = "\\[security\\]", group = "<!-- 00 -->Security" },
   { message = "^chore\\(release\\)", skip = true },
   { message = "^Merge ", skip = true },
   { field = "breaking", pattern = "true", group = "<!-- 01 -->Breaking Changes" },
