@@ -313,5 +313,13 @@ jobs:
           name: ${{ needs.prepare-release.outputs.tag }}
           body_path: release-notes.md
           prerelease: ${{ needs.prepare-release.outputs.prerelease }}
-          make_latest: ${{ needs.prepare-release.outputs.prerelease != 'true' }}
+          draft: true
           files: dist/*
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.prepare-release.outputs.tag }}
+          LATEST: ${{ needs.prepare-release.outputs.prerelease != 'true' }}
+        run: gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest="$LATEST"
