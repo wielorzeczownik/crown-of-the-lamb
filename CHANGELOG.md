@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.1...v3.0.2) - 2026-10-26
+
+### Bug Fixes
+
+- Install cargo-edit with stable toolchain ([e8a5972](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e8a5972b2de577be65636987f600817aa11119b3))
+- Draft releases before uploading assets (#175) ([30d8f32](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/30d8f3201f7026ff3cceef81da81caef174bc27d))
+
+### CI/CD
+
+- Update dtolnay/rust-toolchain digest to b725eda (#176) ([e1113c6](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e1113c65970c8f2f4fc11b3dbafb5b5d6dcb451c))
+- Cut release candidates on push and stable releases weekly (#174) ([b2931f5](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/b2931f5f9260dcbc506b8d773bfcde487d965422))
+
+### Dependencies
+
+- Update dependency stylelint-config-recess-order to v7.8.2 (#177) ([dda484e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/dda484ec873d937c837ec39b8c5b6022a1eb2d81))
+
 ## [3.0.1](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.0...v3.0.1) - 2026-10-21
 
 ### Bug Fixes
