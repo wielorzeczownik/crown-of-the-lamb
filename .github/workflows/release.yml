@@ -37,7 +37,7 @@ env:
 jobs:
   prepare-release:
     name: Prepare release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: write
@@ -179,7 +179,7 @@ jobs:
     name: Firmware
     needs: prepare-release
     if: ${{ needs.prepare-release.outputs.released == 'true' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
     permissions:
       contents: read
@@ -260,7 +260,7 @@ jobs:
       - prepare-release
       - build-firmware
     if: ${{ needs.prepare-release.outputs.released == 'true' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: write
