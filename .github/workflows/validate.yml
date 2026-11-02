@@ -13,7 +13,7 @@ env:
   # renovate: datasource=github-releases depName=rhysd/actionlint extractVersion=^v(?<version>.+)$
   ACTIONLINT_VERSION: 1.7.12
   # renovate: datasource=crate depName=espup
-  ESPUP_VERSION: 0.18.0
+  ESPUP_VERSION: 0.19.0
   # renovate: datasource=npm depName=prettier
   PRETTIER_VERSION: 3.9.10
 
