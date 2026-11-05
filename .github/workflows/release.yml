@@ -159,10 +159,7 @@ jobs:
 
       - name: Create tag
         if: ${{ steps.bump.outputs.released == 'true' }}
-        uses: qoomon/actions--create-tag@bc18da911783e8dd24a7ae3ec1a95af941d29f60 # v1.0.0
-        with:
-          name: '${{ steps.bump.outputs.tag }}'
-          message: '${{ steps.bump.outputs.tag }}'
+        run: git tag '${{ steps.bump.outputs.tag }}'
 
       - name: Push tag
         if: ${{ steps.bump.outputs.released == 'true' }}
