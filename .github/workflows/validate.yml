@@ -20,7 +20,7 @@ env:
 jobs:
   checks:
     name: Checks
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -108,7 +108,7 @@ jobs:
     name: Clippy
     needs: checks
     if: ${{ !cancelled() && needs.checks.outputs.rust == 'true' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
     permissions:
       contents: read
@@ -154,7 +154,7 @@ jobs:
     name: Tests
     needs: checks
     if: ${{ !cancelled() && needs.checks.outputs.rust == 'true' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     permissions:
       contents: read
@@ -199,7 +199,7 @@ jobs:
     name: Firmware
     needs: checks
     if: ${{ !cancelled() && needs.checks.outputs.rust == 'true' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
     permissions:
       contents: read
@@ -242,7 +242,7 @@ jobs:
     name: Portal
     needs: checks
     if: ${{ !cancelled() && needs.checks.outputs.portal == 'true' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: read
