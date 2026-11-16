@@ -5,6 +5,44 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.3](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.2...v3.0.3) - 2026-11-16
+
+### Build System
+
+- Drop autoprefixer ([e42588a](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e42588aa3b90b965b66c3fb7d0563246bde5b12e))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.89.1 (#200) ([c985679](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/c98567958307669d7e087edc44fcb88b724bbf2b))
+- Create lightweight tags ([ce24883](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/ce248830207444781aabd134368e08ddc5a63330))
+- Update swatinem/rust-cache action to v2.9.3 (#189) ([0881310](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/0881310fa78edd4f455c4d4a88ac2747b72aa733))
+- Update taiki-e/install-action action to v2.87.31 (#190) ([500f8f9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/500f8f9de1baea654c6ecc64f00f75d44ebabcb3))
+- Update davidanson/markdownlint-cli2-action action to v25 (#194) ([d4a11dd](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d4a11dd9a55d7a502c8dd2cc0bea62d352d57b17))
+- Update pozil/auto-assign-issue action to v4.1.0 (#192) ([9a66ed1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9a66ed1f5fed4ba3c23ad85987b91d4a228dd316))
+- Update dependency espup to 0.19.0 (#191) ([11a6f9f](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/11a6f9f13807aca71f6d650eeae73624f6e41061))
+- Update taiki-e/install-action action to v2.87.29 (#180) ([47a1dbf](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/47a1dbf8aaa442a7d854ee772c5ee74617babdb0))
+
+### Dependencies
+
+- Update dependency typescript-eslint to v8.72.2 (#205) ([d624781](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d6247813c291dd13bc8c394e7362cc176328e899))
+- Update rust crate simple-dns to 0.13.0 (#201) ([59fc378](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/59fc37859f93f6b12ff4fb6bc026bbad4418331a))
+- Lock file maintenance (#204) ([7be8611](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/7be86111e4bdb66943e78bee6e066fadf797acc4))
+- Update dependency stylelint-config-recess-order to v7.10.0 (#198) ([74904d8](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/74904d8342768fef5d906e788e4cd5df5277e3d0))
+- Update dependency eslint to v10.14.0 (#197) ([1bc62c1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1bc62c17b9e34e3f37215622f3a650f6651c4321))
+- Update dependency vitest to v5.1.0 (#199) ([d381186](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d3811862586dff32dec9320ac9cf580aab3d2736))
+- Update dependency vite to v8.3.6 (#196) ([d9e1b2e](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/d9e1b2e5a5a140b97f1963ed6fe08b3fb6044f19))
+- Lock file maintenance (#195) ([33da691](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/33da6916d1074b460311f2a21948d3cb89bfb928))
+- Update dependency typescript-eslint to v8.72.1 (#188) ([40400c0](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/40400c0e4425408750315d7622259d04c8d373df))
+- Update dependency autoprefixer to v10.6.2 (#187) ([a7665de](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/a7665de04bb650761c1923aef3ec00544fa17f3d))
+- Update node.js to v26 (#193) ([225471b](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/225471b4d8daa203a27a147a2d0564a489e932d6))
+- Lock file maintenance (#186) ([1d66c73](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/1d66c73cc8ec87aca04d6d3217cb75a434225b4d))
+- Update dependency typescript-eslint to v8.72.0 (#183) ([2f5dcbc](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2f5dcbc3e0d41541d019a44505a0295ced071dfc))
+- Update dependency stylelint-config-recess-order to v7.9.0 (#182) ([6fae8d9](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/6fae8d9677a0723d47fe4a27f880fc90170f9a06))
+- Update dependency eslint-plugin-unicorn to v79 (#184) ([e745c05](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e745c0520edc43621fa8f7dedfd66100c361d995))
+- Update dependency eslint to v10.13.0 (#181) ([2fb4014](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2fb4014a24fe6d4b95bc43317c75a6cc49422dd6))
+- Update dependency vite-plugin-singlefile to v2.3.4 (#179) ([05d8738](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/05d87385f777d7f5a56f837c0990dccf1bc9a975))
+- Update dependency vite to v8.3.5 (#178) ([2831598](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2831598cd821dec9c58070ac877d1988036cf55b))
+
 ## [3.0.2](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.1...v3.0.2) - 2026-10-26
 
 ### Bug Fixes
