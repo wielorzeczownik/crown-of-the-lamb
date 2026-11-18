@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/logo.svg" alt="Crown of the Lamb" width="300" />
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/logo-dark.svg"/><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/logo.svg"/><img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/logo-dark.svg" alt="Crown of the Lamb" width="300"/></picture>
 </p>
 
 <p align="center">🇬🇧 <a href="README.md">English</a> | 🇵🇱 Polski</p>

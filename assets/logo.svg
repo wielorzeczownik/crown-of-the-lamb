@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Crown of the Lamb">
   <style>
-    .ink { fill: #4a3f36 }
-    @media (prefers-color-scheme: dark) { .ink { fill: #d8cdb8 } }
+    .ink { fill: #000 }
     .caret { animation: caret 1.2s steps(1) infinite }
     @keyframes caret { 50% { opacity: 0 } }
     @media (prefers-reduced-motion: reduce) { .caret { animation: none } }
