@@ -23,16 +23,31 @@ Settings are changed from a phone through a WiFi portal hosted by the crown. Fir
 ## Wiring
 
 ```mermaid
-flowchart LR
-  BAT[18650] -->|"B+ / B−"| CHG["TP4056 (USB-C)"]
-  CHG -->|"OUT+"| SW[Switch]
-  SW -->|"IN+"| BOOST["MT3608 (set to 5.0 V)"]
-  BOOST -->|"OUT+ → 5V (VIN)"| ESP[ESP32]
-  ESP -->|"3V3 + SPI"| LCD[GC9A01]
-  ESP -->|3V3| MICL[Left MAX9814]
-  ESP -->|3V3| MICR[Right MAX9814]
-  MICL -->|"OUT → GPIO34"| ESP
-  MICR -->|"OUT → GPIO35"| ESP
+flowchart TB
+  subgraph PWR["Power"]
+    direction LR
+    BAT["18650"] -->|"B+ / B−"| CHG["TP4056 (USB-C)"]
+    CHG -->|"OUT+"| SW["Switch"]
+    SW -->|"IN+"| BOOST["MT3608 (set to 5.0 V)"]
+  end
+  subgraph EARS["Microphones"]
+    direction LR
+    MICL["Left MAX9814"]
+    MICR["Right MAX9814"]
+  end
+  subgraph EYE["Eye"]
+    LCD["GC9A01"]
+  end
+  BOOST -->|"OUT+ → 5V (VIN)<br/>OUT− → GND"| ESP["ESP32"]
+  ESP -->|"3V3 → VCC<br/>GND → GND<br/>GPIO18 → SCL<br/>GPIO23 → SDA<br/>GPIO4 → RES<br/>GPIO2 → DC<br/>GPIO5 → CS<br/>GPIO15 → BL"| LCD
+  ESP <-->|"3V3 → VDD<br/>GND → GND, GAIN<br/>OUT → GPIO34"| MICL
+  ESP <-->|"3V3 → VDD<br/>GND → GND, GAIN<br/>OUT → GPIO35"| MICR
+
+  style PWR fill:none,stroke:#c0392b,stroke-dasharray:5 5
+  style EYE fill:none,stroke:#2471a3,stroke-dasharray:5 5
+  style EARS fill:none,stroke:#2471a3,stroke-dasharray:5 5
+  linkStyle 0,1,2,3 stroke:#e74c3c,stroke-width:2px
+  linkStyle 4,5,6 stroke:#5dade2,stroke-width:2px
 ```
 
 ### Signal
