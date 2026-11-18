@@ -20,6 +20,40 @@ Ustawienia zmienia się z telefonu przez panel WiFi wystawiany przez koronę. Pr
   <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/demo.jpg" alt="Gotowa korona z zapalonym okiem" width="70%" />
 </p>
 
+## Lista części
+
+### Obudowa (druk 3D)
+
+Skorupa to [Red Crown (Cult of the Lamb)](https://www.printables.com/model/326078-red-crown-cult-of-the-lamb/files) od [ShinpiMakes](https://www.printables.com/@ShinpiMakes_277232) z Printables, wariant Full Shelled Cross Mount. Zmiany pod elektronikę:
+
+- otwór na oko (okno wyświetlacza),
+- otwory na mikrofony po obu bokach,
+- wycięcia na 2 porty USB-C (ładowarka i przetwornica) oraz włącznik.
+
+Drukuj w skali 120%, żeby wszystko weszło do środka. Skalowanie zależy od drukarki i slicera, więc kieruj się rzeczywistym rozmiarem: gotowy wydruk powinien mieć około 11,5 cm wysokości, od najniższego do najwyższego punktu.
+
+### Części
+
+| Część                                           | Rola                                                                 | Źródło                                                                                                                      |
+| ----------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| ESP32 DevKitC-32D                               | główny MCU                                                           | [AliExpress](https://pl.aliexpress.com/item/1005007963451549.html)                                                          |
+| Wyświetlacz GC9A01 240×240                      | oko                                                                  | [AliExpress](https://pl.aliexpress.com/item/1005004482028005.html)                                                          |
+| 2× moduł mikrofonu MAX9814                      | kierunek dźwięku                                                     | [AliExpress](https://pl.aliexpress.com/item/1005006109706636.html)                                                          |
+| Moduł ładowania USB-C                           | ładowanie ogniwa Li-ion                                              | [AliExpress](https://pl.aliexpress.com/item/1005009438702687.html)                                                          |
+| Przetwornica MT3608 (USB-C)                     | podbija napięcie baterii do 5 V                                      | [AliExpress](https://pl.aliexpress.com/item/1005011548818999.html)                                                          |
+| Ogniwo 18650                                    | bateria                                                              | [AliExpress](https://pl.aliexpress.com/item/1005011665515612.html)                                                          |
+| Koszyk 18650                                    | mocowanie ogniwa                                                     | [AliExpress](https://pl.aliexpress.com/item/1005005084346241.html)                                                          |
+| Włącznik                                        | odcina baterię                                                       | [AliExpress](https://pl.aliexpress.com/item/4000681145062.html)                                                             |
+| Przewody jumper / Dupont                        | okablowanie                                                          | [AliExpress](https://pl.aliexpress.com/item/1005006205169394.html)                                                          |
+| 2× przedłużacz USB-C (krótki, np. UGREEN 0,5 m) | wyprowadza porty ESP32 i ładowania na obudowę, każdy krótki się nada | [UGREEN](https://www.ugreen.pl/pl/products/kable/usb-c/przedluzajacy-kabel-ugreen-usb-c-0-5m-3-1-4k-60w-czarny-ed008-60664) |
+| Zestaw małych radiatorów                        | chłodzi ESP32 i trzyma ciepły chip z dala od plastiku                | [AliExpress](https://pl.aliexpress.com/item/4000266052801.html)                                                             |
+| Zestaw dystansów                                | trzyma wyświetlacz na właściwej głębokości                           | [AliExpress](https://pl.aliexpress.com/item/1005006270641755.html)                                                          |
+
+> [!NOTE]
+> Części kosztowały około 150 zł w momencie budowy, od tamtej pory ceny poszły w górę. Linki
+> do AliExpress często znikają. Jak któryś nie działa, szukaj po nazwie części,
+> każdy odpowiednik się nada.
+
 ## Podłączenie
 
 ```mermaid
@@ -84,40 +118,6 @@ Mikrofony daj po przeciwnych stronach korony. Kierunek wychodzi z różnicy gło
 > Dla stabilnego obrazu dodaj kondensatory przy pinach zasilania: około
 > 10 µF + 100 nF na VCC/GND wyświetlacza i na 3V3 ESP32, do tego 220-470 µF na
 > wyjściu MT3608.
-
-## Lista części
-
-### Obudowa (druk 3D)
-
-Skorupa to [Red Crown (Cult of the Lamb)](https://www.printables.com/model/326078-red-crown-cult-of-the-lamb/files) od [ShinpiMakes](https://www.printables.com/@ShinpiMakes_277232) z Printables, wariant Full Shelled Cross Mount. Zmiany pod elektronikę:
-
-- otwór na oko (okno wyświetlacza),
-- otwory na mikrofony po obu bokach,
-- wycięcia na 2 porty USB-C (ładowarka i przetwornica) oraz włącznik.
-
-Drukuj w skali 120%, żeby wszystko weszło do środka. Skalowanie zależy od drukarki i slicera, więc kieruj się rzeczywistym rozmiarem: gotowy wydruk powinien mieć około 11,5 cm wysokości, od najniższego do najwyższego punktu.
-
-### Części
-
-| Część                                           | Rola                                                                 | Źródło                                                                                                                      |
-| ----------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| ESP32 DevKitC-32D                               | główny MCU                                                           | [AliExpress](https://pl.aliexpress.com/item/1005007963451549.html)                                                          |
-| Wyświetlacz GC9A01 240×240                      | oko                                                                  | [AliExpress](https://pl.aliexpress.com/item/1005004482028005.html)                                                          |
-| 2× moduł mikrofonu MAX9814                      | kierunek dźwięku                                                     | [AliExpress](https://pl.aliexpress.com/item/1005006109706636.html)                                                          |
-| Moduł ładowania USB-C                           | ładowanie ogniwa Li-ion                                              | [AliExpress](https://pl.aliexpress.com/item/1005009438702687.html)                                                          |
-| Przetwornica MT3608 (USB-C)                     | podbija napięcie baterii do 5 V                                      | [AliExpress](https://pl.aliexpress.com/item/1005011548818999.html)                                                          |
-| Ogniwo 18650                                    | bateria                                                              | [AliExpress](https://pl.aliexpress.com/item/1005011665515612.html)                                                          |
-| Koszyk 18650                                    | mocowanie ogniwa                                                     | [AliExpress](https://pl.aliexpress.com/item/1005005084346241.html)                                                          |
-| Włącznik                                        | odcina baterię                                                       | [AliExpress](https://pl.aliexpress.com/item/4000681145062.html)                                                             |
-| Przewody jumper / Dupont                        | okablowanie                                                          | [AliExpress](https://pl.aliexpress.com/item/1005006205169394.html)                                                          |
-| 2× przedłużacz USB-C (krótki, np. UGREEN 0,5 m) | wyprowadza porty ESP32 i ładowania na obudowę, każdy krótki się nada | [UGREEN](https://www.ugreen.pl/pl/products/kable/usb-c/przedluzajacy-kabel-ugreen-usb-c-0-5m-3-1-4k-60w-czarny-ed008-60664) |
-| Zestaw małych radiatorów                        | chłodzi ESP32 i trzyma ciepły chip z dala od plastiku                | [AliExpress](https://pl.aliexpress.com/item/4000266052801.html)                                                             |
-| Zestaw dystansów                                | trzyma wyświetlacz na właściwej głębokości                           | [AliExpress](https://pl.aliexpress.com/item/1005006270641755.html)                                                          |
-
-> [!NOTE]
-> Części kosztowały około 150 zł w momencie budowy, od tamtej pory ceny poszły w górę. Linki
-> do AliExpress często znikają. Jak któryś nie działa, szukaj po nazwie części,
-> każdy odpowiednik się nada.
 
 ## Montaż
 

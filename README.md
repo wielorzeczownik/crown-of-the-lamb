@@ -20,6 +20,40 @@ Settings are changed from a phone through a WiFi portal hosted by the crown. Fir
   <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/demo.jpg" alt="The finished crown with the eye lit up" width="70%" />
 </p>
 
+## Bill of materials
+
+### 3D-printed enclosure
+
+The shell is [Red Crown (Cult of the Lamb)](https://www.printables.com/model/326078-red-crown-cult-of-the-lamb/files) by [ShinpiMakes](https://www.printables.com/@ShinpiMakes_277232) from Printables, the Full Shelled Cross Mount variant. Changes made to fit the electronics:
+
+- a hole for the eye (the display window),
+- microphone holes on both sides,
+- openings for 2 USB-C ports (charger and boost module) and the power switch.
+
+Print it at 120% so everything fits inside. Scaling depends on your printer and slicer, so go by the real size: the finished print should be about 11.5 cm tall, from the lowest to the highest point.
+
+### Parts
+
+| Part                                                | Role                                                                     | Source                                                                                                                      |
+| --------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| ESP32 DevKitC-32D                                   | main MCU                                                                 | [AliExpress](https://pl.aliexpress.com/item/1005007963451549.html)                                                          |
+| GC9A01 240×240 round display                        | the eye                                                                  | [AliExpress](https://pl.aliexpress.com/item/1005004482028005.html)                                                          |
+| 2× MAX9814 microphone module                        | sound direction                                                          | [AliExpress](https://pl.aliexpress.com/item/1005006109706636.html)                                                          |
+| USB-C charging module                               | Li-ion charging                                                          | [AliExpress](https://pl.aliexpress.com/item/1005009438702687.html)                                                          |
+| MT3608 boost converter (USB-C)                      | steps the battery up to 5 V                                              | [AliExpress](https://pl.aliexpress.com/item/1005011548818999.html)                                                          |
+| 18650 cell                                          | battery                                                                  | [AliExpress](https://pl.aliexpress.com/item/1005011665515612.html)                                                          |
+| 18650 holder                                        | battery mount                                                            | [AliExpress](https://pl.aliexpress.com/item/1005005084346241.html)                                                          |
+| Power switch                                        | cuts the battery circuit                                                 | [AliExpress](https://pl.aliexpress.com/item/4000681145062.html)                                                             |
+| Jumper / Dupont wires                               | wiring                                                                   | [AliExpress](https://pl.aliexpress.com/item/1005006205169394.html)                                                          |
+| 2× USB-C extension cable (short, e.g. UGREEN 0.5 m) | brings the ESP32 and charging ports out to the shell, any short one does | [UGREEN](https://www.ugreen.pl/pl/products/kable/usb-c/przedluzajacy-kabel-ugreen-usb-c-0-5m-3-1-4k-60w-czarny-ed008-60664) |
+| Small heatsink set                                  | cools the ESP32 and keeps the warm chip off the plastic                  | [AliExpress](https://pl.aliexpress.com/item/4000266052801.html)                                                             |
+| Standoff / spacer set                               | holds the display at the right depth                                     | [AliExpress](https://pl.aliexpress.com/item/1005006270641755.html)                                                          |
+
+> [!NOTE]
+> The parts cost about 150 PLN (~€35) at the time of building, prices have gone up since. AliExpress
+> links die often. If one does, search by the part name, any equivalent module
+> works.
+
 ## Wiring
 
 ```mermaid
@@ -84,40 +118,6 @@ Put the microphones on opposite sides of the crown. The direction comes from the
 > For a stable image, add some capacitors near the power pins: about 10 µF +
 > 100 nF across the display VCC/GND and on the ESP32 3V3, plus 220-470 µF on
 > the MT3608 output.
-
-## Bill of materials
-
-### 3D-printed enclosure
-
-The shell is [Red Crown (Cult of the Lamb)](https://www.printables.com/model/326078-red-crown-cult-of-the-lamb/files) by [ShinpiMakes](https://www.printables.com/@ShinpiMakes_277232) from Printables, the Full Shelled Cross Mount variant. Changes made to fit the electronics:
-
-- a hole for the eye (the display window),
-- microphone holes on both sides,
-- openings for 2 USB-C ports (charger and boost module) and the power switch.
-
-Print it at 120% so everything fits inside. Scaling depends on your printer and slicer, so go by the real size: the finished print should be about 11.5 cm tall, from the lowest to the highest point.
-
-### Parts
-
-| Part                                                | Role                                                                     | Source                                                                                                                      |
-| --------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| ESP32 DevKitC-32D                                   | main MCU                                                                 | [AliExpress](https://pl.aliexpress.com/item/1005007963451549.html)                                                          |
-| GC9A01 240×240 round display                        | the eye                                                                  | [AliExpress](https://pl.aliexpress.com/item/1005004482028005.html)                                                          |
-| 2× MAX9814 microphone module                        | sound direction                                                          | [AliExpress](https://pl.aliexpress.com/item/1005006109706636.html)                                                          |
-| USB-C charging module                               | Li-ion charging                                                          | [AliExpress](https://pl.aliexpress.com/item/1005009438702687.html)                                                          |
-| MT3608 boost converter (USB-C)                      | steps the battery up to 5 V                                              | [AliExpress](https://pl.aliexpress.com/item/1005011548818999.html)                                                          |
-| 18650 cell                                          | battery                                                                  | [AliExpress](https://pl.aliexpress.com/item/1005011665515612.html)                                                          |
-| 18650 holder                                        | battery mount                                                            | [AliExpress](https://pl.aliexpress.com/item/1005005084346241.html)                                                          |
-| Power switch                                        | cuts the battery circuit                                                 | [AliExpress](https://pl.aliexpress.com/item/4000681145062.html)                                                             |
-| Jumper / Dupont wires                               | wiring                                                                   | [AliExpress](https://pl.aliexpress.com/item/1005006205169394.html)                                                          |
-| 2× USB-C extension cable (short, e.g. UGREEN 0.5 m) | brings the ESP32 and charging ports out to the shell, any short one does | [UGREEN](https://www.ugreen.pl/pl/products/kable/usb-c/przedluzajacy-kabel-ugreen-usb-c-0-5m-3-1-4k-60w-czarny-ed008-60664) |
-| Small heatsink set                                  | cools the ESP32 and keeps the warm chip off the plastic                  | [AliExpress](https://pl.aliexpress.com/item/4000266052801.html)                                                             |
-| Standoff / spacer set                               | holds the display at the right depth                                     | [AliExpress](https://pl.aliexpress.com/item/1005006270641755.html)                                                          |
-
-> [!NOTE]
-> The parts cost about 150 PLN (~€35) at the time of building, prices have gone up since. AliExpress
-> links die often. If one does, search by the part name, any equivalent module
-> works.
 
 ## Assembly
 
