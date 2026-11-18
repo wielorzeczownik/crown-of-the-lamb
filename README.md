@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/logo.png" alt="Crown of the Lamb" width="300" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/crown-of-the-lamb/main/assets/logo.svg" alt="Crown of the Lamb" width="300" />
 </p>
 
 <p align="center">🇬🇧 English | 🇵🇱 <a href="README.pl.md">Polski</a></p>
