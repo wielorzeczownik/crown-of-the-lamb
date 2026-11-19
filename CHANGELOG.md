@@ -5,6 +5,32 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.4](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.3...v3.0.4) - 2026-11-19
+
+### Security
+
+- Update rust crate heapless to v0.9.4 [security] (#214) ([be04c7d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/be04c7d540be37eef19dbe1d4cebad3c0f36034b))
+
+### Documentation
+
+- Switch the logo with the github theme ([2ce6937](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2ce693789015b47a242b1efa7911d7aa0a07eca3))
+- Replace the png logo with an animated svg ([2849516](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/284951688e20505ddf264bccfdef92078cc482c1))
+- Move wiring after the bill of materials ([e62a777](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e62a7776879e5aa64538a3d704b27813f4952ea8))
+- Show every esp32 pin in the grouped wiring diagram (#213) ([5a0783d](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5a0783da7031d3061865faf2dd34209d85e83396))
+- Update readme, screenshots and logo for the new OTA tab (#212) ([e7ef507](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/e7ef507dd70369b82ca4a5c28f807eab721dd816))
+
+### CI/CD
+
+- Update dependency prettier to v3.10.1 (#210) ([0fb6214](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/0fb62142536efd15b49f46e2690f2ad7d1011e61))
+- Update taiki-e/install-action action to v2.90.3 (#211) ([8df6e9b](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8df6e9bdd6a009f89f4e2dfc72a2c14f57f77416))
+- Update dependency espflash to v4.7.0 (#209) ([454ff51](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/454ff513fbcb4153dee9484aba58cd1e094f7bbe))
+- Update softprops/action-gh-release action to v3.0.4 (#207) ([44ea7d2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/44ea7d29de36910547bcf5be262996c5111ac66e))
+
+### Dependencies
+
+- Update html-eslint monorepo to v0.68.0 (#208) ([60532a3](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/60532a31ec719278ec510bde7878c3b1479491c8))
+- Update dependency vite to v8.3.8 (#206) ([5a69440](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/5a69440bef32b0fb209b9a7cd69f143170127fce))
+
 ## [3.0.3](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.2...v3.0.3) - 2026-11-16
 
 ### Build System
