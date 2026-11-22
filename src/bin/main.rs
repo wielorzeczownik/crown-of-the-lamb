@@ -223,8 +223,9 @@ async fn main(spawner: Spawner) -> ! {
   let hal_config = esp_hal::Config::default().with_cpu_clock(CpuClock::max());
   let peripherals = esp_hal::init(hal_config);
 
-  // Dark until the first frame lands, GRAM wakes up full of confetti
-  let mut backlight = Output::new(peripherals.GPIO15, Level::Low, OutputConfig::default());
+  // Never pull BL low, some panels lose their init with it.
+  // DISPOFF hides the confetti instead
+  let _backlight = Output::new(peripherals.GPIO15, Level::High, OutputConfig::default());
 
   esp_alloc::heap_allocator!(size: HEAP_SIZE);
 
@@ -343,7 +344,6 @@ async fn main(spawner: Spawner) -> ! {
     // Nothing changed since the last draw
     if ticked {
       display.draw(&Frame::new(&eye)).await;
-      backlight.set_high();
     }
 
     Timer::after(Duration::from_millis(FRAME_DELAY_MS)).await;
