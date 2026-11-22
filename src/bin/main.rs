@@ -223,7 +223,8 @@ async fn main(spawner: Spawner) -> ! {
   let hal_config = esp_hal::Config::default().with_cpu_clock(CpuClock::max());
   let peripherals = esp_hal::init(hal_config);
 
-  // Never pull BL low, some panels lose their init with it. DISPOFF hides the confetti
+  // Never pull BL low, some panels lose their init with it.
+  // DISPOFF hides the confetti instead
   let _backlight = Output::new(peripherals.GPIO15, Level::High, OutputConfig::default());
 
   esp_alloc::heap_allocator!(size: HEAP_SIZE);
