@@ -15,11 +15,3 @@ body:
     attributes:
       label: Proposed solution
       description: How would you like it to work?
-    validations:
-      required: true
-
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Alternatives considered
-      description: Any other approaches you've thought about?
