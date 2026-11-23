@@ -5,6 +5,33 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.5](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.4...v3.0.5) - 2026-11-23
+
+### Bug Fixes
+
+- Never pull the backlight pin low (#215) ([2930e13](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/2930e13c0b996cc9873361e68c1a620e2831197a))
+
+### Documentation
+
+- Make contributing, security and issue forms friendlier (#224) ([4614c2b](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/4614c2bbb0094e7ea0c873b6af8425bd3bd9f850))
+
+### Styling
+
+- Add painted edge filter and red dark-mode ink (#225) ([0d02626](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/0d0262622d88eaebe16adbb02562ec9781ae741c))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.90.5 (#220) ([4133311](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/41333118ebe4f32d01158a398f3f4bd6e6284869))
+
+### Dependencies
+
+- Update stylelint (#223) ([8ad0a58](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/8ad0a58849c6299f9d8157f9a727e938509d55ff))
+- Update dependency typescript-eslint to v8.73.0 (#222) ([3d7b0a1](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/3d7b0a1ec4eee77b5d41768bbe720c14402b04db))
+- Update dependency eslint to v10.15.0 (#221) ([c32c342](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/c32c3429bb3dc2e60132b1256ed1a9b80d86afee))
+- Update rust crate simple-dns to v0.13.1 (#219) ([9289fd8](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/9289fd8b40bdef44a7eb2ba2a2646819e0eb30b3))
+- Update dependency vitest to v5.1.1 (#218) ([712c5aa](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/712c5aaa4a61c689c2a613b17e1655e2ffbf2343))
+- Update dependency stylelint-config-recess-order to v7.10.1 (#217) ([71021e2](https://github.com/wielorzeczownik/crown-of-the-lamb/commit/71021e2f1fed241f66a6a967cbed3bb9dc560c0b))
+
 ## [3.0.4](https://github.com/wielorzeczownik/crown-of-the-lamb/compare/v3.0.3...v3.0.4) - 2026-11-19
 
 ### Security
