@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before reporting, check if the issue already exists in [open issues](https://github.com/wielorzeczownik/crown-of-the-lamb/issues).
+        Thanks for reporting. Any detail helps, but don't worry if you don't know all of it. If you have a moment, a quick look through [open issues](https://github.com/wielorzeczownik/crown-of-the-lamb/issues) helps avoid duplicates.
 
   - type: textarea
     id: description
@@ -19,8 +19,6 @@ body:
     id: expected
     attributes:
       label: What did you expect?
-    validations:
-      required: true
 
   - type: dropdown
     id: flash_method
@@ -38,8 +36,6 @@ body:
     attributes:
       label: Firmware version
       placeholder: 'e.g. v0.1.0'
-    validations:
-      required: true
 
   - type: input
     id: hardware

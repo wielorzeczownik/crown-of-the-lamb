@@ -1,39 +1,19 @@
-# Security Policy
+# Security
 
-## Supported versions
+Thanks for taking the time to look. Please report vulnerabilities privately through [GitHub Security Advisories](https://github.com/wielorzeczownik/crown-of-the-lamb/security/advisories/new) instead of a public issue, so there's a chance to fix them first. You'll be credited in the release notes unless you'd rather not be. Only the latest release gets fixes.
 
-Only the latest release receives security fixes.
+## In scope
 
-## Reporting a vulnerability
+The firmware runs its own open WiFi access point with a captive portal, so anyone in WiFi range can reach it. The scope is:
 
-**Do not open a public GitHub issue for security vulnerabilities.**
+- the access point and captive portal (DHCP, DNS, HTTP)
+- the configuration API behind the portal
+- the OTA firmware update endpoint
+- configuration stored in flash
 
-Report vulnerabilities privately via [GitHub Security Advisories](https://github.com/wielorzeczownik/crown-of-the-lamb/security/advisories/new).
+Problems in upstream crates (esp-hal, embassy, picoserve and others) belong to those projects. If a vulnerable version is pinned here, please still let us know so it can be bumped.
 
-Include as much detail as possible:
+## Running it safely
 
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact
-- Suggested fix (if any)
-
-You will receive a response within **7 days**. If the issue is confirmed, a fix will be released as soon as possible and you will be credited in the release notes (unless you prefer to remain anonymous).
-
-## Scope
-
-This project is firmware for a self-contained ESP32 prop that runs its own WiFi access point and captive portal. The attack surface includes:
-
-- The WiFi access point and captive portal (DHCP, DNS, HTTP endpoints)
-- The configuration API exposed by the portal (eye/expression settings, colours, thresholds)
-- The over-the-air (OTA) firmware update endpoint
-- Configuration persisted to flash
-
-Because the device exposes an open access point by design, anyone within WiFi range can reach the portal. Treat physical/RF proximity as part of the trust boundary.
-
-Issues in upstream crates (esp-hal, embassy, picoserve, etc.) should be reported to their respective projects; if a vulnerable version is pinned here, please still let us know so the dependency can be bumped.
-
-## Security notes for operators
-
-- Deploy the prop only in environments where you control who is in WiFi range.
-- Do not expose the portal beyond the device's own access point (there is no authentication by design).
-- Only flash firmware built from trusted sources; verify the firmware against the `SHA256SUMS` manifest published with each release.
+- Use the prop where you control who is in WiFi range. The portal has no authentication by design.
+- Only flash firmware from trusted sources, and check it against the `SHA256SUMS` published with each release.
